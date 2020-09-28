@@ -14,7 +14,6 @@ router.get('room', '/', async(ctx) => {
     await ctx.render('room/index', {
         room,
         newRoomPath: ctx.router.url('room-new'),
-    
     });
 
 });
