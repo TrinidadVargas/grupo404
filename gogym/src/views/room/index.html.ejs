@@ -1,0 +1,13 @@
+<h1>SALAS</h1>
+<p>Cantidad de Salas: <%=room.length%></p>
+
+<h1>Lista de Salas</h1>
+
+<a href="<%= newRoomPath %>">Agregar Sala</a>
+
+<% room.forEach(sala => { %>
+    <div>
+        <h2><%= sala.type %></h2>
+        <p><%= sala.capacity %></p>
+    </div>
+<% })%>
