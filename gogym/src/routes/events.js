@@ -52,5 +52,12 @@ router.get('event', '/:id', (ctx) => {
     return ctx.render('events/show', { event });
 });
 
+// router.del('publications.delete', '/:id', async (ctx) => {
+//     ctx.state.publication = await ctx.orm.publication.findByPk(ctx.params.id);
+    // await publication.destroy();
+    // ctx.redirect(ctx.router.url('publications.list'));
+//   
+//   });
+
 
 module.exports = router;

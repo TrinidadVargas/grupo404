@@ -23,8 +23,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {});
 
-  room.associate = function associate() {
+  room.associate = function associate(models) {
     // associations can be defined here. This method receives a models parameter.
+    // room.hasMany(models.event, { onDelete: 'cascade', hooks: true })
   };
 
   return room;

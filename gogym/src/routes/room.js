@@ -50,5 +50,18 @@ router.get('sala', '/:id', (ctx) => {
     return ctx.render('room/show', { sala });
 });
 
+// router.get('room.events.new', '/:id/events/:eventId', (ctx) => {
+//     const event = models.Room.findByPk(ctx.params.eventId)
+//     return ctx.render('events/show', { event });
+// });
+
+// router.get('room.events', '/:id/events', async(ctx) => {
+//     const events = await ctx.orm.event.findAll();
+//     await ctx.render('events/index', {
+//         events,
+//         newEventPath: ctx.router.url('events-new'),
+//     });
+// });
+
 
 module.exports = router;

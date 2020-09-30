@@ -7,23 +7,23 @@ module.exports = {
 
     roomArray.push({
       gym_id: 1,
-      type:'Spinning',
+      type:'Sala Principal',
       capacity:20,
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     });
 
     roomArray.push({
-      gym_id: 2,
-      type:'TRX',
+      gym_id: 1,
+      type:'Sala Mediana',
       capacity:15,
       createdAt: new Date(),
       updatedAt: new Date()
     });
 
     roomArray.push({
-      gym_id: 3,
-      type:'Yoga',
+      gym_id: 1,
+      type:'Sala Pequeña',
       capacity:12,
       createdAt: new Date(),
       updatedAt: new Date()

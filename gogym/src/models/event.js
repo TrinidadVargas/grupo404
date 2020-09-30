@@ -29,8 +29,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {});
 
-  event.associate = function associate() {
+  event.associate = function associate(models) {
     // associations can be defined here. This method receives a models parameter.
+    // event.belongsTo(models.room)
   };
 
   return event;
