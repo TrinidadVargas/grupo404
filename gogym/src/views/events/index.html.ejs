@@ -1,0 +1,15 @@
+<h1>CLASES</h1>
+<p>Cantidad de Clases: <%=events.length%></p>
+
+<h1>Lista de Clases</h1>
+
+<a href="<%= newEventPath %>">Agregar Clase</a>
+
+<% events.forEach(event => { %>
+    <div>
+        <h2><%= event.name %></h2>
+        <p><%= event.description %></p>
+        <p><%= event.days %></p>
+        <p><%= event.startsAt %></p>
+    </div>
+<% })%>
