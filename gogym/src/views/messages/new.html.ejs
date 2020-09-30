@@ -1,0 +1,24 @@
+<h1>Enviar mensaje </h1>
+
+<form method="post" action="<%= createMessagePath%>">
+  <div class="field">
+    <label for="conversationId">ConversationId</label>
+    <input type="number" id="conversationId" name="conversationId" />
+  </div>
+
+  <div class="field">
+    <label for="userId2">My Id</label>
+    <input type="number" id="senderId" name="senderId"/>
+  </div>
+
+  <div class="field">
+    <label for="message">Mensaje</label>
+    <input type="text" id="message" name="message"/>
+  </div>
+
+  <div class="actions">
+    <input type="submit" value="Crear" />
+  </div>
+
+
+</form>
