@@ -1,0 +1,20 @@
+<h2><%= conversation.id %> Chat entre: <%= users[0].name %> <%= users[0].lastname %> y <%= users[1].name %> <%= users[1].lastname %> </h2>
+
+<div class=messages">
+  <% if (messages.length) { %>
+    <% messages.forEach((message) => { %>
+      <ul>
+        <% if (message.senderId == users[0].id) { %>
+          <%= users[0].name %>:
+        <% } else { %>
+          <%= users[1].name %>:
+        <% } %>
+        <p><%= message.message %></p>
+        <p><%= message.createdAt %></p>
+          </ul>
+    <% }); %>
+  <% } %>
+</div>
+
+<h3><a href="<%= newMessagePath %>">Enviar mensaje</a></h3> 
+

@@ -1,0 +1,15 @@
+<h3> Vista solo de admin!!</h3>
+<h1> Usuarios </h1>
+
+<a href="<%= newUserPath %>">Agregar nuevo usuario</a>
+
+
+<p> Cantidad de Usuarios: <%= users.length %> </p>
+<% users.forEach(user => { %>
+    <div>
+        <h2><%=user.id %> <%= user.name %> <%= user.lastname %></h2>
+        <a href="<%= userPath(user.id) %>">Ver más</a>
+        <p><%=  %></p>
+    </div>
+
+<% }) %>
