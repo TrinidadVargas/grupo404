@@ -14,7 +14,7 @@ module.exports = {
     });
 
     roomArray.push({
-      gym_id: 1,
+      gym_id: 2,
       type:'Sala Mediana',
       capacity:15,
       createdAt: new Date(),
@@ -22,7 +22,7 @@ module.exports = {
     });
 
     roomArray.push({
-      gym_id: 1,
+      gym_id: 3,
       type:'Sala Pequeña',
       capacity:12,
       createdAt: new Date(),
