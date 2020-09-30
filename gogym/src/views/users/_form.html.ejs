@@ -1,0 +1,48 @@
+<form method="post" action="<%= createUserPath%>">
+  <% if (locals.errors) {%>
+    <div class="errors">
+      <p>El usuario no se puede crear debido a los siguientes errores: </p>
+      <ul>
+        <% errors.forEach(error => {%>
+          <li><%= error.path %>: <%= error.message %></li>
+        <% });%>
+      </ul>
+    </div>
+    
+  <%} %>
+
+  <div class="field">
+    <label for="name">Nombre</label>
+    <input type="text" id="name" name="name" value="<%= user.name %>" />
+  </div>
+  <div class="field">
+    <label for="lastname">Apellido</label>
+    <input type="text" id="lastname" name="lastname" value="<%= user.lastname %>" />
+  </div>
+  <div class="field">
+    <label for="email">Email</label>
+    <input type="text" id="email" name="email" value="<%= user.email %>" />
+  </div>
+
+  <div class="field">
+    <label for="password">Contraseña</label>
+    <input type="password" id="password" name="password" value="<%= user.password %>" />
+  </div>
+  <div class="field">
+    <label for="rut">Rut</label>
+    <input type="text" id="rut" name="rut" value="<%= user.rut %>" />
+  </div>
+  <div>
+    <label for="uset_type">Tipo de Cuenta</label>
+    <select name="user_type" id="user_type">
+      <option value=0> Administrador</option>
+      <option value=1> Cliente</option>
+      <option value=2> Entrenador</option>
+      <option value=3> Nutricionista</option>
+    </select>
+  </div>
+  
+  <div class="actions">
+    <input type="submit" value="Crear" />
+  </div>
+</form>
