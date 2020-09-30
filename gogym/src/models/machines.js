@@ -1,9 +1,23 @@
 module.exports = (sequelize, DataTypes) => {
   const machines = sequelize.define('machines', {
-    gym_id: DataTypes.INTEGER,
-    name: DataTypes.STRING,
-    description: DataTypes.TEXT,
-    available: DataTypes.BOOLEAN,
+
+    gym_id:{
+       type: DataTypes.INTEGER
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate:{
+      notEmpty: true,
+      },
+    },
+    description: {
+      type: DataTypes.TEXT
+    },
+    available:{
+
+    type: DataTypes.BOOLEAN}
+    ,
   }, {});
 
   machines.associate = function associate() {

@@ -1,0 +1,24 @@
+<form method ="post" action="<%= createMachinePath %>">
+    <% if (locals.errors){ %>
+        <div class="errors">
+        <p>La maquina no se pudo crear debido a los siguientes errores:</p>
+        <ul>
+            <% errors.forEach(error => { %>
+                <li><%= error.path %>: <%= error.message %></li>
+            <% }); %>
+        </ul>
+    </div>
+<% } %>
+
+    <div class="field">
+        <label for="name">Nombre</label>
+        <input type="text" id="name" name="name" value="<%= machine.name%>">
+    </div>
+    <div class="field">
+        <label for="description">Descripción</label>
+        <textarea name="description" id="description" rows="4", cols="30"><%= machine.description%></textarea>
+    </div>
+    <div class="actions">
+        <input type="submit" value="Crear">
+    </div>
+</form>
