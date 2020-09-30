@@ -45,9 +45,12 @@ router.post('room-create', '/', async (ctx) => {
     }
 });
 
-router.get('sala', '/:id', (ctx) => {
+router.get('sala', '/:id', async (ctx) => {
     const {sala} = ctx.state;
-    return ctx.render('room/show', { sala });
+    return ctx.render('room/show', { 
+        sala,
+        events: await sala.getEvents(),
+    });
 });
 
 // router.get('room.events.new', '/:id/events/:eventId', (ctx) => {
