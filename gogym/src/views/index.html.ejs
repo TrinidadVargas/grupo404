@@ -1,6 +1,12 @@
-<h1>Hello world</h1>
-<p>
-  App web version
-  <%= appVersion %>
-</p>
-<div id="react-app">Here a React app will be rendered</div>
+<main class="home">
+  <h1>Clases Destacadas</h1>
+  <ul>
+    <% events.forEach((event) => { %>
+      <li>
+        <h3><%= event.name %></h3>
+        <p><a href="<%= roomPath(event.room.id)%>"><%= event.room.type %></a></p>
+        <p> <%= event.days %>  de <%= event.startsAt %> a <%= event.endsAt %> hrs</p>
+      </li>
+    <% }); %>
+  </ul>
+</main>

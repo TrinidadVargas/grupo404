@@ -1,0 +1,14 @@
+<a href= "<%= newMachinePath %>" > Agregar nueva máquina</a>
+
+<p>Cantidad de maquinas:  <%= machines.length %></p>
+<% machines.forEach(machine =>{ %>
+    <div>
+        <h2><%= machine.name%></h2>
+        <p><%= machine.description%></p>
+        <p>Disponible:<%=  machine.available %></p>
+        <a href = "<%= machinePath(machine.id) %>">Ver más</a>
+    </div>
+
+<% }) %>
+
+

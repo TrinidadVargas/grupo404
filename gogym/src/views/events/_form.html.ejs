@@ -1,0 +1,45 @@
+<form method="post" action="<%= createEventPath %>">
+    <% if (locals.errors) { %>
+        <div class="errors">
+            <p>La clase no se pudo crear por los siguientes errores:</p>
+            <ul>
+                <% errors.forEach(error => { %>
+                    <li> <%= error.path %>: <%= error.message %></li>
+                <% }); %> 
+            </ul>
+        </div> 
+    <% } %>
+    <div class="field">
+        <label for="name">Nombre</label>
+        <input type="text" name="name" value="<%= event.name %>" />
+    </div>
+    <div class="field">
+        <label for="description">Descripción</label>
+        <textarea type="text" name="description" rows="4" cols="30" value="<%= event.description %>" ></textarea>
+    </div>
+    <div class="field">
+        <label for="days">Días</label>
+        <input type="text" name="days" value="<%= event.days %>" />
+    </div>
+    <div class="field">
+        <label for="startsAt">Horario Inicio</label>
+        <input type="text" name="startsAt" value="<%= event.startsAt %>" />
+    </div>
+    <div class="field">
+        <label for="endsAt">Horario Término</label>
+        <input type="text" name="endsAt" value="<%= event.endsAt %>" />
+    </div>
+    <div class="field">
+        <label for="sala">Sala</label>
+        <select id="sala" name="roomId">
+            <% room.forEach((sala) => { %>
+                <option value="<%= sala.id %>" <%= event.roomId == sala.id ? 'selected' : '' %>>
+                    <%= sala.type %>
+                </option>  
+            <% }) %>
+        </select>
+    </div>
+    <div class="actions">
+        <input type="submit" value="Crear" />
+    </div>
+</form>
