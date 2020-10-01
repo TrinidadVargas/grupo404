@@ -52,15 +52,15 @@ router.post('events-create', '/', async (ctx) => {
     }
 });
 
-//router.get('event', '/:id', (ctx) => {
-  //  const {event} = ctx.state;
-    //return ctx.render('events/show', { event });
-//});
+router.get('event', '/:id', (ctx) => {
+    const {event} = ctx.state;
+    return ctx.render('events/show', { event });
+});
 
-// router.del('publications.delete', '/:id', async (ctx) => {
-//     ctx.state.publication = await ctx.orm.publication.findByPk(ctx.params.id);
-    // await publication.destroy();
-    // ctx.redirect(ctx.router.url('publications.list'));
+// router.del('events.delete', '/:id', async (ctx) => {
+//     ctx.state.event = await ctx.orm.event.findByPk(ctx.params.id);
+    // await event.destroy();
+    // ctx.redirect(ctx.router.url('events.list'));
 //   
 //   });
 

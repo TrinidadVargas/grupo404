@@ -35,9 +35,6 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: true,
       },
     },
-    photo: {
-      type: DataTypes.STRING,
-    },
     user_type: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -54,6 +51,11 @@ module.exports = (sequelize, DataTypes) => {
     });
     user.hasMany(models.conversation, {
       foreignKey: 'userId2',
+    });
+
+    user.belongsToMany(models.event, { 
+      through: 'event_users',
+      foreignKey: 'eventId',
     });
   };
 
