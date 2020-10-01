@@ -1,0 +1,32 @@
+<form method ="post" action="<%= createMembershipPath %>">
+    <% if (locals.errors){ %>
+        <div class="errors">
+        <p>El nuevo miembro no se pudo crear debido a los siguientes errores:</p>
+        <ul>
+            <% errors.forEach(error => { %>
+                <li><%= error.path %>: <%= error.message %></li>
+            <% }); %>
+        </ul>
+    </div>
+<% } %>
+
+    <div class="field">
+        <label for="user_id">Id de usuario</label>
+        <input type="text" id="user_id" name="user_id" value="<%= membership.user_id%>">
+    </div>
+    <div class="field">
+        <label for="type">Tipo</label>
+        <input type="text" id="type" name="type" value="<%= membership.type %>" />
+    </div>
+    <div class="field">
+        <label for="start">Inicio</label>
+        <input type="text"  id="start" name="start"  value="<%= membership.start  %>" />
+    </div>
+    <div class="field">
+        <label for="end">Termino</label>
+        <input type="text" id= "end" name="end" value="<%= membership.end  %>" />
+    </div>
+    <div class="actions">
+        <input type="submit" value="Crear">
+    </div>
+</form>

@@ -1,0 +1,16 @@
+<a href = "<%= newMembershipPath %>">Agregar membresía</a>
+<p>Cantidad de membresias:  <%= memberships.length %></p>
+<% memberships.forEach(membership =>{ %>
+    <div>
+        <h2><%= membership.user_id%></h2>
+        <p> Tipo: <%if (membership.type == 1) { %>
+            Membresía - Simple
+            <% } %>
+            <%if (membership.type == 2) { %>
+                Membresía - Full
+                <% } %>
+        </p>
+        <a href = "<%= membershipPath(membership.id) %>">Ver más</a>
+    </div>
+
+<% }) %>
