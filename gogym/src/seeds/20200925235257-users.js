@@ -39,6 +39,8 @@ module.exports = {
     });
 
     return queryInterface.bulkInsert('users', usersArray);
+
+    
   },
 
   down: async (queryInterface, Sequelize) => {

@@ -27,6 +27,10 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here. This method receives a models parameter.
     //room.hasMany(models.event, { onDelete: 'cascade', hooks: true });
     room.hasMany(models.event);
+    room.belongsToMany(models.user, {
+       through: 'room_users',
+       foreignKey: 'roomId',
+    });
   };
 
   return room;

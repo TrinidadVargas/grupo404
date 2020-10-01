@@ -68,6 +68,7 @@ router.get('user', '/:id', async (ctx) =>{
     conversations,
     conversationPath: (id) => ctx.router.url('conversation', id),
     newConversationPath: ctx.router.url('conversations-new'),
+    events: await user.getEvents(),
     // newConversationPath: (id) => ctx.router.url('')
   });
 });
