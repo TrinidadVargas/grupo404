@@ -8,9 +8,10 @@ const room = require('./routes/room');
 const events = require('./routes/events');
 
 const users = require('./routes/users');
-const gyms = require('./routes/gyms');
+//const gyms = require('./routes/gyms');
 const conversations = require('./routes/conversations');
 const messages = require('./routes/messages');
+const memberships = require('./routes/memberships');
 
 
 
@@ -24,9 +25,10 @@ router.use('/room', room.routes());
 router.use('/events', events.routes()); 
 
 router.use('/users', users.routes());
-router.use('/gyms', gyms.routes());
+//router.use('/gyms', gyms.routes());
 router.use('/conversations', conversations.routes());
 router.use('/messages', messages.routes());
+router.use('/memberships', memberships.routes());
 
 
 module.exports = router;
