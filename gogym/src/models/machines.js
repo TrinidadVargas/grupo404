@@ -20,7 +20,10 @@ module.exports = (sequelize, DataTypes) => {
     ,
   }, {});
 
-  machines.associate = function associate() {
+  machines.associate = function associate(models) {
+
+    machines.hasMany(models.user_machine);
+   
     // associations can be defined here. This method receives a models parameter.
   };
 

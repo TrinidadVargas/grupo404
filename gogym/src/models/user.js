@@ -35,9 +35,6 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: true,
       },
     },
-    photo: {
-      type: DataTypes.STRING,
-    },
     user_type: {
       type: DataTypes.INTEGER,
       allowNull: false,
