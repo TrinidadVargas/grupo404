@@ -1,8 +1,13 @@
 module.exports = (sequelize, DataTypes) => {
   const user_machine = sequelize.define('user_machine', {
-    id_user: DataTypes.INTEGER,
-    id_machine: DataTypes.INTEGER,
-    time: DataTypes.TIME,
+    id_user: {
+      type: DataTypes.INTEGER
+    },
+    id_machine: { 
+      type: DataTypes.INTEGER
+    },
+    time:{type: DataTypes.TIME
+    },
   }, {});
 
   user_machine.associate = function associate() {
