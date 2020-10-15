@@ -30,7 +30,9 @@
         <% } else { %> 
           <h4>Chat con <%= conversation.user2.name %> <%= conversation.user2.lastname %> 
         <% } %> 
-          <a href="<%= conversationPath(conversation.id) %>">Ir</a> </h4>
+          <a href="<%= conversationPath(conversation.id) %>">Ir</a> 
+          
+        </h4>
         </ul>
       <% }); %>
       
@@ -42,14 +44,14 @@
 <div class=events">
   <h2><%= events.length %> clases reservadas</h2>
   <% if (events.length) { %>
-      <ul>
-          <% events.forEach((event) => { %>
-              <h4> <%= event.name %></h4>
-              <p> <%= event.description %></p>
-              <p> Días: <%= event.days %></p>
-              <p> De <%= event.startsAt %> a <%= event.endsAt %> hrs</p>
-          <% }); %>
-      </ul>
+  <ul>
+    <% events.forEach((event) => { %>
+      <h4> <%= event.name %></h4>
+      <p> <%= event.description %></p>
+      <p> Días: <%= event.days %></p>
+      <p> De <%= event.startsAt %> a <%= event.endsAt %> hrs</p>
+    <% }); %>
+  </ul>
   <% } %>
 </div>
 </body>
