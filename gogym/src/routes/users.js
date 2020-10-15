@@ -1,5 +1,4 @@
 const KoaRouter = require('koa-router');
-// const db = require('../models');
 
 const router = new KoaRouter();
 
@@ -25,16 +24,26 @@ router.get('users', '/', async (ctx) => {
   await ctx.render('users/index', {
     users,
     userPath: id => ctx.router.url('user', id),
+    editUserPath: id => ctx.router.url('users-edit', id),
+    deleteUserPath: id => ctx.router.url('users-delete', id),
     newUserPath: ctx.router.url('users-new'),
-    editUserPath: (id) => ctx.router.url('users-edit', id),
+    
   });
 });
 
-router.get('users-new', '/new', (ctx) => {
+router.get('users-new', '/new', async (ctx) => {
   const user = ctx.orm.user.build();
-  return ctx.render('users/new', {
+  return await ctx.render('users/new', {
     user,
-    createUserPath: ctx.router.url('users-create'),
+    submitUserPath: ctx.router.url('users-create'),
+  });
+});
+
+router.get('users-edit', '/:id/edit', async (ctx) => {
+  const { user } = ctx.state;
+  await ctx.render('users/edit', {
+    user,
+    submitUserPath: ctx.router.url('users-update', { id: user.id }),
   });
 });
 
@@ -47,7 +56,23 @@ router.post('users-create', '/', async (ctx) => {
     await ctx.render('users/new', {
       user,
       errors: error.errors,
-      createUserPath: ctx.router.url('users-create'),
+    });
+  }
+});
+
+router.patch('users-update', '/:id', async (ctx) => {
+  const { user } = ctx.state;
+  try {
+    const params = ctx.request.body;
+    if (!params.password) delete params.password;
+    await user.update(params, { fields: PERMITTED_FIELDS });
+    //await user.update(ctx.request.body );
+    ctx.redirect(ctx.router.url('users'));
+  } catch (error) {
+    await ctx.render('users/edit', {
+      user,
+      errors: error.errors,
+      submitUserPath: ctx.router.url('users-update', { id: user.id }),
     });
   }
 });
@@ -69,24 +94,17 @@ router.get('user', '/:id', async (ctx) =>{
     conversations,
     conversationPath: (id) => ctx.router.url('conversation', id),
     newConversationPath: ctx.router.url('conversations-new'),
+    deleteConversationPath: (id) => ctx.router.url('conversations-delete', id),
     events: await user.getEvents(),
-    // newConversationPath: (id) => ctx.router.url('')
   });
 });
 
-router.patch('users-update', '/:id', async (ctx) => {
+
+
+router.del('users-delete', '/:id', async (ctx) => {
   const { user } = ctx.state;
-  try {
-    const params = ctx.request.body;
-    if (!params.password) delete params.password;
-    await user.update(params, { fields: PERMITTED_FIELDS });
-    ctx.redirect(ctx.router.url('users'));
-  } catch (error) {
-    await ctx.render('users/edit', {
-      user,
-      errors: error.errors,
-      submitPath: ctx.router.url('users-update', user.id),
-    });
-  }
+  await user.destroy();
+  ctx.redirect(ctx.router.url('users'));
 });
+
 module.exports = router;

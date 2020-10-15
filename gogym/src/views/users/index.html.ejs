@@ -24,10 +24,14 @@
             <div class="elemento">
                 <h2><%=user.id %> <%= user.name %> <%= user.lastname %></h2>
                 <a href="<%= userPath(user.id) %>">Ver más</a>
-                <p><%=  %></p>
+                <a href="<%- editUserPath(user.id) %>">Editar</a>
+                <form action="<%= deleteUserPath(user.id) %>" method="POST">
+                    <input type="hidden" name="_method" value="delete" />
+                    <input type="submit" value="Delete" />
+                </form>
             </div>
 
-        <% }) %>
+        <% }); %>
     </div>
 </body>
 </html>

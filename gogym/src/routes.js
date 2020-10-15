@@ -13,6 +13,7 @@ const conversations = require('./routes/conversations');
 const messages = require('./routes/messages');
 const memberships = require('./routes/memberships');
 const session = require('./routes/session');
+const appointments = require('./routes/appointments');
 
 
 
@@ -49,6 +50,7 @@ router.use('/conversations', conversations.routes());
 router.use('/messages', messages.routes());
 router.use('/memberships', memberships.routes());
 router.use('/session', session.routes());
+router.use('/appointments', appointments.routes());
 
 
 module.exports = router;
