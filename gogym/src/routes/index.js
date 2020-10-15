@@ -8,7 +8,6 @@ router.get('/', async (ctx) => {
   await ctx.render('index', { 
     events ,
     roomPath: (id) => ctx.router.url('sala', id),
-    usersPath: ctx.router.url('users'),
   });
 });
 
