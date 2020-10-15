@@ -1,32 +1,54 @@
-<form method ="post" action="<%= createMembershipPath %>">
-    <% if (locals.errors){ %>
-        <div class="errors">
-        <p>El nuevo miembro no se pudo crear debido a los siguientes errores:</p>
-        <ul>
-            <% errors.forEach(error => { %>
-                <li><%= error.path %>: <%= error.message %></li>
-            <% }); %>
-        </ul>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de membresías</title>
+    <link rel="stylesheet"  href="_form.scss" >
+</head>
+<div class="topnav">
+    <a class="active" href="#home">Home</a>
+    <a href="#">Mi perfil</a>
+    <a href="#">Máquinas</a>
+    <a href="#">Clases</a>
+    <a href="#">Reservas</a>
+    <a href="#">Horas</a>
+  </div>
+<body>
+    <form method ="post" action="<%= createMembershipPath %>">
+        <% if (locals.errors){ %>
+            <div class="errors">
+            <p>El nuevo miembro no se pudo crear debido a los siguientes errores:</p>
+            <ul>
+                <% errors.forEach(error => { %>
+                    <li><%= error.path %>: <%= error.message %></li>
+                <% }); %>
+            </ul>
+        </div>
+    <% } %>
+    <h1>Nueva mebresía</h1>
+    <div class="wrapper">
+        <div class="this-form">
+            <div class="field">
+                <label for="user_id">Id de usuario</label>
+                <input type="text" id="user_id" name="user_id" value="<%= membership.user_id%>">
+            </div>
+            <div class="field">
+                <label for="type">Tipo</label>
+                <input type="text" id="type" name="type" value="<%= membership.type %>" />
+            </div>
+            <div class="field">
+                <label for="start">Inicio</label>
+                <input type="text"  id="start" name="start"  value="<%= membership.start  %>" />
+            </div>
+            <div class="field">
+                <label for="end">Termino</label>
+                <input type="text" id= "end" name="end" value="<%= membership.end  %>" />
+            </div>
+            <div class="actions">
+                <input type="submit" value="Crear">
+            </div>
+        </div>
     </div>
-<% } %>
-
-    <div class="field">
-        <label for="user_id">Id de usuario</label>
-        <input type="text" id="user_id" name="user_id" value="<%= membership.user_id%>">
-    </div>
-    <div class="field">
-        <label for="type">Tipo</label>
-        <input type="text" id="type" name="type" value="<%= membership.type %>" />
-    </div>
-    <div class="field">
-        <label for="start">Inicio</label>
-        <input type="text"  id="start" name="start"  value="<%= membership.start  %>" />
-    </div>
-    <div class="field">
-        <label for="end">Termino</label>
-        <input type="text" id= "end" name="end" value="<%= membership.end  %>" />
-    </div>
-    <div class="actions">
-        <input type="submit" value="Crear">
-    </div>
-</form>
+    </form>
+</body>
+</html>

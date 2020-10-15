@@ -1,0 +1,91 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    outline: none;
+    font-family: sans-serif;
+}
+.topnav {
+    background-color: black;
+    overflow: hidden;
+  }
+  
+
+  .topnav a {
+    float: left;
+    color: #F7F7FF;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+
+  .topnav a:hover {
+    background-color: #F7F7FF;
+    color: black;
+  }
+  
+
+  .topnav a.active {
+    background-color: #577399;
+    color: #F7F7FF;
+  }
+
+
+body{
+    background: url('gogymt.png')  top center;
+    background-size: cover;
+    height: 100vh;
+}
+
+body h1{
+    color: #F7F7FF;
+    text-decoration: none;
+    background: black;
+    padding: 5px 20px;
+    border-radius: 20px;
+    font-size: 30px;
+    margin: 10px;
+
+}
+
+.wrapper{
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.this-form{
+    max-width: 550px;
+    margin:0 auto;
+    background: rgba(0,0,0,0.8);
+    padding: 30px;
+    border-radius:5px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 10px rgba(0,0,0,0.13);
+}
+
+.field{
+    display: flex;
+    flex-direction: column;
+    margin-right: 4%;
+    background: transparent;
+    border-bottom: 2px solid #c5ecfd;
+    padding: 10 px;
+    margin: 10px 0;
+    background: transparent;
+    border-left: 0;
+    border-bottom: 2px solid #c5ecfd;
+    padding: 10px;
+    color: #c5ecfd;
+    width: 100%;
+
+}
+
+.field .text{
+    width: 48%;
+}
+
