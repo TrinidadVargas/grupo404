@@ -45,7 +45,6 @@
     "webpack-manifest-plugin": "^2.2.0"
   },
   "dependencies": {
-    "bcrypt": "^5.0.0",
     "core-js": "^3.6.5",
     "koa": "^2.13.0",
     "koa-body": "^4.2.0",

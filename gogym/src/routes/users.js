@@ -26,7 +26,6 @@ router.get('users', '/', async (ctx) => {
     users,
     userPath: id => ctx.router.url('user', id),
     newUserPath: ctx.router.url('users-new'),
-    editUserPath: (id) => ctx.router.url('users-edit', id),
   });
 });
 
@@ -74,19 +73,4 @@ router.get('user', '/:id', async (ctx) =>{
   });
 });
 
-router.patch('users-update', '/:id', async (ctx) => {
-  const { user } = ctx.state;
-  try {
-    const params = ctx.request.body;
-    if (!params.password) delete params.password;
-    await user.update(params, { fields: PERMITTED_FIELDS });
-    ctx.redirect(ctx.router.url('users'));
-  } catch (error) {
-    await ctx.render('users/edit', {
-      user,
-      errors: error.errors,
-      submitPath: ctx.router.url('users-update', user.id),
-    });
-  }
-});
 module.exports = router;
