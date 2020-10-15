@@ -19,6 +19,7 @@
   <h3>Nombre: <%= user.name%> <%= user.lastname%></h3>
   <p>email: <%= user.email %></p>
 
+
   <div class="conversations">
     <% if (conversations.length){ %>
       <h2>Mis conversaciones</h2>
@@ -36,5 +37,20 @@
     <% } %> 
     <a href="<%= newConversationPath%>">Crear nueva conversación</a>
   </div>
+  
+  <h2>Mis Clases</h2>
+<div class=events">
+  <h2><%= events.length %> clases reservadas</h2>
+  <% if (events.length) { %>
+      <ul>
+          <% events.forEach((event) => { %>
+              <h4> <%= event.name %></h4>
+              <p> <%= event.description %></p>
+              <p> Días: <%= event.days %></p>
+              <p> De <%= event.startsAt %> a <%= event.endsAt %> hrs</p>
+          <% }); %>
+      </ul>
+  <% } %>
+</div>
 </body>
 </html>

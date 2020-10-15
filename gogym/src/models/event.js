@@ -8,31 +8,37 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     description:{
-    type: DataTypes.TEXT,
+      type: DataTypes.TEXT,
     },
     days:{
-    type: DataTypes.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
     },
     startsAt:{
-    type: DataTypes.TIME,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
+      type: DataTypes.TIME,
+      allowNull: false, 
+      validate: {
+        notEmpty: true,
+      },
     },
     endsAt: {
-    type: DataTypes.TIME,
-    }
+      type: DataTypes.TIME,
+    },
+    roomId:{
+      type: DataTypes.INTEGER,
+    },
   }, {});
 
   event.associate = function associate(models) {
     // associations can be defined here. This method receives a models parameter.
-    // event.belongsTo(models.room)
+    //event.belongsTo(models.room); 
+    //event.hasMany(models.room, { onDelete: 'cascade', hooks: true })
+    event.belongsTo(models.room, { foreignKey: 'roomId'}); 
   };
+
 
   return event;
 };

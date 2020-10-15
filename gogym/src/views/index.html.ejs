@@ -25,6 +25,15 @@
       <article class="secondary-article">
         <section>
           <h3>Clases</h3>
+          <ul>
+    <% events.forEach((event) => { %>
+      <li>
+        <h3><%= event.name %></h3>
+        <p><a href="<%= roomPath(event.room.id)%>"><%= event.room.type %></a></p>
+        <p> <%= event.days %>  de <%= event.startsAt %> a <%= event.endsAt %> hrs</p>
+      </li>
+    <% }); %>
+  </ul>
         </section>
       </article>
       <article class="secondary-article">

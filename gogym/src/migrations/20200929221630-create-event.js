@@ -22,6 +22,14 @@ module.exports = {
     endsAt: {
       type: Sequelize.TIME,
     },
+    roomId:{
+      type: Sequelize.INTEGER,
+      references: {
+        model: 'rooms',
+        key: 'id'
+      },
+      onDelete: 'CASCADE'
+    },
 
     createdAt: {
       allowNull: false,
