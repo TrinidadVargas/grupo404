@@ -9,9 +9,19 @@ module.exports = {
 
     specialistId: {
       type: Sequelize.INTEGER,
+      references: {
+        model: 'users',
+        key: 'id',
+      },
+      onDeleye: 'CASCADE',
     },
     userId: {
       type: Sequelize.INTEGER,
+      references: {
+        model: 'users',
+        key: 'id',
+      },
+      onDeleye: 'CASCADE',
     },
     date: {
       type: Sequelize.DATE,
