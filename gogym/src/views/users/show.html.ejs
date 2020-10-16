@@ -30,13 +30,16 @@
         <% } else { %> 
           <h4>Chat con <%= conversation.user2.name %> <%= conversation.user2.lastname %> 
         <% } %> 
-          <a href="<%= conversationPath(conversation.id) %>">Ir</a> </h4>
+          <a href="<%= conversationPath(conversation.id) %>">Ir</a> 
+          
+        </h4>
         </ul>
       <% }); %>
       
     <% } %> 
     <a href="<%= newConversationPath%>">Crear nueva conversación</a>
   </div>
+
 
 <div class="article">
   <div class="articles-grid">

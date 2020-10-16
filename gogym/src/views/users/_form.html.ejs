@@ -14,7 +14,7 @@
     <a href="#">Horas</a>
   </div>
 <body>
-  <form method="post" action="<%= createUserPath%>">
+  <form method="post" action="<%= submitUserPath%>">
     <% if (locals.errors) {%>
       <div class="errors">
         <p>El usuario no se puede crear debido a los siguientes errores: </p>
@@ -62,8 +62,13 @@
             </div>
             
             <div class="actions">
-              <input type="submit" value="Crear" />
-            </div>
+              <% if (user.isNewRecord) { %>
+                <input type="submit" name="create" value="Create" />
+              <% } else { %>
+                <input type="submit" name="update" value="Update" />
+              <% } %>
+          </div>
+
           </form>
         </div>
       </div>
