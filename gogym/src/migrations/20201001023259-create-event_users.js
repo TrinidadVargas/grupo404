@@ -9,9 +9,19 @@ module.exports = {
 
     eventId: {
       type: Sequelize.INTEGER,
+      references: {
+        model: 'events',
+        key: 'id',
+      },
+      onDeleye: 'CASCADE',
     },
     userId: {
       type: Sequelize.INTEGER,
+      references: {
+        model: 'users',
+        key: 'id',
+      },
+      onDeleye: 'CASCADE',
     },
 
     createdAt: {

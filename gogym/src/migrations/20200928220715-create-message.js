@@ -17,6 +17,11 @@ module.exports = {
     },
     senderId: {
       type: Sequelize.INTEGER,
+      references: {
+        model: 'users',
+        key: 'id',
+      },
+      onDeleye: 'CASCADE',
     },
     message: {
       type: Sequelize.TEXT,
