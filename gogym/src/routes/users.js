@@ -13,9 +13,9 @@ const PERMITTED_FIELDS = [
   'user_type',
 ];
 
-router.param('id', async (id, ctx, next) =>{
+router.param('id', async (id, ctx, next) => {
   const user = await ctx.orm.user.findByPk(id);
-  if (!user) ctx.throw (404);
+  if (!user) ctx.throw(404);
   ctx.state.user = user;
   return next();
 });
@@ -24,7 +24,7 @@ router.get('users', '/', async (ctx) => {
   const users = await ctx.orm.user.findAll();
   await ctx.render('users/index', {
     users,
-    userPath: id => ctx.router.url('user', id),
+    userPath: (id) => ctx.router.url('user', id),
     newUserPath: ctx.router.url('users-new'),
     editUserPath: (id) => ctx.router.url('users-edit', id),
   });
@@ -41,8 +41,8 @@ router.get('users-new', '/new', (ctx) => {
 router.post('users-create', '/', async (ctx) => {
   const user = ctx.orm.user.build(ctx.request.body);
   try {
-    await user.save({fields: PERMITTED_FIELDS});
-    ctx.redirect(ctx.router.url('users')); 
+    await user.save({ fields: PERMITTED_FIELDS });
+    ctx.redirect(ctx.router.url('users'));
   } catch (error) {
     await ctx.render('users/new', {
       user,
@@ -52,18 +52,19 @@ router.post('users-create', '/', async (ctx) => {
   }
 });
 
-router.get('user', '/:id', async (ctx) =>{
-  const {user} = ctx.state;
-  const { Op } = require("sequelize");
+router.get('user', '/:id', async (ctx) => {
+  const { user } = ctx.state;
+  // eslint-disable-next-line global-require
+  const { Op } = require('sequelize');
   const conversations = await ctx.orm.conversation.findAll({
     where: {
       [Op.or]: [
         { userId1: user.id },
         { userId2: user.id },
-      ] 
+      ],
     },
     include: ['user1', 'user2'],
-    });
+  });
   return ctx.render('users/show', {
     user,
     conversations,
