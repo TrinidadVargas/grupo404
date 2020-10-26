@@ -1,23 +1,46 @@
-<form method="post" action="<%= createRoomPath %>">
-    <% if (locals.errors) { %>
-        <div class="errors">
-            <p>La sala no se pudo crear por los siguientes errores:</p>
-            <ul>
-                <% errors.forEach(error => { %>
-                    <li> <%= error.path %>: <%= error.message %></li>
-                <% }); %> 
-            </ul>
-        </div> 
-    <% } %>
-    <div class="field">
-        <label for="type">Nombre</label>
-        <input type="text" name="type" value="<%= sala.name %>" />
-    </div>
-    <div class="field">
-        <label for="capacity">Capacidad</label>
-        <input type="text" name="capacity" value="<%= sala.capacity %>" />
-    </div>
-    <div class="actions">
-        <input type="submit" value="Crear" />
-    </div>
-</form>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de salas</title>
+    <link rel="stylesheet"  href="_form.scss" >
+</head>
+<div class="topnav">
+    <a class="active" href="#home">Home</a>
+    <a href="#">Mi perfil</a>
+    <a href="#">Máquinas</a>
+    <a href="#">Clases</a>
+    <a href="#">Reservas</a>
+    <a href="#">Horas</a>
+  </div>
+<body> 
+    <form method="post" action="<%= createRoomPath %>">
+        <% if (locals.errors) { %>
+            <div class="errors">
+                <p>La sala no se pudo crear por los siguientes errores:</p>
+                <ul>
+                    <% errors.forEach(error => { %>
+                        <li> <%= error.path %>: <%= error.message %></li>
+                    <% }); %> 
+                </ul>
+            </div> 
+        <% } %>
+        <h1>Nueva sala</h1>
+        <div class="wrapper">
+            <div class="this-form">
+            <div class="field">
+                <label for="type">Nombre</label>
+                <input type="text" name="type" value="<%= sala.name %>" />
+            </div>
+            <div class="field">
+                <label for="capacity">Capacidad</label>
+                <input type="text" name="capacity" value="<%= sala.capacity %>" />
+            </div>
+            <div class="actions">
+                <input type="submit" value="Crear" />
+            </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

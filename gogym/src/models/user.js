@@ -42,7 +42,16 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: true,
       },
     },
-  }, {});
+  }, {
+    hooks: {
+      beforeSave: async (instance) => {
+        if (instance.changed('password')) {
+          /* eslint-disable-next-line no-param-reassign */
+          instance.password = await bcrypt.hash(instance.password, 10);
+        }
+      },
+    },
+  });
 
   user.associate = function associate(models) {
     // associations can be defined here. This method receives a models parameter.
@@ -53,9 +62,16 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'userId2',
     });
 
-    user.belongsToMany(models.event, { 
+    user.hasMany(models.appointment, {
+      foreignKey: 'userId',
+    });
+    user.hasMany(models.appointment, {
+      foreignKey: 'specialistId',
+    });
+
+    user.belongsToMany(models.event, {
       through: 'event_users',
-      foreignKey: 'eventId',
+      foreignKey: 'userId',
     });
   };
 

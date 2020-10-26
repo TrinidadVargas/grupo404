@@ -37,6 +37,10 @@ module.exports = (sequelize, DataTypes) => {
     //event.belongsTo(models.room); 
     //event.hasMany(models.room, { onDelete: 'cascade', hooks: true })
     event.belongsTo(models.room, { foreignKey: 'roomId'}); 
+    event.belongsToMany(models.user, { 
+      through: 'event_users',
+      foreignKey: 'eventId',
+    });
   };
 
 

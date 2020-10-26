@@ -1,7 +1,23 @@
 <h1><%= event.name%></h1>
 
+<% if (locals.currentUser) {%>
+  <form action="<%= inscriptionPath %>" method="POST">
+    <input type="hidden" name="_method" value="get" />
+    <input type="hidden" name="eventId" value="<%=event.id%>" />
+    <input type="submit" value="Inscribirme" />
+  </form>
+  
+<% }%>
+
 <h4> Descripción </h4>
 <p> <%= event.description %></p>
 
 <h5>Días: <%= event.days %></h5>
 <h5>Horario: <%= event.startsAt %></h5>
+
+<div>
+  <h5>Cantidad de inscritos: <%= users.length%></h5>
+  <% users.forEach(user => { %>
+    <%=user.id %> <%= user.name %> <%= user.lastname %>
+  <% });%>
+</div>
