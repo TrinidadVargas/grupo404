@@ -3,7 +3,7 @@
 
   <head>
     <meta charset="utf-8">
-    <title>IIC2513 - GOGYM</title>
+    <title>IIC2513 - CHANGE-ME</title>
     <% if (env !== 'development') { %>
       <link rel="stylesheet" href="<%= assetPath('app.css') %>">
     <% } %>
@@ -11,20 +11,6 @@
 
   <body>
     <header>
-      <div class="logo">
-        <a href="/">Gogym</a>
-      </div>
-      <div id="user-bar">
-        <% if (locals.currentUser) { %>
-          <%= currentUser.email %>
-          <form action="<%= destroySessionPath %>" method="post">
-            <input type="hidden" name="_method" value="delete" />
-            <input type="submit" value="Cerrar Sesión" />
-          </form>
-        <% } else { %>
-          <a href="<%= newSessionPath %>">Iniciar sesión</a>
-        <% } %>
-      </div>
     </header>
     <%- body %>
     <script src="<%= assetPath('app.js') %>"></script>

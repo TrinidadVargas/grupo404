@@ -12,6 +12,7 @@ const users = require('./routes/users');
 const conversations = require('./routes/conversations');
 const messages = require('./routes/messages');
 const memberships = require('./routes/memberships');
+
 const session = require('./routes/session');
 const appointments = require('./routes/appointments');
 
