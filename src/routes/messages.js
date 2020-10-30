@@ -16,11 +16,12 @@ router.get('messages-new', '/new', (ctx) => {
 
 router.post('messages-create', '/', async (ctx) => {
   const message = ctx.orm.message.build(ctx.request.body);
-  console.log(ctx.request.body);
+  console.log('\n\nhola Trini!\n');
+  const cid = ctx.request.body['conversationId'];
   try {
     console.log(ctx.request.body)
     await message.save({fields: PERMITTED_FIELDS});
-    ctx.redirect(ctx.router.url('users')); 
+    ctx.redirect(ctx.router.url('conversation', cid)); 
   } catch (error) {
     ctx.redirect('back');
     console.log('ouch shit')
