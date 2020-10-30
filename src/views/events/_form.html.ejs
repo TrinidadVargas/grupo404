@@ -1,39 +1,41 @@
 <body>
-    <h1>Nueva clase</h1>
-    <div class="wrapper">
-        <div class="this-form">
-        <form method="post" action="<%= createEventPath %>">
-            <% if (locals.errors) { %>
-                <div class="errors">
-                    <p>La clase no se pudo crear por los siguientes errores:</p>
-                    <ul>
-                        <% errors.forEach(error => { %>
-                            <li> <%= error.path %>: <%= error.message %></li>
-                        <% }); %> 
-                    </ul>
-                </div> 
-            <% } %>
-            <div class="field">
-                <label for="name">Nombre</label>
-                <input type="text" name="name" value="<%= event.name %>" />
+    <form method="post" action="<%= submitPath %>" enctype="multipart/form-data">
+        <% if (locals.errors) { %>
+            <div class="errors">
+                <p>La clase no se pudo crear por los siguientes errores:</p>
+                <ul>
+                    <% errors.forEach(error => { %>
+                        <li> <%= error.path %>: <%= error.message %></li>
+                    <% }); %> 
+                </ul>
+            </div> 
+        <% } %>
+    
+        <% if (!event.isNewRecord){ %>
+            <input type="hidden" name="_method" value="patch" />
+        <%}%>
+        <div class="wrapper">
+            <div class="this-form">
+                <div class="field">
+                    <label for="name">Nombre</label>
+                    <input type="text" name="name" value="<%= event.name %>" />
+                </div>
+                <div class="field">
+                    <label for="description">Descripción</label>
+                    <textarea type="text" name="description" value="<%= event.description %>" ></textarea>
+                </div>
+                <div class="field">
+                    <label for="days">Días</label>
+                    <input type="text" name="days" value="<%= event.days %>" />
+                </div>
+                <div class="field">
+                    <label for="startsAt">Horario</label>
+                    <input type="text" name="startsAt" value="<%= event.startsAt %>" />
+                </div>
+                <div class="actions">
+                    <input type="submit" value="Crear" />
+                </div>
             </div>
-            <div class="field">
-                <label for="description">Descripción</label>
-                <textarea type="text" name="description" value="<%= event.description %>" ></textarea>
-            </div>
-            <div class="field">
-                <label for="days">Días</label>
-                <input type="text" name="days" value="<%= event.days %>" />
-            </div>
-            <div class="field">
-                <label for="startsAt">Horario</label>
-                <input type="text" name="startsAt" value="<%= event.startsAt %>" />
-            </div>
-            <div class="actions">
-                <input type="submit" value="Crear" />
-            </div>
-        </form>
         </div>
-    </div>
-</body>
-</html>
+        </form>
+    </body>

@@ -12,6 +12,8 @@
                 <p><%= event.description %></p>
                 <p><%= event.days %></p>
                 <p><%= event.startsAt %></p>
+                <a href = "<%= eventPath(event.id) %>">Ver más</a>
+                <a href="<%= editEventPath(event.id) %>">Editar</a>
             </div>
         <% })%>
     </div>

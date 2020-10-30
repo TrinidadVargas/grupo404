@@ -1,5 +1,4 @@
 <body>
-    <link rel="stylesheet"  href="machines.scss" >
     <div class="ref-to-new">
         <a href= "<%= newMachinePath %>" > Agregar nueva máquina</a>
         <p>Cantidad de maquinas:  <%= machines.length %></p>
@@ -10,10 +9,13 @@
                 <h2><%= machine.name%></h2>
                 <p><%= machine.description%></p>
                 <a href = "<%= machinePath(machine.id) %>">Ver más</a>
+                
+                <a href="<%= editMachinePath(machine.id) %>">Editar</a>
                 <button type="button">Reservar</button>
+                
             </div>
 
         <% }) %>
     </div>
 </body>
-</html>
+
