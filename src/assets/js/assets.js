@@ -1,1 +1,1 @@
-import '../images/gogym.png';
+//import '../images/gogym.png';

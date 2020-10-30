@@ -5,6 +5,7 @@ const index = require('./routes/index');
 const machines = require('./routes/machines');
 
 const room = require('./routes/room');
+const event_users = require('./routes/event_users');
 const events = require('./routes/events');
 
 const users = require('./routes/users');
@@ -16,12 +17,18 @@ const session = require('./routes/session');
 const appointments = require('./routes/appointments');
 const health_profiles = require('./routes/healthprofiles');
 
+
 const router = new KoaRouter();
 
 router.use(async (ctx, next) => {
   Object.assign(ctx.state, {
     newSessionPath: ctx.router.url('session-new'),
     destroySessionPath: ctx.router.url('session-destroy'),
+    eventsPath: ctx.router.url('events'),
+    roomsPath: ctx.router.url('room'),
+    machinesPath: ctx.router.url('machines'),
+    newUserPath: ctx.router.url('users-new'),
+    usersPath: ctx.router.url('users'),
   });
   return next();
 });
@@ -38,6 +45,7 @@ router.use('/hello', hello.routes());
 router.use('/machines', machines.routes());
 
 router.use('/room', room.routes());
+router.use('/event_users', event_users.routes());
 router.use('/events', events.routes());
 
 router.use('/users', users.routes());
@@ -48,5 +56,6 @@ router.use('/memberships', memberships.routes());
 router.use('/session', session.routes());
 router.use('/appointments', appointments.routes());
 router.use('/healthprofiles', health_profiles.routes());
+
 
 module.exports = router;

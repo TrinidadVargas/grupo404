@@ -1,6 +1,9 @@
 <h1>All appointments</h1>
 
+<% if (locals.currentUser && locals.currentUser.user_type != 1) {%> 
 <a href="<%= newApptPath %>">Agregar nueva consulta</a>
+
+<% } %> 
 
 <p> Cantidad de Consultas Disponibles: <%= appointments.length %> </p>
 <% appointments.forEach(appt => { %>
@@ -8,11 +11,15 @@
       <h3>Especialista: <%=appt.id%>
       <a href="<%=specialistPath(appt.specialistId)%>"><%= appt.specialist.name %> <%= appt.specialist.lastname %></a>
       <h4><%=appt.date%></h4>
+      <h4><%=appt.id%></h4>
       <p><%= appt.description%></p>
-      <form action="<%= deleteApptPath(appt.id) %>" method="POST">
-        <input type="hidden" name="_method" value="delete" />
-        <input type="submit" value="Delete" />
-      </form>
+      <a href="<%=apptPath(appt.id)%>">Ver</a>
+      <% if (locals.currentUser && locals.currentUser.user_type!=1) {%>
+        <form action="<%= deleteApptPath(appt.id) %>" method="POST">
+          <input type="hidden" name="_method" value="delete" />
+          <input type="submit" value="Delete" />
+        </form>
+      <%} %>
         
     </div>
 

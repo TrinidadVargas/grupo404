@@ -28,10 +28,10 @@ router.use(PROTECTED_PATHS, checkAuth);
 
 router.param('id', async (id, ctx, next) => {
 
-   const event = await ctx.orm.event.findByPk(id);
-   if (!event) ctx.throw(404);
-    ctx.state.event = event;
-    return next();
+  const event = await ctx.orm.event.findByPk(id);
+  if (!event) ctx.throw(404);
+  ctx.state.event = event;
+  return next();
 });
 
 router.get('events', '/', async(ctx) => {
@@ -71,15 +71,14 @@ router.post('events-create', '/', async (ctx) => {
 });
 
 router.get('event', '/:id', async (ctx) => {
-    const {event} = ctx.state;
-    const users = await event.getUsers();
-    return ctx.render('events/show', { 
-      event, 
-      users,
-      inscriptionPath: ctx.router.url('events-new'),
-    });
+  const { event } = ctx.state;
+  const users = await event.getUsers(); //
+  return ctx.render('events/show', {
+    event,
+    users,
+    inscriptionPath: ctx.router.url('events-new'),
+  });
 });
-
 
 router.del('events.delete', '/:id', async (ctx) => {
   const { event } = ctx.state;

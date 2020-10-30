@@ -1,4 +1,6 @@
-<h2><%= conversation.id %> Chat entre: <%= users[0].name %> <%= users[0].lastname %> y <%= users[1].name %> <%= users[1].lastname %> </h2>
+
+
+<h2>Chat entre <%= users[0].name %> <%= users[0].lastname %> y <%= users[1].name %> <%= users[1].lastname %> </h2>
 
 <div class=messages">
   <% if (messages.length) { %>
@@ -15,6 +17,25 @@
     <% }); %>
   <% } %>
 </div>
-
+<% if (locals.currentUser) {%>
 <h3><a href="<%= newMessagePath %>">Enviar mensaje</a></h3> 
 
+  <div class="wrapper">
+    <div class="this-form">
+    <form method="post" action="<%= createMessagePath%>">
+
+        <input type="hidden" id="conversationId" name="conversationId" value="<%=conversation.id%>"/>
+        <input type="hidden" id="senderId" name="senderId" value="<%=locals.currentUser.id%>"/>
+
+      <div class="field">
+        <label for="message">Message</label>
+        <input type="text" id="message" name="message" />
+      </div>
+
+      <div class="actions">
+        <input type="submit" value="Send" />
+      </div>
+    </form>
+    </div>
+  </div>
+<%}%>
