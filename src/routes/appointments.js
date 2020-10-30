@@ -24,8 +24,11 @@ router.get('appointments', '/', async (ctx) => {
   await ctx.render('appointments/index', {
     appointments,
     specialistPath: id => ctx.router.url('user', id),
-    editApptPath: id => ctx.router.url('appointment-edit', id),
+    apptPath: id => ctx.router.url('appointment', id),
+    // editApptPath: id => ctx.router.url('appointments-edit', id),
     deleteApptPath: id => ctx.router.url('appointments-delete', id),
+    // inscribeUserPath: id => ctx.router.url('appointments-update', id),
+    // inscribeUserPath: ctx.router.url('appointments-update', { id: user.id }),
     newApptPath: ctx.router.url('appointments-new'),
   });
 });
@@ -38,13 +41,13 @@ router.get('appointments-new', '/new', async (ctx) => {
   });
 });
 
-// router.get('appointments-edit', '/:id/edit', async (ctx) => {
-//   const { appointment } = ctx.state;
-//   await ctx.render('appointments/edit', {
-//     appointment,
-//     submitApptPath: ctx.router.url('appointments-update', { id: appointment.id }),
-//   });
-// });
+router.get('appointments-edit', '/:id/edit', async (ctx) => {
+  const { appointment } = ctx.state;
+  await ctx.render('appointments/edit', {
+    appointment,
+    submitApptPath: ctx.router.url('appointments-update', { id: appointment.id }),
+  });
+});
 
 router.post('appointments-create', '/', async (ctx) => {
   const appointment = ctx.orm.appointment.build(ctx.request.body);
@@ -59,19 +62,18 @@ router.post('appointments-create', '/', async (ctx) => {
   }
 });
 
-// router.patch('appointments-update', '/:id', async (ctx) => {
-//   const { appointment } = ctx.state;
-//   try {
-//     await appointment.update(ctx.request.body );
-//     ctx.redirect(ctx.router.url('appointments'));
-//   } catch (validationError) {
-//     await ctx.render('appointments/edit', {
-//       appointment,
-//       errors: validationError.errors,
-//       submitApptPath: ctx.router.url('appointments-update', { id: appointment.id }),
-//     });
-//   }
-// });
+router.get('appointment', '/:id', async (ctx) => {
+  const {appointment} = ctx.state;
+  const specialist = await ctx.orm.user.findByPk(appointment.specialistId);
+  return ctx.render('appointments/show', { 
+    appointment: appointment,
+    specialist,
+    specialistPath: id => ctx.router.url('user', id),
+    editApptPath: ctx.router.url('appointments-edit', { id: appointment.id }),
+    submitApptPath: ctx.router.url('appointments-update', { id: appointment.id }),
+    // editApptPath: id => ctx.router.url('appointments-edit', id),
+  });
+});
 
 router.del('appointments-delete', '/:id', async (ctx) => {
   const { appointment } = ctx.state;
@@ -79,4 +81,32 @@ router.del('appointments-delete', '/:id', async (ctx) => {
   ctx.redirect(ctx.router.url('appointments'));
 });
 
+router.post('appointments-update', '/:id', async (ctx) => {
+  const { appointment } = ctx.state;
+  const specialist = await ctx.orm.user.findByPk(appointment.specialistId);
+  const params = ctx.request.body;
+  if (params['userId'] == 0)
+  {
+    params['userId'] = null;
+  }
+  try {
+    await appointment.update(params, { fields: PERMITTED_FIELDS });
+    ctx.redirect(ctx.router.url('appointments'));
+  } catch (error) {
+    await ctx.render('appointments/show', {
+      appointment,
+      errors: error.errors,
+      specialist,
+      submitApptPath: ctx.router.url('appointments-update', { id: appointment.id }),
+      specialistPath: id => ctx.router.url('user', id),
+    });
+  }
+});
+
 module.exports = router;
+
+
+// <div class="field">
+//     <label for="userId">userId</label>
+//     <input type="number" id="userId" name="userId" />
+//   </div>
