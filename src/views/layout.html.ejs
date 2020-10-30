@@ -3,6 +3,7 @@
 
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IIC2513 - GOGYM</title>
     <% if (env !== 'development') { %>
       <link rel="stylesheet" href="<%= assetPath('app.css') %>">
@@ -25,9 +26,25 @@
           <a href="<%= newSessionPath %>">Iniciar sesión</a>
         <% } %>
       </div>
+      <div class="topnav">
+        <div class="logo">
+          <a href="/">Logo</a>
+        </div>
+        <ul>
+          <a class="active" href="/">Home</a>
+          <a href="<%= eventsPath %>">Clases</a>
+          <a href="<%= machinesPath %>">Máquinas</a>
+          <a href="<%= roomsPath %>">Salas</a>
+        </ul>
+      </div>
     </header>
     <%- body %>
     <script src="<%= assetPath('app.js') %>"></script>
+    <footer class="footer">
+      <div class="footer-wrapper">
+        <h3> GOGYM </h3>
+      </div>
+    </footer>
   </body>
 
 </html>

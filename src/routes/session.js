@@ -3,7 +3,6 @@ const KoaRouter = require('koa-router');
 
 const router = new KoaRouter();
 
-
 router.get('session-new', '/new', (ctx) => ctx.render(
   'session/new',
   {

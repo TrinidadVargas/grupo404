@@ -1,4 +1,9 @@
 'use strict';
+const bcrypt = require('bcrypt');
+
+const password = 'admin';
+
+const hash = bcrypt.hashSync(password, 10);
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -9,7 +14,7 @@ module.exports = {
       name: 'Trinidad',
       lastname: 'Vargas',
       email: 'mtvargas1@uc.cl',
-      password: 'admin',
+      password: hash,
       rut: '19892520-9',
       user_type: 0,
       createdAt: new Date(),
@@ -20,7 +25,7 @@ module.exports = {
       name: 'Pilar',
       lastname: 'Vargas',
       email: 'pilarvargas@uc.cl',
-      password: 'admin',
+      password: hash,
       rut: '19892521-9',
       user_type: 1,
       createdAt: new Date(),
@@ -31,7 +36,7 @@ module.exports = {
       name: 'Toño',
       lastname: 'Vargas',
       email: 'joseantonio_vargas@gmail.com',
-      password: 'admin',
+      password: hash,
       rut: '19892522-9',
       user_type: 2,
       createdAt: new Date(),
@@ -39,8 +44,6 @@ module.exports = {
     });
 
     return queryInterface.bulkInsert('users', usersArray);
-
-    
   },
 
   down: async (queryInterface, Sequelize) => {

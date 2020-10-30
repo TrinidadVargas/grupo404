@@ -1,18 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Formulario de usuarios</title>
-    <link rel="stylesheet"  href="_form.scss" >
-</head>
-<div class="topnav">
-    <a class="active" href="#home">Home</a>
-    <a href="#">Mi perfil</a>
-    <a href="#">Máquinas</a>
-    <a href="#">Clases</a>
-    <a href="#">Reservas</a>
-    <a href="#">Horas</a>
-  </div>
 <body>
   <form method="post" action="<%= submitUserPath%>">
     <% if (locals.errors) {%>
@@ -24,8 +9,11 @@
           <% });%>
         </ul>
       </div>
-      
     <%} %>
+
+    <% if (!user.isNewRecord) { %>
+      <input type="hidden" name="_method" value="patch" />
+    <% } %>
 
     <h1>Crear cuenta</h1>
     <div class="wrapper">
@@ -73,4 +61,3 @@
         </div>
       </div>
   </body>
-</html>
