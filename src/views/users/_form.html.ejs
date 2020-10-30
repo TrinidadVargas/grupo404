@@ -51,15 +51,21 @@
               <label for="rut">Rut</label>
               <input type="text" id="rut" name="rut" value="<%= user.rut %>" />
             </div>
-            <div>
-              <label for="user_type">Tipo de Cuenta</label>
-              <select name="user_type" id="user_type">
-                <option value=0> Administrador</option>
-                <option value=1> Cliente</option>
-                <option value=2> Entrenador</option>
-                <option value=3> Nutricionista</option>
-              </select>
-            </div>
+
+            <% if (locals.currentUser && locals.currentUser.user_type==0) { %>
+              <div>
+                <label for="user_type">Tipo de Cuenta</label>
+                <select name="user_type" id="user_type">
+                  <option value=0> Administrador</option>
+                  <option value=1> Cliente</option>
+                  <option value=2> Entrenador</option>
+                  <option value=3> Nutricionista</option>
+                </select>
+              </div>
+            <% } else { %>
+              <input type="hidden" id="user_type" name="user_type" value="1" />
+            <% } %>
+
             
             <div class="actions">
               <% if (user.isNewRecord) { %>

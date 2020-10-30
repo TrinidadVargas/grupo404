@@ -24,6 +24,7 @@ router.get('events', '/', async (ctx) => {
     await ctx.render('events/index', {
       events,
       newEventPath: ctx.router.url('events-new'),
+      eventPath: id => ctx.router.url('event', id),
     });
   });
 
@@ -56,10 +57,28 @@ router.post('events-create', '/', async (ctx) => {
 router.get('event', '/:id', async (ctx) => {
     const {event} = ctx.state;
     const users = await event.getUsers();
+    let enrolled = false;
+    let inscriptionId = 0;
+    console.log(users);
+    for (i = 0; i < users.length; i++) {
+      let user = users[i]; 
+      if (user.id == ctx.session.currentUserId) {
+        enrolled = true;
+        const inscription = await ctx.orm.event_inscription.findAll({
+          where: {
+            userId: user.id,
+            eventId: event.id,
+          },
+        });
+        inscriptionId = inscription[0].id;
+      }
+    }
     return ctx.render('events/show', { 
       event, 
       users,
-      inscriptionPath: ctx.router.url('events-new'),
+      enrolled,
+      submitInscriptionPath: ctx.router.url('event_inscriptions-create'),
+      deleteInscription: ctx.router.url('event_inscriptions-delete', inscriptionId),
     });
 });
 

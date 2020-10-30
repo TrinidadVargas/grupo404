@@ -15,6 +15,7 @@ const messages = require('./routes/messages');
 const memberships = require('./routes/memberships');
 const session = require('./routes/session');
 const appointments = require('./routes/appointments');
+const event_inscriptions = require('./routes/event_inscriptions');
 
 
 const router = new KoaRouter();
@@ -49,6 +50,7 @@ router.use('/messages', messages.routes());
 router.use('/memberships', memberships.routes());
 router.use('/session', session.routes());
 router.use('/appointments', appointments.routes());
+router.use('/event_inscription', event_inscriptions.routes());
 
 
 module.exports = router;
