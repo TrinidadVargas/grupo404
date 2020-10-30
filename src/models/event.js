@@ -30,6 +30,9 @@ module.exports = (sequelize, DataTypes) => {
     roomId:{
       type: DataTypes.INTEGER,
     },
+    image:{
+      type: DataTypes.TEXT,
+    }
   }, {});
 
   event.associate = function associate(models) {
