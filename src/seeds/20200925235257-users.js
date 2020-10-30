@@ -1,4 +1,6 @@
 'use strict';
+// bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -6,37 +8,61 @@ module.exports = {
     const usersArray = [];
 
     usersArray.push({
-      name: 'Trinidad',
-      lastname: 'Vargas',
-      email: 'mtvargas1@uc.cl',
-      password: 'admin',
-      rut: '19892520-9',
+      name: 'Admin',
+      lastname: 'Istrador',
+      email: 'admin@gogym.cl',
+      password: await bcrypt.hash('123456', 10),
+      rut: '11111111-1',
       user_type: 0,
       createdAt: new Date(),
       updatedAt: new Date(),
     });
 
     usersArray.push({
-      name: 'Pilar',
-      lastname: 'Vargas',
-      email: 'pilarvargas@uc.cl',
-      password: 'admin',
-      rut: '19892521-9',
+      name: 'Entre',
+      lastname: 'Nador',
+      email: 'entrenador@gogym.cl',
+      password: await bcrypt.hash('123456', 10),
+      rut: '11111111-1',
+      user_type: 2,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+
+    usersArray.push({
+      name: 'Nuti',
+      lastname: 'Cionista',
+      email: 'nutricionista@gogym.cl',
+      password: await bcrypt.hash('123456', 10),
+      rut: '11111111-1',
+      user_type: 3,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+
+    usersArray.push({
+      name: 'Cliente',
+      lastname: '1',
+      email: 'cliente@gogym.cl',
+      password: await bcrypt.hash('123456', 10),
+      rut: '11111111-1',
       user_type: 1,
       createdAt: new Date(),
       updatedAt: new Date(),
     });
 
     usersArray.push({
-      name: 'Toño',
-      lastname: 'Vargas',
-      email: 'joseantonio_vargas@gmail.com',
-      password: 'admin',
-      rut: '19892522-9',
-      user_type: 2,
+      name: 'Cliente',
+      lastname: '2',
+      email: 'cliente@gogym.cl',
+      password: await bcrypt.hash('123456', 10),
+      rut: '11111111-1',
+      user_type: 1,
       createdAt: new Date(),
       updatedAt: new Date(),
     });
+
+    
 
     return queryInterface.bulkInsert('users', usersArray);
 
