@@ -49,7 +49,7 @@ router.get('conversation', '/:id', async (ctx) =>{
     users,
     messages,
     newMessagePath: ctx.router.url('messages-new'),
-
+    createMessagePath: ctx.router.url('messages-create'),
   });
   
 });
