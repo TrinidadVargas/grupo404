@@ -11,6 +11,17 @@
 
 <h3>Fecha:<%= appointment.date%></h3>
 <h3>Lugar:<%= appointment.place%></h3>
+<% if (appointment.appttype == 0) { %>
+  <h3>Status: Libre</h3>
+<% } else if (appointment.appttype == 1) {%>
+  <h3>Status: Agendada</h3>
+<% } else if (appointment.appttype == 2) {%>
+  <h3>Status: Realizada</h3>
+<% } else if (appointment.appttype == 3) {%>
+  <h3>Status: Cancelada</h3>
+<% } else if (appointment.appttype == 4) {%>
+  <h3>Status: No llega</h3>
+<% } %> 
 
 <% if ((!appointment.userId || appointment.userId == 0) && locals.currentUser && locals.currentUser.user_type==1) {%>
 
@@ -33,4 +44,23 @@
 
 <%}%>
 
+<% if (locals.currentUser && locals.currentUser.user_type != 1) {%>
+  <form action="<%= submitApptPath %>" method="post">
+    <div>
+      <label for="appttype">Cambiar Estado</label>
+      <select name="appttype" id="appttype" value="<%= appointment.appttype %>">
+        <option value=0 select="<%= appointment.appttype == 0 ? 'selected' : '' %>"> Libre</option>
+        <option value=1 > Agendada</option>
+        <option value=2 > Realizada</option>
+        <option value=3 > Cancelada</option>
+        <option value=4 > No llega</option>
+      </select>
+    </div>
+    <input type="submit" name="update" value="Cambiar" />
+  </form>
+
+  <% if (appointment.userId) { %>
+    <a href="<%=specialistPath(appointment.userId)%>">Perfil Paciente</a>
+  <% } %>
+<% } %>  
 

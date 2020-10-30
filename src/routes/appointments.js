@@ -7,7 +7,8 @@ const PERMITTED_FIELDS = [
   'userId',
   'date',
   'description',
-  'place'
+  'place',
+  'appttype',
 ];
 
 router.param('id', async (id, ctx, next) =>{
