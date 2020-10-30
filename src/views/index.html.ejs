@@ -1,26 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="style.css" />
-</head>
-<div class="topnav">
-  <a class="active" href="#home">Home</a>
-  <a href="#">Planes</a>
-  <a href="#">Contáctanos</a>
-  <a href="#">Conócenos</a>
-</div>
 <body>
-    <header class="main-header">
-      <section>
-        <h1> GOGYM</h1>
-      </section>
-      <div  class = "content">
-        <p>Bienvenido al gimnasio virtual</p>
-        <a href ="#">Crear cuenta</a>
-        <a href ="#">Ingresar</a>
+  <main> 
+      <div class = "inicio">
+        <p>PREPARA TU MEJOR VERSIÓN CON GOGYM</p>
+        <% if (locals.currentUser) { %>
+        <% } else { %>
+          <a href ="<%= newUserPath %>">Crear cuenta</a>
+          <a href ="<%= newSessionPath %>">Ingresar</a>
+        <% } %>
       </div>
-    </header>
+    
     <section class="articles-grid">
       <article class="secondary-article">
         <section>
@@ -34,33 +22,41 @@
               </li>
             <% }); %>
           </ul>
+          <a href ="<%= eventsPath %>">Ver Más</a>
         </section>
       </article>
       <article class="secondary-article">
         <section>
           <h3>Máquinas</h3>
+          <a href ="<%= machinesPath %>">Ver Más</a>
         </section>
       </article>
       <article class="secondary-article">
         <section>
           <h3>Profesores</h3>
+          <a href ="#">Ver Más</a>
         </section>
       </article>
       <article class="secondary-article">
         <section>
           <h3>Salas</h3>
+          <a href ="<%= roomsPath %>">Ver Más</a>
         </section>
       </article>
       <article class="secondary-article">
         <section>
           <h3>Entrenadores</h3>
+          <a href ="#">Ver Más</a>
         </section>
       </article>
       <article class="secondary-article">
         <section>
           <h3>Usuarios</h3>
+          <a href ="<%= usersPath %>">Ver Más</a>
         </section>
       </article>
-  </section>
+    </section>
+
+  </main>
 </body>
 </html>

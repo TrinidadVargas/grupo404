@@ -23,6 +23,11 @@ router.use(async (ctx, next) => {
   Object.assign(ctx.state, {
     newSessionPath: ctx.router.url('session-new'),
     destroySessionPath: ctx.router.url('session-destroy'),
+    eventsPath: ctx.router.url('events'),
+    roomsPath: ctx.router.url('room'),
+    machinesPath: ctx.router.url('machines'),
+    newUserPath: ctx.router.url('users-new'),
+    usersPath: ctx.router.url('users'),
   });
   return next();
 });

@@ -1,6 +1,11 @@
 'use strict';
-// bcrypt = require('bcrypt');
+
 const bcrypt = require('bcrypt');
+
+const password = 'admin';
+
+const hash = bcrypt.hashSync(password, 10);
+
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -9,9 +14,9 @@ module.exports = {
 
     usersArray.push({
       name: 'Admin',
-      lastname: 'Istrador',
+      lastname: 'Gogym',
       email: 'admin@gogym.cl',
-      password: await bcrypt.hash('123456', 10),
+      password: hash,
       rut: '11111111-1',
       user_type: 0,
       createdAt: new Date(),
@@ -19,21 +24,21 @@ module.exports = {
     });
 
     usersArray.push({
-      name: 'Entre',
-      lastname: 'Nador',
+      name: 'Entrenador',
+      lastname: 'Gogym',
       email: 'entrenador@gogym.cl',
-      password: await bcrypt.hash('123456', 10),
-      rut: '11111111-1',
+      password: hash,
+      rut: '11111111-2',
       user_type: 2,
       createdAt: new Date(),
       updatedAt: new Date(),
     });
 
     usersArray.push({
-      name: 'Nuti',
+      name: 'Nutri',
       lastname: 'Cionista',
       email: 'nutricionista@gogym.cl',
-      password: await bcrypt.hash('123456', 10),
+      password: hash,
       rut: '11111111-1',
       user_type: 3,
       createdAt: new Date(),
@@ -42,9 +47,9 @@ module.exports = {
 
     usersArray.push({
       name: 'Cliente',
-      lastname: '1',
-      email: 'cliente@gogym.cl',
-      password: await bcrypt.hash('123456', 10),
+      lastname: 'Uno',
+      email: 'cliente1@gogym.cl',
+      password: hash,
       rut: '11111111-1',
       user_type: 1,
       createdAt: new Date(),
@@ -52,11 +57,11 @@ module.exports = {
     });
 
     usersArray.push({
-      name: 'Cliente',
-      lastname: '2',
-      email: 'cliente@gogym.cl',
-      password: await bcrypt.hash('123456', 10),
-      rut: '11111111-1',
+      name: 'Diego',
+      lastname: 'Maradona',
+      email: 'cliente2@gogym.cl',
+      password: hash,
+      rut: '11111111-3',
       user_type: 1,
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -65,8 +70,6 @@ module.exports = {
     
 
     return queryInterface.bulkInsert('users', usersArray);
-
-    
   },
 
   down: async (queryInterface, Sequelize) => {
