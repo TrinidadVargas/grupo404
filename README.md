@@ -1,11 +1,11 @@
 # 404
 
-# Entega 2
-La aplicación se encuentra en el siguiente link: https://ancient-ocean-79502.herokuapp.com
+# Entega 4
+La aplicación se encuentra en el siguiente link: https://mysterious-meadow-46479.herokuapp.com
 
 
 # Rutas:
-## Página principal: https://ancient-ocean-79502.herokuapp.com/users
+## Página principal: https://mysterious-meadow-46479.herokuapp.com
 Se muestran las clases destacadas, con sus respectivos horarios y salas. Si haces click en sala te lleva a cada sala y se muestran las clases que se imparten en esa sala.
 
 ## Usuarios
