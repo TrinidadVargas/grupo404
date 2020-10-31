@@ -9,6 +9,19 @@ const PERMITTED_FIELDS = [
   'available',
 ];
 
+const PROTECTED_PATHS = [
+  '/new',
+  '/:id/edit',
+];
+
+function checkAuth(ctx, next) {
+  const { currentUser } = ctx.state;
+  if (!currentUser) ctx.throw(401);
+
+  return next();
+}
+
+router.use(PROTECTED_PATHS, checkAuth);
 
 router.param('id', async (id, ctx, next) =>{
   const machine = await ctx.orm.machines.findByPk(id);
@@ -23,6 +36,7 @@ router.get('machines', '/', async (ctx) => {
     machines,
     machinePath: id => ctx.router.url('machine', id),
     newMachinePath: ctx.router.url('machines-new'),
+    editMachinePath: (id) => ctx.router.url('machines-edit', id),
   });
 }); 
 
@@ -30,7 +44,7 @@ router.get('machines-new', '/new', (ctx) => {
   const machine = ctx.orm.machines.build();
   return ctx.render('machines/new', {
   machine,
-  createMachinePath: ctx.router.url('machines-create'),
+  submitPath: ctx.router.url('machines-create'),
   });
 });
 
@@ -43,7 +57,7 @@ router.post('machines-create', '/', async (ctx) => {
     await ctx.render('machines/new', {
       machine,
       errors: error.errors,
-      createMachinePath: ctx.router.url('machines-create'),
+      submitPath: ctx.router.url('machines-create')
     });
   }
 
@@ -53,5 +67,34 @@ router.get('machine', '/:id', (ctx) =>{
   const {machine} = ctx.state;
   return ctx.render('machines/show', {machine});
 });
+
+router.get('machines-edit', '/:id/edit', (ctx) => {
+  const { machine } = ctx.state;
+  return ctx.render('machines/edit', {
+    machine,
+    submitPath: ctx.router.url('machines-update', machine.id),
+  });
+});
+
+router.post('machines-update', '/:id', checkAuth, async (ctx) => {
+  const { cloudinary, machine } = ctx.state;
+  try {
+    const { image } = ctx.request.files;
+    if (image.size > 0) {
+      // This does now allow to update existing images. It should be handled
+      const uploadedImage = await cloudinary.uploader.upload(image.path);
+      ctx.request.body.image = uploadedImage.public_id;
+    }
+    await machine.update(ctx.request.body, { fields: PERMITTED_FIELDS });
+    ctx.redirect(ctx.router.url('machines'));
+  } catch (error) {
+    await ctx.render('machines/edit', {
+      machine,
+      errors: error.errors,
+      submitPath: ctx.router.url('machines-update', machine.id),
+    });
+  }
+});
+
 
 module.exports = router;

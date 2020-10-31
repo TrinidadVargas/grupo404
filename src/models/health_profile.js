@@ -1,13 +1,34 @@
 module.exports = (sequelize, DataTypes) => {
   const health_profile = sequelize.define('health_profile', {
-    user_id: DataTypes.INTEGER,
-    birth: DataTypes.DATE,
-    level: DataTypes.INTEGER,
-    gender: DataTypes.INTEGER,
-    height: DataTypes.FLOAT,
-    weight: DataTypes.FLOAT,
-    fat_percentage: DataTypes.FLOAT,
-    emergency_number: DataTypes.INTEGER,
+
+    user_id:{
+      type: DataTypes.INTEGER
+    },
+    birth:{
+      type: DataTypes.DATE
+    },
+    level: {
+      type: DataTypes.INTEGER
+    },
+    gender: {
+      type: DataTypes.INTEGER
+    },
+    height: {
+      type: DataTypes.FLOAT
+    },
+    weight: {
+      type: DataTypes.FLOAT
+    },
+    fat_percentage: {
+      type: DataTypes.FLOAT
+    },
+    emergency_number: {
+      type: DataTypes.INTEGER
+    },
+    description: {
+      type: DataTypes.TEXT
+    }
+
   }, {});
 
   health_profile.associate = function associate() {

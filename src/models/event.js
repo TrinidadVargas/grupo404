@@ -30,6 +30,9 @@ module.exports = (sequelize, DataTypes) => {
     roomId:{
       type: DataTypes.INTEGER,
     },
+    image:{
+      type: DataTypes.TEXT,
+    }
   }, {});
 
   event.associate = function associate(models) {
@@ -37,8 +40,17 @@ module.exports = (sequelize, DataTypes) => {
     //event.belongsTo(models.room); 
     //event.hasMany(models.room, { onDelete: 'cascade', hooks: true })
     event.belongsTo(models.room, { foreignKey: 'roomId'}); 
+    // event.belongsToMany(models.user, { 
+    //   through: 'event_users',
+    //   foreignKey: 'eventId',
+    // });
+
+    // event.hasMany(models.event_inscription, {
+    //   foreignKey: 'eventId',
+    // });
+
     event.belongsToMany(models.user, { 
-      through: 'event_users',
+      through: 'event_inscriptions',
       foreignKey: 'eventId',
     });
   };
