@@ -31,6 +31,9 @@ module.exports = {
     emergency_number: {
       type: Sequelize.INTEGER,
     },
+    description: {
+      type: Sequelize.TEXT
+    },
 
     createdAt: {
       allowNull: false,

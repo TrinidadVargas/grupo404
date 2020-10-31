@@ -18,6 +18,9 @@ module.exports = (sequelize, DataTypes) => {
 
     type: DataTypes.BOOLEAN}
     ,
+    image:{
+      type: DataTypes.STRING,
+    }
   }, {});
 
   machines.associate = function associate(models) {

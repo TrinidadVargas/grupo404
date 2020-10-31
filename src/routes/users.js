@@ -99,7 +99,6 @@ router.get('user', '/:id', async (ctx) => {
   });
 });
 
-
 router.del('users-delete', '/:id', async (ctx) => {
   const { user } = ctx.state;
   await user.destroy();
