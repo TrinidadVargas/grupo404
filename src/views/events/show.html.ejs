@@ -1,19 +1,26 @@
 <h1><%= event.name%></h1>
 
-<% if (locals.currentUser) {%>
-  <form action="<%= inscriptionPath %>" method="POST">
-    <input type="hidden" name="_method" value="get" />
-    <input type="hidden" name="eventId" value="<%=event.id%>" />
-    <input type="submit" value="Inscribirme" />
-  </form>
-  
-<% }%>
-
 <h4> Descripción </h4>
 <p> <%= event.description %></p>
 
 <h5>Días: <%= event.days %></h5>
 <h5>Horario: <%= event.startsAt %></h5>
+
+<% if (locals.currentUser && locals.currentUser.user_type==1 && !enrolled) { %>
+
+  <form action="<%= submitInscriptionPath %>" method="post">
+      <input type="hidden" id="userId" name="userId" value="<%=locals.currentUser.id%>" />
+      <input type="hidden" id="eventId" name="eventId" value="<%=event.id%>" />
+      <input type="submit" name="update" value="Inscribirme" />
+  </form>
+<% } else if (locals.currentUser && locals.currentUser.user_type==1) { %>
+  <form action="<%= deleteInscription %>" method="POST">
+    <input type="hidden" id="userId" name="userId" value="<%=locals.currentUser.id%>" />
+    <input type="hidden" id="eventId" name="eventId" value="<%=event.id%>" />
+    <input type="hidden" name="_method" value="delete" />
+    <input type="submit" value="Desinscribirme" />
+</form>
+<% } %>
 
 <div>
   <h5>Cantidad de inscritos: <%= users.length%></h5>

@@ -40,6 +40,9 @@ router.get('events', '/', async(ctx) => {
       events,
       eventPath: (id) => ctx.router.url('event', id),
       newEventPath: ctx.router.url('events-new'),
+      eventPath: id => ctx.router.url('event', id),
+//   });
+//=======
       editEventPath: (id) => ctx.router.url('events-edit', id),
   });
 });
@@ -71,13 +74,33 @@ router.post('events-create', '/', async (ctx) => {
 });
 
 router.get('event', '/:id', async (ctx) => {
-  const { event } = ctx.state;
-  const users = await event.getUsers(); //
-  return ctx.render('events/show', {
-    event,
-    users,
-    inscriptionPath: ctx.router.url('events-new'),
-  });
+    const {event} = ctx.state;
+    const users = await event.getUsers();
+    let enrolled = false;
+    let inscriptionId = 0;
+    console.log(users);
+    for (i = 0; i < users.length; i++) {
+      let user = users[i]; 
+      if (user.id == ctx.session.currentUserId) {
+        enrolled = true;
+        const inscription = await ctx.orm.event_inscription.findAll({
+          where: {
+            userId: user.id,
+            eventId: event.id,
+          },
+        });
+        inscriptionId = inscription[0].id;
+      }
+    }
+    return ctx.render('events/show', { 
+      event, 
+      users,
+      enrolled,
+      submitInscriptionPath: ctx.router.url('event_inscriptions-create'),
+      deleteInscription: ctx.router.url('event_inscriptions-delete', inscriptionId),
+    });
+
+//  });
 });
 
 router.del('events.delete', '/:id', async (ctx) => {
