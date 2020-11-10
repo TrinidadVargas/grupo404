@@ -8,7 +8,6 @@
   display: flex;
   position: sticky;
   top: 0;
-  
 }
 
 .topnav .logo {
@@ -46,12 +45,13 @@
   color: #F7F7FF;
 }
 
-body{
+.cuerpo{
   font-family: 'calibri';
   width: 80%;
   margin: 0;
   padding: 0 10%;
 }
+
 .inicio {
   color: #241f20;
   text-align: center;
@@ -117,8 +117,11 @@ article {
 
 .footer {
   background-color: #1f2123;
-  height: 50px;
+  height: 30px;
   padding: 40px 35px;
+  width: 100%;
+  bottom: 0;
+  position: fixed;
   .footer-wrapper{
     text-align: center;
     font-size: 15px;

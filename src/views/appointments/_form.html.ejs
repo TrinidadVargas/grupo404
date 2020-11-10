@@ -1,3 +1,6 @@
+<body>
+<section class="cuerpo">
+  
 <form method="post" action="<%= submitAppointmentPath%>">
   <% if (locals.errors) {%>
     <div class="errors">
@@ -23,8 +26,6 @@
       <input type="number" id="specialistId" name="specialistId" value="<%=appointment.specialistId%>"/>
     </div>
   <% } %> 
-
-
   
 
   <div class="field">
@@ -48,3 +49,5 @@
       <% } %>
   </div>
 </form>
+</section>
+</body>
