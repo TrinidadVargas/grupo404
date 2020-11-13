@@ -1,8 +1,9 @@
 <body>
 <section class="cuerpo"> 
-
-<h1>All appointments</h1>
-
+  <div class="title">
+    <h3>All appointments</h3>
+  </div>
+  
 <% if (locals.currentUser && locals.currentUser.user_type != 1) {%> 
 <a href="<%= newApptPath %>">Agregar nueva consulta</a>
 

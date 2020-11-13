@@ -4,18 +4,19 @@ const router = new KoaRouter();
 
 const PERMITED_FIELDS = [
   'name',
+  'logo',
   'description',
   'days',
   'startsAt',
   'endsAt',
   'roomId',
+  'image',
 ];
 
 const PROTECTED_PATHS = [
   '/new',
   '/:id/edit',
 ];
-
 
 function checkAuth(ctx, next) {
   const { currentUser } = ctx.state;
@@ -27,23 +28,19 @@ function checkAuth(ctx, next) {
 router.use(PROTECTED_PATHS, checkAuth);
 
 router.param('id', async (id, ctx, next) => {
-
   const event = await ctx.orm.event.findByPk(id);
   if (!event) ctx.throw(404);
   ctx.state.event = event;
   return next();
 });
 
-router.get('events', '/', async(ctx) => {
+router.get('events', '/', async (ctx) => {
   const events = await ctx.orm.event.findAll();
   await ctx.render('events/index', {
-      events,
-      eventPath: (id) => ctx.router.url('event', id),
-      newEventPath: ctx.router.url('events-new'),
-      eventPath: id => ctx.router.url('event', id),
-//   });
-//=======
-      editEventPath: (id) => ctx.router.url('events-edit', id),
+    events,
+    eventPath: (id) => ctx.router.url('event', id),
+    newEventPath: ctx.router.url('events-new'),
+    editEventPath: (id) => ctx.router.url('events-edit', id),
   });
 });
 
@@ -74,33 +71,33 @@ router.post('events-create', '/', async (ctx) => {
 });
 
 router.get('event', '/:id', async (ctx) => {
-    const {event} = ctx.state;
-    const users = await event.getUsers();
-    let enrolled = false;
-    let inscriptionId = 0;
-    console.log(users);
-    for (i = 0; i < users.length; i++) {
-      let user = users[i]; 
-      if (user.id == ctx.session.currentUserId) {
-        enrolled = true;
-        const inscription = await ctx.orm.event_inscription.findAll({
-          where: {
-            userId: user.id,
-            eventId: event.id,
-          },
-        });
-        inscriptionId = inscription[0].id;
-      }
+  const { event } = ctx.state;
+  const users = await event.getUsers();
+  let enrolled = false;
+  let inscriptionId = 0;
+  console.log(users);
+  for (i = 0; i < users.length; i++) {
+    let user = users[i];
+    if (user.id == ctx.session.currentUserId) {
+      enrolled = true;
+      const inscription = await ctx.orm.event_inscription.findAll({
+        where: {
+          userId: user.id,
+          eventId: event.id,
+        },
+      });
+      inscriptionId = inscription[0].id;
     }
-    return ctx.render('events/show', { 
-      event, 
-      users,
-      enrolled,
-      submitInscriptionPath: ctx.router.url('event_inscriptions-create'),
-      deleteInscription: ctx.router.url('event_inscriptions-delete', inscriptionId),
-    });
+  }
+  return ctx.render('events/show', {
+    event,
+    users,
+    enrolled,
+    submitInscriptionPath: ctx.router.url('event_inscriptions-create'),
+    deleteInscription: ctx.router.url('event_inscriptions-delete', inscriptionId),
+  });
 
-//  });
+
 });
 
 router.del('events.delete', '/:id', async (ctx) => {
@@ -119,15 +116,15 @@ router.get('events-edit', '/:id/edit', (ctx) => {
 });
 
 router.patch('events-update', '/:id', checkAuth, async (ctx) => {
-  const { cloudinary, event} = ctx.state;
+  const { cloudinary, event } = ctx.state;
   try {
-    const { image } = ctx.request.files;
-    if (image.size > 0) {
+    const { logo } = ctx.request.files;
+    if (logo.size > 0) {
       // This does now allow to update existing images. It should be handled
-      const uploadedImage = await cloudinary.uploader.upload(image.path);
+      const uploadedImage = await cloudinary.uploader.upload(logo.path);
       ctx.request.body.image = uploadedImage.public_id;
     }
-    await event.update(ctx.request.body, { fields: PERMITTED_FIELDS });
+    await event.update(ctx.request.body, { fields: PERMITED_FIELDS });
     ctx.redirect(ctx.router.url('events'));
   } catch (error) {
     await ctx.render('events/edit', {
@@ -137,6 +134,5 @@ router.patch('events-update', '/:id', checkAuth, async (ctx) => {
     });
   }
 });
-
 
 module.exports = router;

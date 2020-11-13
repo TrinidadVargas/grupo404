@@ -25,13 +25,13 @@
             <div class="field">
                 <label for="description">Descripción</label>
                 <textarea name="description" id="description" rows="4", cols="30"><%= machine.description%></textarea>
-            </div>
+            </div>}
             <div class="field">
-                <label for="image">Imagen</label>
-                <input type="file" name="image" id="image"/>
+                <label for="logo">Imagen</label>
+                <input type="file" id="logo" name="logo" ></input>
             </div>
             <div class="actions">
-                <input type="submit" value="<%= machine.isNewRecord ? 'Crear' : 'Modificar' %>" />
+                <input class= "btn" type="submit" value="<%= machine.isNewRecord ? 'Crear' : 'Modificar' %>" />
             </div>
         </div>
     </div>

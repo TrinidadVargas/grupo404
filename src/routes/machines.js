@@ -7,6 +7,7 @@ const PERMITTED_FIELDS = [
   'name',
   'description',
   'available',
+  'image'
 ];
 
 const PROTECTED_PATHS = [
@@ -34,7 +35,7 @@ router.get('machines', '/', async (ctx) => {
   const machines = await ctx.orm.machines.findAll();
   await ctx.render('machines/index', {
     machines,
-    machinePath: id => ctx.router.url('machine', id),
+    machinePath: (id) => ctx.router.url('machine', id),
     newMachinePath: ctx.router.url('machines-new'),
     editMachinePath: (id) => ctx.router.url('machines-edit', id),
   });
@@ -43,15 +44,15 @@ router.get('machines', '/', async (ctx) => {
 router.get('machines-new', '/new', (ctx) => {
   const machine = ctx.orm.machines.build();
   return ctx.render('machines/new', {
-  machine,
-  submitPath: ctx.router.url('machines-create'),
+    machine,
+    submitPath: ctx.router.url('machines-create'),
   });
 });
 
 router.post('machines-create', '/', async (ctx) => {
   const machine = ctx.orm.machines.build(ctx.request.body);
   try {
-    await machine.save({fields: PERMITTED_FIELDS});
+    await machine.save({ fields: PERMITTED_FIELDS });
     ctx.redirect(ctx.router.url('machines'));
   } catch (error) {
     await ctx.render('machines/new', {
@@ -63,9 +64,9 @@ router.post('machines-create', '/', async (ctx) => {
 
 });
 
-router.get('machine', '/:id', (ctx) =>{
-  const {machine} = ctx.state;
-  return ctx.render('machines/show', {machine});
+router.get('machine', '/:id', (ctx) => {
+  const { machine } = ctx.state;
+  return ctx.render('machines/show', { machine });
 });
 
 router.get('machines-edit', '/:id/edit', (ctx) => {
@@ -76,13 +77,13 @@ router.get('machines-edit', '/:id/edit', (ctx) => {
   });
 });
 
-router.post('machines-update', '/:id', checkAuth, async (ctx) => {
+router.patch('machines-update', '/:id', checkAuth, async (ctx) => {
   const { cloudinary, machine } = ctx.state;
   try {
-    const { image } = ctx.request.files;
-    if (image.size > 0) {
+    const { logo } = ctx.request.files;
+    if (logo.size > 0) {
       // This does now allow to update existing images. It should be handled
-      const uploadedImage = await cloudinary.uploader.upload(image.path);
+      const uploadedImage = await cloudinary.uploader.upload(logo.path);
       ctx.request.body.image = uploadedImage.public_id;
     }
     await machine.update(ctx.request.body, { fields: PERMITTED_FIELDS });

@@ -1,12 +1,15 @@
 <body>
   <section class="cuerpo">
-    <h1><%= event.name%></h1>
 
-    <h4> Descripción </h4>
-    <p> <%= event.description %></p>
-
-    <h5>Días: <%= event.days %></h5>
-    <h5>Horario: <%= event.startsAt %></h5>
+    <div class="elemento">
+      <h1><%= event.name%></h1>
+      <img class="big" src="<%= cloudinary.url(event.image) %>" />
+      <h4> Descripción </h4>
+      <p> <%= event.description %></p>
+      <h5>Días: <%= event.days %></h5>
+      <h5>Horario: <%= event.startsAt %></h5>
+    </div>
+    
 
     <% if (locals.currentUser && locals.currentUser.user_type==1 && !enrolled) { %>
 
@@ -30,5 +33,6 @@
         <%=user.id %> <%= user.name %> <%= user.lastname %>
       <% });%>
     </div>
+    <div id="photos-app"></div>
   </section>
 </body>

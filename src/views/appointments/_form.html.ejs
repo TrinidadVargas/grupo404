@@ -14,39 +14,44 @@
     
   <%} %>
 
-  <% if (!appointment.isNewRecord) { %>
-    <input type="hidden" name="_method" value="patch" />
-  <% } %>
   
-  <% if (locals.currentUser && locals.currentUser.user_type != 0) { %>
-    <input type="hidden" id="specialistId" name="specialistId" value="<%=locals.currentUser.id%>"/>
-  <% } else if (locals.currentUser && locals.currentUser.user_type == 0) {%>
-    <div class="field">
-      <label for="specialistId">SpecialistId</label>
-      <input type="number" id="specialistId" name="specialistId" value="<%=appointment.specialistId%>"/>
-    </div>
-  <% } %> 
   
 
-  <div class="field">
-    <label for="date">Fecha</label>
-    <input type="datetime-local" id="date" name="date" value=<%=appointment.date%>>
-  </div>
-
-  <div class="field">
-    <label for="date">Lugar</label>
-    <input type="string" id="place" name="place" value=<%=appointment.place%>>
-  </div>
-
-  <input type="hidden" id="appttype" name="appttype" value="0" />
-  
-  
-  <div class="actions">
-      <% if (appointment.isNewRecord) { %>
-        <input type="submit" name="create" value="Create" />
-      <% } else { %>
-        <input type="submit" name="update" value="Update" />
+  <div class="wrapper">
+    <div class="this-form">
+      <% if (!appointment.isNewRecord) { %>
+        <input type="hidden" name="_method" value="patch" />
       <% } %>
+      
+      <% if (locals.currentUser && locals.currentUser.user_type != 0) { %>
+        <input type="hidden" id="specialistId" name="specialistId" value="<%=locals.currentUser.id%>"/>
+      <% } else if (locals.currentUser && locals.currentUser.user_type == 0) {%>
+        <div class="field">
+          <label for="specialistId">SpecialistId</label>
+          <input type="number" id="specialistId" name="specialistId" value="<%=appointment.specialistId%>"/>
+        </div>
+      <% } %> 
+      <div class="field">
+        <label for="date">Fecha</label>
+        <input type="datetime-local" id="date" name="date" value=<%=appointment.date%>>
+      </div>
+    
+      <div class="field">
+        <label for="date">Lugar</label>
+        <input type="string" id="place" name="place" value=<%=appointment.place%>>
+      </div>
+    
+      <input type="hidden" id="appttype" name="appttype" value="0" />
+      
+      
+      <div class="actions">
+          <% if (appointment.isNewRecord) { %>
+            <input type="submit" name="create" value="Create" />
+          <% } else { %>
+            <input type="submit" name="update" value="Update" />
+          <% } %>
+      </div>
+    </div>
   </div>
 </form>
 </section>

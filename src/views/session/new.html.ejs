@@ -1,21 +1,28 @@
 <body>
   <section class="cuerpo">
+    <div class="title">
+      <h3>Bienvenido a tu portal</h3>
+  </div>
     <form action="<%= submitPath %>" method="post">
       <% if (locals.error) { %>
         <div class="error"><%= error %></div>
       <% } %>
       
-      <div class="field">
-        <label for="email">E-mail</label>
-        <input type="email" id="email" name="email" value="<%= locals.email %>" />
-      </div>
-      <div class="field">
-        <label for="password">Contraseña</label>
-        <input type="password" id="password" name="password" />
-      </div>
-    
-      <div class="actions">
-        <input type="submit" value="Iniciar sesión" />
+      <div class="wrapper">
+        <div class="this-form">
+          <div class="field">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" value="<%= locals.email %>" />
+          </div>
+          <div class="field">
+            <label for="password">Contraseña</label>
+            <input type="password" id="password" name="password" />
+          </div>
+        
+          <div class="actions">
+            <input type="submit" value="Iniciar sesión" />
+          </div>
+        </div>
       </div>
     </form>
   </section>

@@ -15,6 +15,7 @@
         <% if (!event.isNewRecord){ %>
             <input type="hidden" name="_method" value="patch" />
         <%}%>
+        
         <div class="wrapper">
             <div class="this-form">
                 <div class="field">
@@ -24,6 +25,10 @@
                 <div class="field">
                     <label for="description">Descripción</label>
                     <textarea type="text" name="description" value="<%= event.description %>" ></textarea>
+                </div>
+                <div class="field">
+                    <label for="logo">Logo</label>
+                    <input type="file" id="logo" name="logo" ></input>
                 </div>
                 <div class="field">
                     <label for="days">Días</label>

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,42 +8,47 @@
       <link rel="stylesheet" href="<%= assetPath('app.css') %>">
     <% } %>
   </head>
-
   <body>
     <header>
-      <div class="logo">
-        <a href="/">Gogym</a>
-      </div>
-      <div id="user-bar">
-        <% if (locals.currentUser) { %>
-          <%= currentUser.email %>
-          <form action="<%= destroySessionPath %>" method="post">
-            <input type="hidden" name="_method" value="delete" />
-            <input type="submit" value="Cerrar Sesión" />
-          </form>
-        <% } else { %>
-          <a href="<%= newSessionPath %>">Iniciar sesión</a>
-        <% } %>
-      </div>
-      <div class="topnav">
-        <div class="logo">
-          <a href="/">Logo</a>
+      <div class="container">
+        <div class="logo-container">
+          <a class="logo" href="/">GO<span>GYM</span></a>
         </div>
-        <ul>
-          <a class="active" href="/">Home</a>
-          <a href="<%= eventsPath %>">Clases</a>
-          <a href="<%= machinesPath %>">Máquinas</a>
-          <a href="<%= roomsPath %>">Salas</a>
-        </ul>
+          
+        <div class="nav-btn">
+          <div class="nav-links">
+            <ul>
+              <li class="nav-link">
+                <a class="current" href="<%= eventsPath %>">Clases</a>
+              </li>
+              <li class="nav-link">
+                <a class="current" href="<%= machinesPath %>">Máquinas</a>
+              </li>
+              <li class="nav-link">
+                <a class="current" href="<%= roomsPath %>">Salas</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="log-sign">
+            <% if (locals.currentUser) { %>
+              <p><%= currentUser.email %></p>
+              <form action="<%= destroySessionPath %>" method="post">
+                <input type="hidden" name="_method" value="delete" />
+                <input type="submit" value="Cerrar Sesión" class="btn solid"/>
+              </form>
+            <% } else { %>
+              <a class="btn solid" href="<%= newSessionPath %>"> Iniciar sesión </a>
+            <% } %>
+          </div>
+        </div>
       </div>
     </header>
     <%- body %>
-    <script src="<%= assetPath('app.js') %>"></script>
-    <footer class="footer">
-      <div class="footer-wrapper">
-        <h3> GOGYM </h3>
-      </div>
+    <footer class="foter">
+      <p> GOGYM </p>
     </footer>
+    <script src="<%= assetPath('app.js') %>"></script>
   </body>
 
 </html>

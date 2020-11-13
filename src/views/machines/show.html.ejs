@@ -1,9 +1,11 @@
 <body>
   <section class="cuerpo">
-    <h4><%= machine.name%></h4>
+    <div class="elemento">
+      <h4><%= machine.name%></h4>
+      <img class="big" src="<%= cloudinary.url(machine.image) %>" />
+      <h5>Descripción</h5>
       <p><%= machine.description%></p>
-        <% if (machine.image){ %>
-          <img src="<%= cloudinary.url(machine.image) %>" />
-        <% } %>
+    </div>
+    
   </section>
 </body>

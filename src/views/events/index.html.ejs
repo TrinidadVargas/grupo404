@@ -1,6 +1,8 @@
 <body>
     <section class="cuerpo">
-    <h1>CLASES</h1>
+        <div class="title">
+            <h3>Clases Grupales</h3>
+        </div>
     <div class="ref-to-new">
         <p>Cantidad de Clases: <%=events.length%></p>
         <a href="<%= newEventPath %>">Agregar Clase</a>
@@ -10,10 +12,12 @@
         <% events.forEach(event => { %>
             <div class="elemento">
                 <h2><%= event.name %></h2>
+                <img class="medium" src="<%= cloudinary.url(event.image) %>" />
                 <p><%= event.description %></p>
+
                 <p><%= event.days %></p>
                 <p><%= event.startsAt %></p>
-                //<a href="<%=eventPath(event.id)%>">Ver</a>
+                
                 <a href = "<%= eventPath(event.id) %>">Ver más</a>
                 <a href="<%= editEventPath(event.id) %>">Editar</a>
             </div>

@@ -8,6 +8,7 @@
         <% machines.forEach(machine =>{ %>
             <div class="elemento">
                 <h2><%= machine.name%></h2>
+                <img class="medium" src="<%= cloudinary.url(machine.image) %>" />
                 <p><%= machine.description%></p>
                 <a href = "<%= machinePath(machine.id) %>">Ver más</a>
                 

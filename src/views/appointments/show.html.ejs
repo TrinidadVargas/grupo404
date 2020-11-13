@@ -6,7 +6,7 @@
 <%if (specialist.user_type == 2) {%>
   Entrenador 
 <%} else if (specialist.user_type == 3) {%>
-  Nutrisionista
+  Nutricionista
 <%}%>
 
 <a href="<%=specialistPath(appointment.specialistId)%>"><%= specialist.name %> <%= specialist.lastname %></a>
