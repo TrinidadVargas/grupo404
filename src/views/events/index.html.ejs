@@ -12,13 +12,13 @@
         <% events.forEach(event => { %>
             <div class="elemento">
                 <h2><%= event.name %></h2>
-                <img class="medium" src="<%= cloudinary.url(event.image) %>" />
-                <p><%= event.description %></p>
 
+                <a href = "<%= eventPath(event.id) %>">
+                  <img class="medium" src="<%= cloudinary.url(event.image) %>" />
+                </a>   
+                <p><%= event.description %></p>
                 <p><%= event.days %></p>
                 <p><%= event.startsAt %></p>
-                
-                <a href = "<%= eventPath(event.id) %>">Ver más</a>
                 <a href="<%= editEventPath(event.id) %>">Editar</a>
             </div>
         <% })%>

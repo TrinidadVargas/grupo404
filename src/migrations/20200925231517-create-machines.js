@@ -20,7 +20,10 @@ module.exports = {
       type: Sequelize.BOOLEAN,
     },
 
-    image:{
+    image: {
+      type: Sequelize.STRING,
+    },
+    tipo: {
       type: Sequelize.STRING,
     },
 

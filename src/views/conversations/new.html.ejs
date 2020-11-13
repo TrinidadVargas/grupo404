@@ -6,21 +6,25 @@
 
 
 <form method="post" action="<%= createConversationPath%>">
-  <div class="field">
-    <label for="userId1">MyId</label>
-    <input type="number" id="userId1" name="userId1" />
+  <div class="wrapper">
+    <div class="this-form">
+      
+      <div class="field">
+        <label for="userId1">MyId</label>
+        <input type="number" id="userId1" name="userId1" />
+      </div>
+    
+      <div class="field">
+        <label for="userId2">OtherId</label>
+        <input type="number" id="userId2" name="userId2"/>
+      </div>
+    
+      <div class="actions">
+        <input type="submit" value="Crear" />
+      </div>
+    </div>
   </div>
-
-  <div class="field">
-    <label for="userId2">OtherId</label>
-    <input type="number" id="userId2" name="userId2"/>
-  </div>
-
-  <div class="actions">
-    <input type="submit" value="Crear" />
-  </div>
-
-
+  
 </form>
 </section>
 </body>

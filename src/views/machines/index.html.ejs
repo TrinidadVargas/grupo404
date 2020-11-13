@@ -1,5 +1,8 @@
 <body>
 	<section class="cuerpo">
+        <div class="title">
+			<h1> Máquinas </h1>
+		</div>
     <div class="ref-to-new">
         <a href= "<%= newMachinePath %>" > Agregar nueva máquina</a>
         <p>Cantidad de maquinas:  <%= machines.length %></p>
@@ -7,14 +10,16 @@
     <div class="items">
         <% machines.forEach(machine =>{ %>
             <div class="elemento">
-                <h2><%= machine.name%></h2>
-                <img class="medium" src="<%= cloudinary.url(machine.image) %>" />
-                <p><%= machine.description%></p>
-                <a href = "<%= machinePath(machine.id) %>">Ver más</a>
+								<h2><%= machine.name%></h2>
+								<a href = "<%= machinePath(machine.id) %>">
+									<img class="medium" src="<%= cloudinary.url(machine.image) %>" />	
+								</a>
+								<p><%= machine.description%></p>
+								<p>Tipo: <%= machine.tipo%></p>
+                
                 
                 <a href="<%= editMachinePath(machine.id) %>">Editar</a>
                 <button type="button">Reservar</button>
-                
             </div>
 
         <% }) %>

@@ -20,8 +20,9 @@ module.exports = {
       days: 'Lunes, Miércoles y Viernes',
       startsAt: '10:00',
       endsAt: '11:00',
+      image: 'gbojhyzqqtj2sea7vnau',
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     });
     eventsArray.push({
       roomId,
@@ -30,8 +31,9 @@ module.exports = {
       days: 'Lunes, Miércoles y Viernes',
       startsAt: '18:30',
       endsAt: '19:30',
+      image: 'w9kr9k2rrcelj5xz52jb',
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     });
     eventsArray.push({
       roomId,
@@ -40,8 +42,9 @@ module.exports = {
       days: 'Martes y Jueves',
       startsAt: '19:00',
       endsAt: '20:00',
+      image: 'zhlgcuwbvnmim0xdljvc',
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     });
 
     return queryInterface.bulkInsert('events', eventsArray);

@@ -6,7 +6,6 @@ const password = 'admin';
 
 const hash = bcrypt.hashSync(password, 10);
 
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
 
@@ -19,6 +18,7 @@ module.exports = {
       password: hash,
       rut: '11111111-1',
       user_type: 0,
+      image: 'default-user_nmftx2',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -30,6 +30,7 @@ module.exports = {
       password: hash,
       rut: '11111111-2',
       user_type: 2,
+      image: 'default-user_nmftx2',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -41,6 +42,7 @@ module.exports = {
       password: hash,
       rut: '11111111-1',
       user_type: 3,
+      image: 'default-user_nmftx2',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -52,6 +54,7 @@ module.exports = {
       password: hash,
       rut: '11111111-1',
       user_type: 1,
+      image: 'default-user_nmftx2',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -63,11 +66,10 @@ module.exports = {
       password: hash,
       rut: '11111111-3',
       user_type: 1,
+      image: 'default-user_nmftx2',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
-
-    
 
     return queryInterface.bulkInsert('users', usersArray);
   },

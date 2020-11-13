@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+
 module.exports = (sequelize, DataTypes) => {
   const user = sequelize.define('user', {
     name: {
@@ -42,6 +43,9 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notEmpty: true,
       },
+    },
+    image: {
+      type: DataTypes.STRING,
     },
   }, {
     hooks: {
