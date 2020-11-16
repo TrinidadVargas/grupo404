@@ -1,0 +1,60 @@
+.editlink {
+
+  background-color: white;
+  color: #60b4df;
+  border: 2px solid #4a91bb;
+  font-family: 'Roboto', sans-serif;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 12px;
+}
+  
+.editlink:hover, .editlink:active {
+  background-color: #60b4df;
+  color: white;
+ 
+
+}
+
+
+.addthing:link, .addthing:visited {
+
+  background-color:#4a91bb;
+  color: white;
+  padding: 12px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 12px;
+  
+  
+}
+
+.addthing:hover, .addthing:active {
+  background-color: #60b4df;
+}
+
+
+.formlink {
+
+  background-color:#4a91bb;
+  color: #fff;
+  border: 2px solid #4a91bb;
+  font-family: 'Roboto', sans-serif;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 12px;
+}
+  
+.formlink:hover, .formlink:active {
+  background-color: #60b4df;
+  color: white;
+ 
+
+}

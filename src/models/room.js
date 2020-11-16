@@ -20,7 +20,10 @@ module.exports = (sequelize, DataTypes) => {
         max: 30,
         min: 5,
       },
-    }
+    },
+    image: {
+      type: DataTypes.STRING,
+    },
   }, {});
 
   room.associate = function associate(models) {
