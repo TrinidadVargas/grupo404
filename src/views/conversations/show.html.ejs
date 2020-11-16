@@ -1,25 +1,17 @@
 <body>
 <section class="cuerpo">
-
+<% console.log(conversation) %> 
 <h2>Chat entre <%= users[0].name %> <%= users[0].lastname %> y <%= users[1].name %> <%= users[1].lastname %> </h2>
 
-<div class=messages">
-  <% if (messages.length) { %>
-    <% messages.forEach((message) => { %>
-      <ul>
-        <% if (message.senderId == users[0].id) { %>
-          <%= users[0].name %>:
-        <% } else { %>
-          <%= users[1].name %>:
-        <% } %>
-        <p><%= message.message %></p>
-        <p><%= message.createdAt %></p>
-          </ul>
-    <% }); %>
-  <% } %>
-</div>
-<% if (locals.currentUser) {%>
-<h3><a href="<%= newMessagePath %>">Enviar mensaje</a></h3> 
+<% if (locals.currentUser && (locals.currentUser.id == users[0].id || locals.currentUser.id == users[1].id)) {%>
+<div id="chat-app" data-conv-id="<%=conversation.id%>" data-user-id="<%=locals.currentUser.id%>"></div>
+<% } %> 
+
+<!-- <% if (locals.currentUser && (locals.currentUser.id == users[0].id || locals.currentUser.id == users[1].id)) {%>
+  <div id="new-msg-app" data-conv-id="<%=conversation.id%>" data-user-id="<%=locals.currentUser.id%>"></div>
+<% } %>  -->
+
+<!-- <% if (locals.currentUser && (locals.currentUser.id == users[0].id || locals.currentUser.id == users[1].id)) {%>
 
   <div class="wrapper">
     <div class="this-form">
@@ -29,16 +21,21 @@
         <input type="hidden" id="senderId" name="senderId" value="<%=locals.currentUser.id%>"/>
 
       <div class="field">
-        <label for="message">Message</label>
+        <label for="message">Message</label> 
         <input type="text" id="message" name="message" />
       </div>
 
       <div class="actions">
         <input type="submit" value="Send" />
       </div>
+      <div>
+        <button class="-" disabled=True>Send2</button>
+      </div>
     </form>
     </div>
   </div>
-<%}%>
+<%}%> -->
 </section>
+<!-- <script src="../../assets/js/index.js"></script> -->
+
 </body>
