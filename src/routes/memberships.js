@@ -17,6 +17,7 @@ router.param('id', async (id, ctx, next) =>{
   return next();
 });
 
+
 router.get('memberships', '/', async (ctx) => {
   const memberships = await ctx.orm.membership.findAll();
   await ctx.render('memberships/index', {

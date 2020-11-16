@@ -17,10 +17,12 @@
             <div class="field">
                 <label for="user_id">Id</label>
                 <input type="text" id="user_id" name="user_id" value="<%= health_profile.user_id%>">
+                <span class="error"></span>
             </div>
             <div class="field">
                 <label for="birth">Fecha de nacimiento</label>
                 <input type="text" id="birth" name="birth" value="<%= health_profile.birth%>">
+                <span class="error"></span>
             </div>
             <div class="field">
                 <label for="gender">Genero</label>
@@ -32,21 +34,25 @@
             <div class="field">
                 <label for="height">Altura</label>
                 <input type="text" id="height" name="height" value="<%= health_profile.height%>">
+                <span class="error"></span>
             </div>
             <div class="field">
                 <label for="weight">Peso</label>
                 <input type="text" id="weight" name="weight" value="<%= health_profile.weight%>">
+                <span class="error"></span>
             </div>
             <div class="field">
                 <label for="fat_percentage">Porcentaje de grasa</label>
                 <input type="text" id="fat_percentage" name="fat_percentage" value="<%= health_profile.fat_percentage%>">
+                <span class="error"></span>
             </div>
             <div class="field">
                 <label for="emergency_number">Numero de emergencia</label>
                 <input type="text" id="emergency_number" name="emergency_number" value="<%= health_profile.emergency_number%>">
+                <span class="error"></span>
             </div>
             <div class="actions">
-                <input type="submit" value="Crear">
+                <input class="formlink" type="submit" value="Crear">
             </div>
         </div>
     </div>

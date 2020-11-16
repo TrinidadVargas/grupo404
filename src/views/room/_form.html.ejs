@@ -1,6 +1,6 @@
 <body> 
 	<section class="cuerpo">
-    <form method="post" action="<%= createRoomPath %>">
+        <form method="post" action="<%= submitPath %>" enctype="multipart/form-data">
         <% if (locals.errors) { %>
             <div class="errors">
                 <p>La sala no se pudo crear por los siguientes errores:</p>
@@ -11,22 +11,30 @@
                 </ul>
             </div> 
         <% } %>
-        <h1>Nueva sala</h1>
+        <% if (!sala.isNewRecord){ %>
+            <input type="hidden" name="_method" value="patch" />
+        <%}%>
         <div class="wrapper">
             <div class="this-form">
             <div class="field">
                 <label for="type">Nombre</label>
                 <input type="text" name="type" value="<%= sala.name %>" />
+                <span class="error"></span>
             </div>
             <div class="field">
                 <label for="capacity">Capacidad</label>
                 <input type="text" name="capacity" value="<%= sala.capacity %>" />
+                <span class="error"></span>
+            </div>
+            <div class="field">
+                <label for="logo">Imagen</label>
+                <input type="file" id="logo" name="logo" ></input>
             </div>
             <div class="actions">
-                <input type="submit" value="Crear" />
+                <input class="formlink" type="submit" value="Crear" />
             </div>
             </div>
         </div>
     </form>
-		</section>
-	</body>
+    </section>
+</body>
