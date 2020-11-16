@@ -17,21 +17,25 @@
             <div class="field">
                 <label for="user_id">Id de usuario</label>
                 <input type="text" id="user_id" name="user_id" value="<%= membership.user_id%>">
+                <span class="error"></span>
             </div>
             <div class="field">
                 <label for="type">Tipo</label>
                 <input type="text" id="type" name="type" value="<%= membership.type %>" />
+                <span class="error"></span>
             </div>
             <div class="field">
                 <label for="start">Inicio</label>
                 <input type="text"  id="start" name="start"  value="<%= membership.start  %>" />
+                <span class="error"></span>
             </div>
             <div class="field">
                 <label for="end">Termino</label>
                 <input type="text" id= "end" name="end" value="<%= membership.end  %>" />
+                <span class="error"></span>
             </div>
             <div class="actions">
-                <input type="submit" value="Crear">
+                <input class="formlink" type="submit" value="Crear">
             </div>
         </div>
     </div>
