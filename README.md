@@ -1,19 +1,29 @@
 # 404
 
 # GOGYM
-# Entega 4
+# Entega 5
 La aplicación se encuentra en el siguiente link: https://mysterious-meadow-46479.herokuapp.com/
 
 Movimos la aplicación a la raíz de este repositorio, por lo que ahora la rama master está en heroku.
 
+## CSS
+
+Se mejoró el aspecto de la página, los botones, links y navbar. Incorporaron imágenes.
+
 ## Home
 
-Página principal donde se pueden visualizar las clases, máquinas, profesores, salas, entrenadores.
+Página principal donde se pueden visualizar las clases, máquinas, profesores, salas, entrenadores. Se le agregaron fotografías que lleven a los links.
 Hay dos botones uno para CREAR CUENTA y otro para iniciar sesión.
 
 
+## React:
+
+1. Filtro: se dejo sin terminar
+2. Chat: se pueden enviar mensajes sin que se recargue la página
+3. Revisión de formularios: se dejó el código pero sin agregar el archivo js,  ya que no se detectó el problema de porque no se estaban validando adecuadamente los campos.
+
 ## Cliente:
-Como cliente, en el dashboard podras ver las clases, máquonas, profesores, salas y entrenadores.
+Como cliente, en el dashboard podras ver las clases, máquinas, profesores, salas y entrenadores.Las rutas fueron restringidas  y los botones necesarios solamente se muestran para el cliente.
 
 ### Reservar clase:
  Apredando la navbar clases, podrás ver todas las clases disponibles.  Y para reservar una clase tienes que hacer click en VER y luego en el botón inscribirme.
@@ -26,13 +36,17 @@ Como cliente, en el dashboard podras ver las clases, máquonas, profesores, sala
  ## Administrador:
 
 El administrador puede, agregar o eliminar clases, gestionar a los usuarios.
-Puede crear o eliminar citas con especialista
+Puede crear o eliminar citas con especialista. Se restringieron las rutas
 
 
 
 ## Cloudinary
 
-Se hizo el backend de las máquina y eventos para agregar las fotos, el formulario de creación de máquinas y eventos permite arrastrar una fotografía, sin embargo a la hora de mostrar la máquina la imágen no se mostraba en pantalla. No se pudo identificar la causa de este error por lo que se dejó solo el backend de cloudinary y para la proxima entrega debería ser visible.
+Funciona cloudinary, se pueden cargar fotos a la página.
+
+## Edit y update
+
+Se arreglo el error del edit y update de máquinas clases y salas. Ahora se pueden modificar correctamente
 
 
 # RUTAS 
