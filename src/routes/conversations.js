@@ -14,8 +14,30 @@ router.param('id', async (id, ctx, next) =>{
   return next();
 });
 
-router.get('conversations-new', '/new', (ctx) => {
+router.get('conversations-new', '/new', async (ctx) => {
+  let users = []
+  const { Op } = require("sequelize");
+  if (ctx.state.currentUser) {
+    const userId = ctx.state.currentUser.id;
+    const userType = ctx.state.currentUser.user_type;
+    if (userType == 1) {
+      users = await ctx.orm.user.findAll({
+        where: {
+          user_type: {[Op.ne]: 1, },
+        },
+        attributes: ['id', 'name', 'lastname'],
+      });
+    } else {
+      users = await ctx.orm.user.findAll({
+        // attributes: ['id', 'name', 'lastname'],
+        where: {
+          id: { [Op.ne]: userId, }
+        }
+      });
+    }
+  }
   return ctx.render('conversations/new', {
+    users,
     createConversationPath: ctx.router.url('conversations-create'),
   });
 });
@@ -26,10 +48,35 @@ router.post('conversations-create', '/', async (ctx) => {
 
   try {
     await conversation.save({fields: PERMITTED_FIELDS});
-    ctx.redirect(ctx.router.url('users'));
+    ctx.redirect(ctx.router.url('conversation', conversation.id));
   } catch (error) {
-    ctx.redirect(ctx.router.url('users')); 
+    ctx.redirect(ctx.router.url('conversation', conversation.id)); 
   }
+});
+
+router.get('conversations', '/', async (ctx) => {
+  let conversations = [];
+  let userId = -1;
+  if (ctx.state.currentUser) {
+    userId = ctx.state.currentUser.id;
+    const { Op } = require('sequelize');
+    conversations = await ctx.orm.conversation.findAll({
+      where: {
+        [Op.or]: [
+          { userId1: userId },
+          { userId2: userId },
+        ],
+      },
+      include: ['user1', 'user2'],
+    });
+  }
+  await ctx.render('conversations/index', {
+    currentId: userId,
+    conversations,
+    newConversationPath: ctx.router.url('conversations-new'),
+    conversationPath: (id) => ctx.router.url('conversation', id),
+    deleteConversationPath: (id) => ctx.router.url('conversations-delete', id),
+  });
 });
 
 
@@ -87,5 +134,10 @@ router.post('conversation-send-msg', '/:id/msgs', async (ctx) => {
   }
 });
 
+router.del('conversations-delete', '/:id', async (ctx) => {
+  const { conversation } = ctx.state;
+  await conversation.destroy();
+  ctx.redirect(ctx.router.url('conversations'));
+});
 
 module.exports = router;

@@ -105,9 +105,3 @@ router.post('appointments-update', '/:id', async (ctx) => {
 });
 
 module.exports = router;
-
-
-// <div class="field">
-//     <label for="userId">userId</label>
-//     <input type="number" id="userId" name="userId" />
-//   </div>
