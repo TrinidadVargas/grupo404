@@ -7,14 +7,37 @@ module.exports = {
       type: Sequelize.INTEGER,
     },
 
-    id_user: {
+    userId: {
+      type: Sequelize.INTEGER,
+      references: {
+        model: 'users',
+        key: 'id',
+      },
+      onDelete: 'CASCADE',
+    },
+
+    machineId: {
+      allowNull: false,
+      type: Sequelize.INTEGER,
+      references: {
+        model: 'machines',
+        key: 'id',
+      },
+      onDelete: 'CASCADE',
+    },
+
+    date: {
+      allowNull: false,
+      type: Sequelize.DATE,
+    },
+
+    duration: {
+      allowNull: false,
       type: Sequelize.INTEGER,
     },
-    id_machine: {
+
+    status: {
       type: Sequelize.INTEGER,
-    },
-    time: {
-      type: Sequelize.TIME,
     },
 
     createdAt: {
