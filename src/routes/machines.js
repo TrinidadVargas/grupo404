@@ -39,7 +39,18 @@ router.get('machines', '/', async (ctx) => {
     newMachinePath: ctx.router.url('machines-new'),
     editMachinePath: (id) => ctx.router.url('machines-edit', id),
   });
-}); 
+});
+
+router.get('machines-all', '/all', async (ctx) => {
+  const machines = await ctx.orm.machines.findAll();
+  switch (ctx.accepts(['json'])) {
+    case 'json':
+      ctx.body = machines.map(({ name, description, image, tipo }) => ({ name, description, image, tipo }));
+      break;
+    default:
+      break;
+  }
+});
 
 router.get('machines-new', '/new', (ctx) => {
   const machine = ctx.orm.machines.build();
@@ -61,7 +72,6 @@ router.post('machines-create', '/', async (ctx) => {
       submitPath: ctx.router.url('machines-create')
     });
   }
-
 });
 
 router.get('machine', '/:id', (ctx) => {
