@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { hot } from 'react-hot-loader';
 import Button from './Button';
 import SingleMachine from './SingleMachine';
@@ -10,20 +10,74 @@ async function fetchData(url) {
   return response.json();
 }
 
-function Machines(props) {
-  const [machines, setMachines] = React.useState(fetchData(URL).then(response));
+function buildMachinesPath() {
+  return `/machines/all`;
+}
 
-  function handleClick() {
-    fetchData(URL).then((response) => setMachines(response));
-  }
+const fetchMachines = () => (
+  fetch(buildMachinesPath())
+    .then(response => response.json())
+);
+
+
+function Machines(props) {
+
+  const [machines, setMachines] = React.useState([]);
+  const [allMachines, setAllMachines] = React.useState([]);
+  
+  useEffect(() => {
+    fetchMachines()
+      .then((machines) => {
+        setAllMachines(machines);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetchMachines()
+      .then((machines) => {
+        setMachines(machines);
+      });
+  }, []);
+
+  const handleAllClick = () => {
+    setMachines(allMachines);
+  };
+
+  const handleCardioClick = () => {
+    const cardioMachines = allMachines.filter(machine => machine.tipo == 'Cardio');
+    setMachines(cardioMachines);
+  };
+
+  const handleUpperClick = () => {
+    const upperMachines = allMachines.filter(machine => machine.tipo == 'Tren Superior');
+    setMachines(upperMachines);
+  };
+
+  const handleLowerClick = () => {
+    const lowerMachines = allMachines.filter(machine => machine.tipo == 'Tren Inferior');
+    setMachines(lowerMachines);
+  };
+
+  const handleNoneClick = () => {
+    setMachines([]);
+  };
 
   return (
     <div>
-      <h5>Filtros</h5>
-      <Button onClick={handleClick} />
-      <ul className="machine">
-        <SingleMachine machine={machines} />
-      </ul>
+      <button onClick={handleAllClick}>Todas</button>
+      <button onClick={handleCardioClick}>Cardio</button>
+      <button onClick={handleUpperClick}>Tren Superior</button>
+      <button onClick={handleLowerClick}>Tren Inferior</button>
+      <button onClick={handleNoneClick}>Borrar todas</button>
+
+
+      <div className="machines">
+        {machines.map((machine) => (
+          < SingleMachine key={machine.id} machine={machine}/>
+        ))}
+
+
+      </div>
     </div>
   );
 }

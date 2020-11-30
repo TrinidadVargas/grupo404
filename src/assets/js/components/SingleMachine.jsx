@@ -6,7 +6,6 @@ function SingleMachine(props) {
   return (
     <li className="single_machine">
       <h2>{machine.name}</h2>
-      
       <p>{machine.description}</p>
       <p>{machine.tipo}</p>
     </li>
