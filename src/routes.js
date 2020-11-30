@@ -34,6 +34,8 @@ router.use(async (ctx, next) => {
     userPath: id => ctx.router.url('user', id),
     chatsPath: ctx.router.url('conversations'),
     machineReservationsPath: ctx.router.url('reserve_machines'),
+    usersTrainersPath: ctx.router.url('users-entrenadores'),
+    usersNutriPath: ctx.router.url('users-nutricionistas'),
   });
   return next();
 });
