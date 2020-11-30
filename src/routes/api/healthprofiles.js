@@ -19,6 +19,7 @@ router.get('/', async (ctx) => {
 
 router.get('healthprofile', '/:id', async (ctx) => {
   const { healthprofile } = ctx.state;
+  ctx.state = 200;
   ctx.body = {
     ...healthprofile.toJSON(),
   };
@@ -27,7 +28,14 @@ router.get('healthprofile', '/:id', async (ctx) => {
 router.post('healthprofile-create', '/', async (ctx) => {
   const healthprofile = ctx.orm.health_profile.build(ctx.request.body);
   await healthprofile.save();
-  ctx.body = { };
+  ctx.state = 201;
+  ctx.body = {"content": "ficha creada" };
+});
+
+router.del('healthprofile-delete', '/:id', async (ctx) => {
+  const { healthprofile } = ctx.state;
+  await healthprofile.destroy();
+  ctx.body = {"content": "ficha eliminada" };
 });
 
 module.exports = router;

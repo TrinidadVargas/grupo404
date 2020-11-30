@@ -27,7 +27,13 @@ router.get('machine', '/:id', async (ctx) => {
 router.post('machine-create', '/', async (ctx) => {
   const machine = ctx.orm.machines.build(ctx.request.body);
   await machine.save();
-  ctx.body = { };
+  ctx.body = {"content": "máquina creada" };
+});
+
+router.del('machines-delete', '/:id', async (ctx) => {
+  const { machine } = ctx.state;
+  await machine.destroy();
+  ctx.body = {"content": "máquina eliminada" };
 });
 
 module.exports = router;
