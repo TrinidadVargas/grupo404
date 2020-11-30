@@ -7,7 +7,7 @@ const PERMITTED_FIELDS = [
   'name',
   'description',
   'available',
-  'image'
+  'image',
 ];
 
 const PROTECTED_PATHS = [

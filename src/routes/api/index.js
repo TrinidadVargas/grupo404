@@ -3,6 +3,8 @@ const jwt = require('koa-jwt');
 const auth = require('./auth');
 const events = require('./events');
 const users = require('./users');
+const machines = require('./machines');
+const rooms = require('./rooms');
 
 const router = new KoaRouter({ prefix: '/api' });
 
@@ -21,5 +23,8 @@ router.use('/events', events.routes());
 router.use(jwt({ secret: process.env.JWT_SECRET, key: 'jwtDecoded' }));
 
 router.use('/users', users.routes());
+router.use('/machines', machines.routes());
+router.use('/rooms', rooms.routes());
+
 
 module.exports = router;

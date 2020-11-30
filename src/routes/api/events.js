@@ -11,7 +11,7 @@ router.param('id', async (id, ctx, next) => {
 
 router.get('/', async (ctx) => {
   const events = await ctx.orm.event.findAll(
-    { attributes: ['id', 'name', 'description', 'days', 'startsAt', 'endsAt'], include: ['users'] } );
+    { attributes: ['id', 'name', 'description', 'days', 'startsAt', 'endsAt'], include: ['users'] });
   ctx.body = events.map((event) => ({
     ...event.toJSON(),
     eventUrl: ctx.apiUrl('event', event.id),

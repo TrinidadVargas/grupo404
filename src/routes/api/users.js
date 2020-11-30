@@ -8,4 +8,9 @@ router.get('user-data', '/me', async (ctx) => {
   ctx.body = user;
 });
 
+router.get('user-data', '/all', async (ctx) => {
+  const users = await ctx.orm.user.findAll();
+  ctx.body = users;
+});
+
 module.exports = router;
