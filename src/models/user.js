@@ -96,6 +96,12 @@ module.exports = (sequelize, DataTypes) => {
       through: 'event_inscriptions',
       foreignKey: 'userId',
     });
+
+    user.belongsToMany(models.health_profile,{
+      through: 'user_profiles',
+      foreignKey: 'userId'
+
+    });
   };
 
   return user;

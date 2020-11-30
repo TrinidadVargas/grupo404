@@ -27,14 +27,23 @@
               <li class="nav-link">
                 <a class="current" href="<%= roomsPath %>">Salas</a>
               </li>
-              <% if (locals.currentUser) { %>
+              <% if (locals.currentUser && locals.currentUser.user_type==1) { %>
                 <li class="nav-link">
-                  <a class="current" href="<%= chatsPath %>">Chats</a>
+                  <a class="current" href="<%= chatsPath %>">Chat</a>
                 </li>
                 <li class="nav-link">
-                  <a class="current" href="<%= machineReservationsPath %>">Reservas</a>
+                  <a class="current" href="<%= userPath(locals.currentUser.id) %>">Perfil</a>
                 </li>
-                
+                <% } %>
+          
+              <% if (locals.currentUser && locals.currentUser.user_type==0) { %>
+                <li class="nav-link">
+                  <a class="current" href="<%= chatsPath %>">Chat</a>
+                </li>
+                <li class="nav-link">
+                  <a class="current" href="<%= usersPath %>">Usuarios</a>
+                </li>
+          
               <% } %>
             </ul>
           </div>
@@ -54,9 +63,6 @@
       </div>
     </header>
     <%- body %>
-    <footer class="footer">
-      <p> GOGYM </p>
-    </footer>
     <script src="<%= assetPath('app.js') %>"></script>
   </body>
 
