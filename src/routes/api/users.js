@@ -33,25 +33,21 @@ router.patch('user', '/:id', async (ctx) => {
   const currentUser = await ctx.orm.user.findByPk(sub);
   const { user } = ctx.state;
 
-  if (currentUser.dataValues.user_type != 0 && user.id != currentUser.id) {
-    ctx.body = {
-      "status": 401,
-    };
+  if (currentUser.user_type != 0 && user.id != currentUser.id) {
+    ctx.status = 401;
   } else {
     try {
       if (currentUser.user_type != 0) {
         user.user_type = currentUser.user_type;
       }
       const params = ctx.request.body;
-      console.log('lalala');
-      console.log(user);
       await user.update(params, { fields: ADMIN_UPDATE_PERMITTED_FIELDS });
+      ctx.status = 201;
       ctx.body = { 
-        "status": 201,
-        user,
-      };
+          user,
+        };
     } catch (error) {
-      ctx.status = 403;
+      ctx.status = 404;
       ctx.body = { 
         "errorMessage": error,
       };
