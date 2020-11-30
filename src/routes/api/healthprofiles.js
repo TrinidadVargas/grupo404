@@ -2,6 +2,16 @@ const KoaRouter = require('koa-router');
 
 const router = new KoaRouter();
 
+const PERMITTED_FIELDS = [
+  'birth',
+  'level',
+  'gender',
+  'height',
+  'weight',
+  'fat_percentage',
+  'emergency_number',
+];
+
 router.param('id', async (id, ctx, next) => {
   const healthprofile = await ctx.orm.health_profile.findByPk(id);
   if (!healthprofile) ctx.throw(404);
@@ -28,6 +38,32 @@ router.post('healthprofile-create', '/', async (ctx) => {
   const healthprofile = ctx.orm.health_profile.build(ctx.request.body);
   await healthprofile.save();
   ctx.body = { };
+});
+
+router.patch('healthprofile', '/:id', async (ctx) => {
+  const { jwtDecoded: { sub } } = ctx.state;
+  const currentUser = await ctx.orm.user.findByPk(sub);
+  const { healthprofile } = ctx.state;
+  console.log(healthprofile);
+
+  if (currentUser.user_type == 1 && healthprofile.user_id != currentUser.id) {
+    ctx.status = 401;
+  } else {
+    try {
+      const params = ctx.request.body;
+      await healthprofile.update(params, { fields: PERMITTED_FIELDS });
+      ctx.status = 201;
+      ctx.body = { 
+        healthprofile,
+      };
+    } catch (error) {
+      ctx.status = 404;
+      ctx.body = { 
+        "errorMessage": error,
+      };
+    }
+  }
+  
 });
 
 module.exports = router;

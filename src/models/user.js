@@ -80,7 +80,7 @@ module.exports = (sequelize, DataTypes) => {
     });
     
     user.hasMany(models.health_profile, {
-      foreignKey: 'userId',
+      foreignKey: 'user_id',
     });
 
     // user.hasMany(models.event_inscription, {
