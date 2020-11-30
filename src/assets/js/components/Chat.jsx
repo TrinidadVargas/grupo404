@@ -88,7 +88,7 @@ function Chat(props) {
   
   return (
     <div>
-      <button onClick={handleMsgsClick} >Recargar</button>
+      <button class="editlinkchat" onClick={handleMsgsClick} >Recargar</button>
       <div className="messages">
         {messages.map((msg) => (
           < SingleMessage key={msg.id} message={msg} userId={userId}/>
