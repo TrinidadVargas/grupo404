@@ -45,7 +45,14 @@ router.get('machines-all', '/all', async (ctx) => {
   const machines = await ctx.orm.machines.findAll();
   switch (ctx.accepts(['json'])) {
     case 'json':
-      ctx.body = machines.map(({ id, name, description, image, tipo }) => ({ id, name, description, image, tipo }));
+      ctx.body = machines.map(({ id, name, description, image, tipo }) => (
+        { id, 
+          name, 
+          description, 
+          image, 
+          tipo, 
+          url: ctx.router.url('machine', id),
+      }));
       break;
     default:
       break;

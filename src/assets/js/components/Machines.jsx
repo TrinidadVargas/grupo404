@@ -5,11 +5,6 @@ import SingleMachine from './SingleMachine';
 
 const URL = '/machines/all';
 
-async function fetchData(url) {
-  const response = await fetch(url, { Accept: 'application/json' });
-  return response.json();
-}
-
 function buildMachinesPath() {
   return `/machines/all`;
 }
@@ -71,7 +66,7 @@ function Machines(props) {
       <button onClick={handleNoneClick}>Borrar todas</button>
 
 
-      <div className="machines">
+      <div className="items">
         {machines.map((machine) => (
           < SingleMachine key={machine.id} machine={machine}/>
         ))}
