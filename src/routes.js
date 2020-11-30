@@ -17,6 +17,7 @@ const session = require('./routes/session');
 const appointments = require('./routes/appointments');
 const event_inscriptions = require('./routes/event_inscriptions');
 const health_profiles = require('./routes/healthprofiles');
+const reserve_machines = require('./routes/reserve_machines');
 
 
 const router = new KoaRouter();
@@ -30,6 +31,8 @@ router.use(async (ctx, next) => {
     machinesPath: ctx.router.url('machines'),
     newUserPath: ctx.router.url('users-new'),
     usersPath: ctx.router.url('users'),
+    chatsPath: ctx.router.url('conversations'),
+    machineReservationsPath: ctx.router.url('reserve_machines'),
   });
   return next();
 });
@@ -58,6 +61,7 @@ router.use('/session', session.routes());
 router.use('/appointments', appointments.routes());
 router.use('/event_inscription', event_inscriptions.routes());
 router.use('/healthprofiles', health_profiles.routes());
+router.use('/reserve_machines', reserve_machines.routes());
 
 
 

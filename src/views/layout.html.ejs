@@ -27,6 +27,15 @@
               <li class="nav-link">
                 <a class="current" href="<%= roomsPath %>">Salas</a>
               </li>
+              <% if (locals.currentUser) { %>
+                <li class="nav-link">
+                  <a class="current" href="<%= chatsPath %>">Chats</a>
+                </li>
+                <li class="nav-link">
+                  <a class="current" href="<%= machineReservationsPath %>">Reservas</a>
+                </li>
+                
+              <% } %>
             </ul>
           </div>
 

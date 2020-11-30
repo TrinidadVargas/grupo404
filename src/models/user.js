@@ -74,9 +74,15 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'specialistId',
     });
 
+    user.hasMany(models.user_machine, {
+      foreignKey: 'userId',
+      as: 'reservation',
+    });
+    
     user.hasMany(models.health_profile, {
       foreignKey: 'userId',
     });
+
     // user.hasMany(models.event_inscription, {
     //   foreignKey: 'userId',
     // });
