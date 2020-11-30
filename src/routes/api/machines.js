@@ -27,6 +27,7 @@ router.get('machine', '/:id', async (ctx) => {
 router.post('machine-create', '/', async (ctx) => {
   const machine = ctx.orm.machines.build(ctx.request.body);
   await machine.save();
+  ctx.body = { };
 });
 
 module.exports = router;
