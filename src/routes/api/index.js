@@ -5,6 +5,7 @@ const events = require('./events');
 const users = require('./users');
 const machines = require('./machines');
 const rooms = require('./rooms');
+const register = require('./register');
 
 const router = new KoaRouter({ prefix: '/api' });
 
@@ -19,6 +20,7 @@ router.get('/', async (ctx) => {
 
 router.use('/auth', auth.routes());
 router.use('/events', events.routes());
+router.use('/register', register.routes());
 
 router.use(jwt({ secret: process.env.JWT_SECRET, key: 'jwtDecoded' }));
 
