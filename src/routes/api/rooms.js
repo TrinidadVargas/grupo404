@@ -21,8 +21,13 @@ router.get('room', '/:id', async (ctx) => {
   const { sala } = ctx.state;
   ctx.body = {
     ...sala.toJSON(),
-    //attendancesUrl: ctx.apiUrl('room-attendances', room.id),
   };
+});
+
+router.post('room-create', '/', async (ctx) => {
+  const sala = ctx.orm.room.build(ctx.request.body);
+  await sala.save();
+  ctx.body = { };
 });
 
 module.exports = router;

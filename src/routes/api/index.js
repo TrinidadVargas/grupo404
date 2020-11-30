@@ -6,6 +6,7 @@ const users = require('./users');
 const machines = require('./machines');
 const rooms = require('./rooms');
 const register = require('./register');
+const healthprofiles = require('./healthprofiles');
 
 const router = new KoaRouter({ prefix: '/api' });
 
@@ -27,6 +28,6 @@ router.use(jwt({ secret: process.env.JWT_SECRET, key: 'jwtDecoded' }));
 router.use('/users', users.routes());
 router.use('/machines', machines.routes());
 router.use('/rooms', rooms.routes());
-
+router.use('/healthprofiles', healthprofiles.routes());
 
 module.exports = router;
