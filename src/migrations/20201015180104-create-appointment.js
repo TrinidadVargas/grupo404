@@ -13,7 +13,7 @@ module.exports = {
         model: 'users',
         key: 'id',
       },
-      onDeleye: 'CASCADE',
+      onDelete: 'CASCADE',
     },
     userId: {
       type: Sequelize.INTEGER,
@@ -21,7 +21,7 @@ module.exports = {
         model: 'users',
         key: 'id',
       },
-      onDeleye: 'CASCADE',
+      onDelete: 'CASCADE',
     },
     date: {
       type: Sequelize.DATE,

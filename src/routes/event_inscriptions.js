@@ -31,7 +31,6 @@ router.post('event_inscriptions-create', '/', async (ctx) => {
 
 router.del('event_inscriptions-delete', '/:id', async (ctx) => {
   const { event_inscription } = ctx.state;
-  console.log(ctx.state);
   await event_inscription.destroy();
   ctx.redirect(ctx.router.url('events'));
 });

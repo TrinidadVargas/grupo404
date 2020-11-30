@@ -17,6 +17,96 @@
       </div>
       <% } %>
     
+
+
+    <% if (locals.currentUser && locals.currentUser.user_type == 0) { %>
+      <div class="elemento">
+        <h4>Crear horarios de máquinas</h4>
+        <form method="post" action="<%= createMachineReservationPath%>">
+          <div class="wrapper">
+            <div class="this-form">
+                <input type="hidden" id="machineId" name="machineId" value="<%=machine.id%>" />
+                <input type="hidden" id="status" name="status" value="0" />
+                
+                <div class="field">
+                  <label for="date">Fecha</label>
+                  <input type="datetime-local" id="date" name="date">
+                </div>
+                <div class="field">
+                  <label for="duration">Duración en minutos</label>
+                  <input type="integer" id="duration" name="duration">
+                </div>
+                <div class="actions">
+                    <input class="formlink" type="submit" name="create" value="Create" />      
+                </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      
+      <div class="elemento">
+        <br><br><br><br><br><br><br>
+        <h4>Reservas de máquina</h4>
+        <table>
+          <% reservations.forEach(reservation => { %>
+            
+              <tr>
+                <td>Dia: </bf><%= reservation.date.toLocaleString('es-cl') %> </td>
+                <% if (reservation.status == 0) { %>
+                  <td> Estado:  Disponible</td>
+                <% } else if (reservation.status == 1) { %>
+                  <td> Estado: Reservada</td>
+                <% } else if (reservation.status == 2) { %>
+                  <td> Estado: Ausente</td>
+                <% } %>  
+                <td>
+                  <form action="<%= deleteMachineReservationPath(reservation.id) %>" method="POST">
+                    <input type="hidden" name="_method" value="delete" />
+                    <input type="submit" value="Eliminar" />
+                  </form>
+                </td> 
+              </tr>
+          <% }); %>
+
+        </table>
+        
+      </div>
+    <% } else if (locals.currentUser && locals.currentUser.user_type != 0) { %>
+      <h4>Reservas de máquina</h4>
+      <table>
+        <% reservations.forEach(reservation => { %>
+          <tr>
+            <td>Dia: </bf><%= reservation.date.toLocaleString('es-cl') %> </td>
+            <% if (reservation.status == 0) { %>
+              <td> Estado:  Disponible</td>
+            <% } else if (reservation.status == 1) { %>
+              <td> Estado: Reservada</td>
+            <% } else if (reservation.status == 2) { %>
+              <td> Estado: Ausente</td>
+            <% } %>  
+            <% if (reservation.status == 0) { %>
+              <td>  
+                <form action="<%= updateMachineReservationPath(reservation.id)  %>" method="post">
+                  <input type="hidden" id="userId" name="userId" value="<%=locals.currentUser.id%>" />
+                  <input type="hidden" id="status" name="status" value="<%=1%>" />
+                  <input type="submit" name="update" value="Reservar" />
+                </form>
+              </td>
+            <% } else if (reservation.status == 1 && reservation.userId == locals.currentUser.id) { %>
+              <td>
+                <form action="<%= updateMachineReservationPath(reservation.id) %>" method="post">
+                  <input type="hidden" id="userId" name="userId" value="<%=0%>" />
+                  <input type="hidden" id="status" name="status" value="<%=0%>" />
+                  <input type="submit" name="update" value="Eliminar reserva" />
+                </form>
+              </td>
+            <% } %>    
+          </tr>
+      <% }); %>
+
+      </table>
+    <% } %> 
+
     
   </section>
 </body>

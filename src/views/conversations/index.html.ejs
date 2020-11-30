@@ -1,0 +1,28 @@
+
+<% if (locals.currentUser && locals.currentUser.id == currentId) { %>
+  <a href="<%= newConversationPath%>">Crear nueva conversación</a>
+  <% if (conversations.length) { %>
+    <h2>Mis conversaciones</h2>
+    <% conversations.forEach((conversation) => { %>
+      <ul>
+       
+      <% if (conversation.userId1 != currentId){ %>
+        <h4>Chat con <%= conversation.user1.name %> <%= conversation.user1.lastname %>
+      <% } else { %> 
+        <h4>Chat con <%= conversation.user2.name %> <%= conversation.user2.lastname %> 
+      <% } %> 
+        <a href="<%= conversationPath(conversation.id) %>">Ir</a> 
+        <form action="<%= deleteConversationPath(conversation.id) %>" method="POST">
+          <input type="hidden" name="_method" value="delete" />
+          <input type="submit" value="Delete" />
+      </form>
+        
+      </h4>
+      </ul>
+    <% }); %>
+    
+  <% } else { %>
+    Aun no tienes ninguna conversacion. Crear una para empezar. 
+  <% } %>
+  
+<% } %>

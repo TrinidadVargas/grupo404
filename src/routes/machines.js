@@ -64,10 +64,16 @@ router.post('machines-create', '/', async (ctx) => {
   }
 });
 
-router.get('machine', '/:id', (ctx) => {
+router.get('machine', '/:id', async (ctx) => {
   const { machine } = ctx.state;
-  return ctx.render('machines/show', 
-  { machine, 
+  const reservations = await machine.getMachineReservation();
+  console.log(reservations);
+  return ctx.render('machines/show', { 
+    machine,
+    createMachineReservationPath: ctx.router.url('reserve_machines-create'),
+    reservations,
+    updateMachineReservationPath: (id) => ctx.router.url('reserve_machines-update', id),
+    deleteMachineReservationPath: (id) => ctx.router.url('reserve_machines-delete', id),
     editMachinePath: (id) => ctx.router.url('machines-edit', id),
     deleteMachinePath: (id) => ctx.router.url('machines-delete', id),
   });
