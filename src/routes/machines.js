@@ -38,8 +38,9 @@ router.get('machines', '/', async (ctx) => {
     machinePath: (id) => ctx.router.url('machine', id),
     newMachinePath: ctx.router.url('machines-new'),
     editMachinePath: (id) => ctx.router.url('machines-edit', id),
+    deleteMachinePath: (id) => ctx.router.url('machines-delete', id),
   });
-}); 
+});
 
 router.get('machines-new', '/new', (ctx) => {
   const machine = ctx.orm.machines.build();
@@ -58,10 +59,9 @@ router.post('machines-create', '/', async (ctx) => {
     await ctx.render('machines/new', {
       machine,
       errors: error.errors,
-      submitPath: ctx.router.url('machines-create')
+      submitPath: ctx.router.url('machines-create'),
     });
   }
-
 });
 
 router.get('machine', '/:id', async (ctx) => {
@@ -74,6 +74,8 @@ router.get('machine', '/:id', async (ctx) => {
     reservations,
     updateMachineReservationPath: (id) => ctx.router.url('reserve_machines-update', id),
     deleteMachineReservationPath: (id) => ctx.router.url('reserve_machines-delete', id),
+    editMachinePath: (id) => ctx.router.url('machines-edit', id),
+    deleteMachinePath: (id) => ctx.router.url('machines-delete', id),
   });
 });
 
@@ -105,5 +107,10 @@ router.patch('machines-update', '/:id', checkAuth, async (ctx) => {
   }
 });
 
+router.del('machines-delete', '/:id', async (ctx) => {
+  const { machine } = ctx.state;
+  await machine.destroy();
+  ctx.redirect(ctx.router.url('machines'));
+});
 
 module.exports = router;

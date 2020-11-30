@@ -27,7 +27,13 @@ router.get('room', '/:id', async (ctx) => {
 router.post('room-create', '/', async (ctx) => {
   const sala = ctx.orm.room.build(ctx.request.body);
   await sala.save();
-  ctx.body = { };
+  ctx.body = {"content": "sala creada" };
+});
+
+router.del('rooms-delete', '/:id', async (ctx) => {
+  const { sala } = ctx.state;
+  await sala.destroy();
+  ctx.body = { "content": "sala eliminada" };
 });
 
 module.exports = router;

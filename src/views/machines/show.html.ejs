@@ -6,6 +6,18 @@
       <h5>Descripción</h5>
       <p><%= machine.description%></p>
     </div>
+    <% if (locals.currentUser && locals.currentUser.user_type==0) { %>
+      <a class="editlink" href="<%= editMachinePath(machine.id) %>">Editar</a>
+      
+      <div>
+          <form action="<%= deleteMachinePath(machine.id) %>" method="POST">
+              <input type="hidden" name="_method" value="delete" />
+              <input class="editlink" type="submit" value="Eliminar" />
+          </form>
+      </div>
+      <% } %>
+    
+
 
     <% if (locals.currentUser && locals.currentUser.user_type == 0) { %>
       <div class="elemento">
@@ -94,6 +106,7 @@
 
       </table>
     <% } %> 
+
     
   </section>
 </body>
