@@ -30,6 +30,8 @@ router.get('users', '/', async (ctx) => {
   });
 });
 
+
+
 router.get('users-new', '/new', async (ctx) => {
   const user = ctx.orm.user.build();
   return await ctx.render('users/new', {
@@ -75,6 +77,25 @@ router.patch('users-update', '/:id', async (ctx) => {
     });
   }
 });
+
+router.get('users-entrenadores', '/entrenadores', async (ctx) => {
+  const trainers = ctx.orm.user.findAll();
+  return await ctx.render('users/entrenadores', {
+    trainers,
+    usersTrainersPath: ctx.router.url('users-entrenadores'),
+  });
+});
+
+router.get('users-nutricionistas', '/nutricionistas', async (ctx) => {
+  const trainers = ctx.orm.user.findAll();
+  return await ctx.render('users/nutricionistas', {
+    trainers,
+    userNutriPath: ctx.router.url('users-nutricionistas'),
+  });
+});
+
+
+
 
 router.get('user', '/:id', async (ctx) => {
   const { user } = ctx.state;
