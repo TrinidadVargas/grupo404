@@ -3,11 +3,12 @@
     <div class="title">
 			<h1> Usuarios </h1>
 		</div>
-    
+    <% if (locals.currentUser && locals.currentUser.user_type==0) { %>
     <div class="ref-to-new">
         <a href="<%= newUserPath %>">Agregar nuevo usuario</a>
         <p> Cantidad de Usuarios: <%= users.length %> </p>
     </div>
+    <% } %>
     <div class="items">
         <% users.forEach(user => { %>
             <div class="elemento">
