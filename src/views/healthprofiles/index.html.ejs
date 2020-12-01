@@ -5,15 +5,16 @@
         <a href= "<%= newProfilePath %>" > Agregar nuevo perfil</a>
         <p>Cantidad de perfiles:  <%= health_profiles.length %></p>
     </div>
-    <div class="items">
+    <div class="general-info">
         <% health_profiles.forEach(healthprofile =>{ %>
-            <div class="elemento">
-                <h2>Fecha de nacimiento: <%= healthprofile.birth%></h2>
+            <div class="health-info">
+                <h3>Fecha: <%= healthprofile.createdAt.toDateString()%></h3>
+                <p>Fecha de nacimiento: <%= healthprofile.birth%></p>
                 <p>Género: <%= healthprofile.gender%></p>
                 <p>Altura: <%= healthprofile.height%></p>
                 <p>Peso: <%= healthprofile.weight%></p>
                 <p>Porcentaje de grasa:<%= healthprofile.fat_percentage%></p>
-                <a href = "<%= profilePath(healthprofile.id) %>">Ver más</a>
+                <p>Comentario: <%= healthprofile.description%></p>
             </div>
         <% }) %>
 		</div>

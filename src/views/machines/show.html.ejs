@@ -64,7 +64,7 @@
                 <td>
                   <form action="<%= deleteMachineReservationPath(reservation.id) %>" method="POST">
                     <input type="hidden" name="_method" value="delete" />
-                    <input type="submit" value="Eliminar" />
+                    <input class="editlink" type="submit" value="Eliminar" />
                   </form>
                 </td> 
               </tr>
@@ -91,7 +91,7 @@
                 <form action="<%= updateMachineReservationPath(reservation.id)  %>" method="post">
                   <input type="hidden" id="userId" name="userId" value="<%=locals.currentUser.id%>" />
                   <input type="hidden" id="status" name="status" value="<%=1%>" />
-                  <input type="submit" name="update" value="Reservar" />
+                  <input class="editlink" type="submit" name="update" value="Reservar" />
                 </form>
               </td>
             <% } else if (reservation.status == 1 && reservation.userId == locals.currentUser.id) { %>
@@ -99,7 +99,7 @@
                 <form action="<%= updateMachineReservationPath(reservation.id) %>" method="post">
                   <input type="hidden" id="userId" name="userId" value="<%=0%>" />
                   <input type="hidden" id="status" name="status" value="<%=0%>" />
-                  <input type="submit" name="update" value="Eliminar reserva" />
+                  <input class="editlink" type="submit" name="update" value="Eliminar reserva" />
                 </form>
               </td>
             <% } %>    
