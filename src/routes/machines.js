@@ -50,7 +50,7 @@ router.get('machines-all', '/all', async (ctx) => {
         { id, 
           name, 
           description, 
-          image, 
+          image: ctx.state.cloudinary.url(image),
           tipo, 
           url: ctx.router.url('machine', id),
       }));

@@ -59,11 +59,12 @@ function Machines(props) {
 
   return (
     <div>
-      <button onClick={handleAllClick}>Todas</button>
-      <button onClick={handleCardioClick}>Cardio</button>
-      <button onClick={handleUpperClick}>Tren Superior</button>
-      <button onClick={handleLowerClick}>Tren Inferior</button>
-      <button onClick={handleNoneClick}>Borrar todas</button>
+      <label > Buscar máquina de </label>
+      <button className="editlink" onClick={handleAllClick}>Todas</button>
+      <button className="editlink" onClick={handleCardioClick}>Cardio</button>
+      <button className="editlink" onClick={handleUpperClick}>Tren Superior</button>
+      <button className="editlink" onClick={handleLowerClick}>Tren Inferior</button>
+      <button className="editlink" onClick={handleNoneClick}>Borrar todas</button>
 
 
       <div className="items">
