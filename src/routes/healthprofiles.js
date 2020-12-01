@@ -11,6 +11,7 @@ const PERMITTED_FIELDS = [
   'weight',
   'fat_percentage',
   'emergency_number',
+  'description',
 ];
 
 router.param('id', async (id, ctx, next) => {
@@ -41,7 +42,8 @@ router.post('healthprofiles-create', '/', async (ctx) => {
   const health_profile = ctx.orm.health_profile.build(ctx.request.body);
   try {
     await health_profile.save({fields: PERMITTED_FIELDS });
-    ctx.redirect(ctx.router.url('healthprofiles'));
+    console.log('**');
+    ctx.redirect(ctx.router.url('user', health_profile.user_id));
   } catch (error) {
     await ctx.render('healthprofiles/new', {
       health_profile,
