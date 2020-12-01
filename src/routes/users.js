@@ -40,7 +40,12 @@ router.get('users', '/', async (ctx) => {
 
 router.get('users-new', '/new', async (ctx) => {
   const user = ctx.orm.user.build();
+  let isAdmin = false;
+  if (ctx.state.currentUser && ctx.state.currentUser.user_type == 0) {
+    isAdmin = true;
+  }
   return await ctx.render('users/new', {
+    isAdmin,
     user,
     submitUserPath: ctx.router.url('users-create'),
   });
@@ -48,9 +53,13 @@ router.get('users-new', '/new', async (ctx) => {
 
 router.get('users-edit', '/:id/edit', async (ctx) => {
   const { user } = ctx.state;
+  if (ctx.state.currentUser && ctx.state.currentUser.user_type == 0) {
+    isAdmin = true;
+  }
   await ctx.render('users/edit', {
     user,
     submitUserPath: ctx.router.url('users-update', { id: user.id }),
+    isAdmin,
   });
 });
 
@@ -58,11 +67,14 @@ router.post('users-create', '/', async (ctx) => {
   const user = ctx.orm.user.build(ctx.request.body);
   try {
     await user.save({ fields: PERMITTED_FIELDS });
-    ctx.redirect(ctx.router.url('users'));
+    ctx.redirect(ctx.router.url('events'));
   } catch (error) {
+    console.log(error);
     await ctx.render('users/new', {
       user,
       errors: error.errors,
+      isAdmin: false,
+      submitUserPath: ctx.router.url('users-create'),
     });
   }
 });
