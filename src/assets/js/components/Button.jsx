@@ -3,8 +3,8 @@ import { hot } from 'react-hot-loader';
 
 function Button(props) {
   return (
-    <button>Load from endpoint</button>
+    <button onClick={props.onClick}> Load from endpoint</button>
   );
-}
+};
 
 export default hot(module)(Button);

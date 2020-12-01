@@ -5,6 +5,8 @@
       <img class="big" src="<%= cloudinary.url(machine.image) %>" />
       <h5>Descripción</h5>
       <p><%= machine.description%></p>
+      <p>Tipo: <%= machine.tipo%></p>
+
     </div>
     <% if (locals.currentUser && locals.currentUser.user_type==0) { %>
       <a class="editlink" href="<%= editMachinePath(machine.id) %>">Editar</a>
