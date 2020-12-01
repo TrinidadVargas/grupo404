@@ -41,6 +41,7 @@ router.get('events', '/', async (ctx) => {
     eventPath: (id) => ctx.router.url('event', id),
     newEventPath: ctx.router.url('events-new'),
     editEventPath: (id) => ctx.router.url('events-edit', id),
+    deleteEventPath: (id) => ctx.router.url('events-delete', id),
   });
 });
 
@@ -96,15 +97,13 @@ router.get('event', '/:id', async (ctx) => {
     submitInscriptionPath: ctx.router.url('event_inscriptions-create'),
     deleteInscription: ctx.router.url('event_inscriptions-delete', inscriptionId),
   });
-
-
 });
 
-router.del('events.delete', '/:id', async (ctx) => {
+router.del('events-delete', '/:id', async (ctx) => {
   const { event } = ctx.state;
   ctx.state.event = await ctx.orm.event.findByPk(ctx.params.id);
   await event.destroy();
-  ctx.redirect(ctx.router.url('events.list'));
+  ctx.redirect(ctx.router.url('events'));
 });
 
 router.get('events-edit', '/:id/edit', (ctx) => {

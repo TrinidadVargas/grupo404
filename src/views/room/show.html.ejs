@@ -3,7 +3,9 @@
 		<div class="elemento">
 			<h1><%= sala.type%></h1>
 			<img class="medium" src="<%= cloudinary.url(sala.image) %>" />
-			<h2>Capacidad para <%= sala.capacity %> personas</h2>
+			<div class="cont">
+				<h2>Capacidad para <%= sala.capacity %> personas</h2>
+			</div>
 		</div>
 
 		<div class=elemento">
@@ -14,9 +16,11 @@
 						<div class="elemento">
 						<h4> <%= event.name %></h4>
 						<img class="medium" src="<%= cloudinary.url(event.image) %>" />
+						<div class="cont">
 							<p> <%= event.description %></p>
 							<p> Días: <%= event.days %></p>
 							<p> De <%= event.startsAt %> a <%= event.endsAt %> hrs</p>
+						</div>
 						</div>
 							<% }); %>
 				</ul>

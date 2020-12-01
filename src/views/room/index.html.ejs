@@ -13,15 +13,32 @@
     <div class="items">
 			<% room.forEach(sala => { %>
 				<div class="elemento">
-					<h2><%= sala.type %></h2>
-					<a href = "<%= roomPath(sala.id) %>">
-						<img class="medium" src="<%= cloudinary.url(sala.image) %>" />
-					</a>
-					<p>Capacidad para <%= sala.capacity %> personas</p>
-					<% if (locals.currentUser && locals.currentUser.user_type==0) { %>
-						<a class="editlink" href="<%= editRoomPath(sala.id) %>">Editar</a>
-						<a class="editlink" href="<%= deleteRoomPath(sala.id) %>">Eliminar</a>
-						<% } %>
+					<div class="titulo">
+						<h2><%= sala.type %></h2>
+					</div>
+					<div class="content">
+						<div class="imagen">
+							<a href = "<%= roomPath(sala.id) %>">
+								<img class="medium" src="<%= cloudinary.url(sala.image) %>" />
+							</a>
+						</div>
+						<div class="cont">
+							<p>Capacidad para <%= sala.capacity %> personas</p>
+						</div>
+						<div class="botones">
+							<% if (locals.currentUser && locals.currentUser.user_type==0) { %>
+								<div class="but">
+									<a class="editlink" href="<%= editRoomPath(sala.id) %>">Editar</a>
+								</div>
+								<div class="but">
+								<form action="<%= deleteRoomPath(sala.id) %>" method="POST">
+									<input type="hidden" name="_method" value="delete" />
+									<input class="editlink" type="submit" value="Eliminar" />
+								</form>
+							</div>
+							<% } %>
+						</div>
+					</div>
 				</div>
 			<% })%>
 		</div>
