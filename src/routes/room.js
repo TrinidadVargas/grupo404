@@ -39,7 +39,7 @@ router.get('room', '/', async (ctx) => {
   });
 });
 
-router.get ('room-new', '/new', (ctx) => {
+router.get('room-new', '/new', (ctx) => {
   const sala = ctx.orm.room.build();
   return ctx.render('room/new', {
     sala,
@@ -98,10 +98,11 @@ router.patch('room-update', '/:id', checkAuth, async (ctx) => {
   }
 });
 
-router.del('rooms-delete', '/:id', async (ctx) => {
+router.del('room-delete', '/:id', async (ctx) => {
   const { sala } = ctx.state;
+  ctx.state.sala = await ctx.orm.room.findByPk(ctx.params.id);
   await sala.destroy();
-  ctx.redirect(ctx.router.url('rooms'));
+  ctx.redirect(ctx.router.url('room'));
 });
 
 module.exports = router;
