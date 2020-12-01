@@ -6,6 +6,7 @@
   <div class="ref-to-new">
   </div>
 
+  <% if (users.currentUser && (users.currentUser.id == user.id || users.currentUser.user_type != 1)) { %>
 
   <div class="items">
     <div class="general-info">
@@ -106,6 +107,6 @@
   </div>
   </form>
 
-    
+<% } %>  
 	</section>
 </body>
