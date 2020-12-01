@@ -5,7 +5,7 @@ function SingleMachine(props) {
   const { machine } = props;
   return (
     <div className="elemento">
-      <div className="column">
+      <div className="cont">
         <h2>{machine.name}</h2>
         <a href={machine.url}>
           <img className="medium" src= {machine.image} />

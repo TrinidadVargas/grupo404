@@ -1,28 +1,33 @@
 <body>
   <section class="cuerpo">
     <div class="elemento">
-      <h4><%= machine.name%></h4>
+      <h2><%= machine.name%></h4>
       <img class="big" src="<%= cloudinary.url(machine.image) %>" />
-      <h5>Descripción</h5>
-      <p><%= machine.description%></p>
-      <p>Tipo: <%= machine.tipo%></p>
-
-    </div>
-    <% if (locals.currentUser && locals.currentUser.user_type==0) { %>
-      <a class="editlink" href="<%= editMachinePath(machine.id) %>">Editar</a>
-      
-      <div>
+      <div class="cont"></div>  
+        <p class="des"> Descripción</p>
+        <p><%= machine.description%></p>
+        <p>Tipo: <%= machine.tipo%></p>
+      </div>  
+    
+    <div class="botonesm">
+      <% if (locals.currentUser && locals.currentUser.user_type==0) { %>
+        <div class="butt">
+          <a class="editlink" href="<%= editMachinePath(machine.id) %>">Editar</a>
+        </div>
+        <div class="butt">
           <form action="<%= deleteMachinePath(machine.id) %>" method="POST">
-              <input type="hidden" name="_method" value="delete" />
-              <input class="editlink" type="submit" value="Eliminar" />
+            <input type="hidden" name="_method" value="delete" />
+            <input class="editlink" type="submit" value="Eliminar" />
           </form>
-      </div>
+        </div>
+    </div>
       <% } %>
+    </div>
     
 
 
     <% if (locals.currentUser && locals.currentUser.user_type == 0) { %>
-      <div class="elemento">
+      <div class="element">
         <h4>Crear horarios de máquinas</h4>
         <form method="post" action="<%= createMachineReservationPath%>">
           <div class="wrapper">
@@ -46,7 +51,7 @@
         </form>
       </div>
       
-      <div class="elemento">
+      <div class="element">
         <br><br><br><br><br><br><br>
         <h4>Reservas de máquina</h4>
         <table>
