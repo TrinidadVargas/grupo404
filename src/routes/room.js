@@ -21,7 +21,6 @@ function checkAuth(ctx, next) {
 
 router.use(PROTECTED_PATHS, checkAuth);
 
-
 router.param('id', async (id, ctx, next) => {
   const sala = await ctx.orm.room.findByPk(id);
   if (!sala) ctx.throw(404);
@@ -36,6 +35,7 @@ router.get('room', '/', async (ctx) => {
     roomPath: (id) => ctx.router.url('sala', id),
     editRoomPath: (id) => ctx.router.url('room-edit', id),
     newRoomPath: ctx.router.url('room-new'),
+    deleteRoomPath: (id) => ctx.router.url('room-delete', id),
   });
 });
 
@@ -96,6 +96,12 @@ router.patch('room-update', '/:id', checkAuth, async (ctx) => {
       submitPath: ctx.router.url('room-update', room.id),
     });
   }
+});
+
+router.del('rooms-delete', '/:id', async (ctx) => {
+  const { sala } = ctx.state;
+  await sala.destroy();
+  ctx.redirect(ctx.router.url('rooms'));
 });
 
 module.exports = router;

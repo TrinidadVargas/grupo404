@@ -1,27 +1,29 @@
 <body>
 <section class="cuerpo"> 
   <div class="title">
-    <h3>All appointments</h3>
+    <h3>Citas con Especialistas</h3>
   </div>
   
 <% if (locals.currentUser && locals.currentUser.user_type != 1) {%> 
-<a href="<%= newApptPath %>">Agregar nueva consulta</a>
+<div class="inicio">
+    <a class="addthing" href="<%= newApptPath %>">Agregar nueva consulta</a>
+</div>
+
 
 <% } %> 
-
-<p> Cantidad de Consultas Disponibles: <%= appointments.length %> </p>
+<div class="inicio">
+  <h1> Cantidad de Consultas Disponibles: <%= appointments.length %> </h1>
+</div>
 <% appointments.forEach(appt => { %>
     <div>
-      <h3>Especialista: <%=appt.id%>
       <a href="<%=specialistPath(appt.specialistId)%>"><%= appt.specialist.name %> <%= appt.specialist.lastname %></a>
       <h4><%=appt.date%></h4>
-      <h4><%=appt.id%></h4>
       <p><%= appt.description%></p>
-      <a href="<%=apptPath(appt.id)%>">Ver</a>
+      <a class="addthing" href="<%=apptPath(appt.id)%>">Ver</a>
       <% if (locals.currentUser && locals.currentUser.user_type!=1) {%>
         <form action="<%= deleteApptPath(appt.id) %>" method="POST">
           <input type="hidden" name="_method" value="delete" />
-          <input type="submit" value="Delete" />
+          <input class="editlink" type="submit" value="Delete" />
         </form>
       <%} %>
         

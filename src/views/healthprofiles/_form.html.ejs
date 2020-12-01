@@ -14,11 +14,7 @@
     <h1>Nuevo perfil</h1>
     <div class="wrapper">
         <div class="this-form">
-            <div class="field">
-                <label for="user_id">Id</label>
-                <input type="text" id="user_id" name="user_id" value="<%= health_profile.user_id%>">
-                <span class="error"></span>
-            </div>
+
             <div class="field">
                 <label for="birth">Fecha de nacimiento</label>
                 <input type="date" id="birth" name="birth" value="<%= health_profile.birth%>">
@@ -33,23 +29,24 @@
             </div>
             <div class="field">
                 <label for="height">Altura</label>
-                <input type="text" id="height" name="height" value="<%= health_profile.height%>">
-                <span class="error"></span>
+                <input type="number" id="height" name="height" value="<%= health_profile.height%>">
             </div>
             <div class="field">
                 <label for="weight">Peso</label>
-                <input type="text" id="weight" name="weight" value="<%= health_profile.weight%>">
-                <span class="error"></span>
+                <input type="number" id="weight" name="weight" value="<%= health_profile.weight%>">
             </div>
             <div class="field">
                 <label for="fat_percentage">Porcentaje de grasa</label>
-                <input type="text" id="fat_percentage" name="fat_percentage" value="<%= health_profile.fat_percentage%>">
-                <span class="error"></span>
+                <input type="number" id="fat_percentage" name="fat_percentage" value="<%= health_profile.fat_percentage%>">
             </div>
             <div class="field">
                 <label for="emergency_number">Numero de emergencia</label>
                 <input type="text" id="emergency_number" name="emergency_number" value="<%= health_profile.emergency_number%>">
-                <span class="error"></span>
+            </div>
+
+            <div class="field">
+                <label for="description">Comentarios</label>
+                <textarea name="description" id="description" rows="4" cols="30"><%= health_profile.description %></textarea>
             </div>
             <div class="actions">
                 <input class="formlink" type="submit" value="Crear">

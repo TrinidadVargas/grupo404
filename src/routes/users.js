@@ -27,8 +27,16 @@ router.get('users', '/', async (ctx) => {
     editUserPath: id => ctx.router.url('users-edit', id),
     deleteUserPath: id => ctx.router.url('users-delete', id),
     newUserPath: ctx.router.url('users-new'),
+    usersTrainersPath: ctx.router.url('users-entrenadores'),
+    usersNutriPath: ctx.router.url('users-nutricionistas'),
+    chartsPath: ctx.router.url('users-charts'),
+    personalusersPath: ctx.router.url('users-personal'),
+    adminuserPath: id => ctx.router.url('users-admin', id),
+  
   });
 });
+
+
 
 router.get('users-new', '/new', async (ctx) => {
   const user = ctx.orm.user.build();
@@ -86,6 +94,84 @@ router.patch('users-update', '/:id', async (ctx) => {
       submitUserPath: ctx.router.url('users-update', { id: user.id }),
     });
   }
+});
+
+router.get('users-entrenadores', '/entrenadores', async (ctx) => {
+  const trainers = ctx.orm.user.findAll();
+  return await ctx.render('users/entrenadores', {
+    trainers,
+    usersTrainersPath: ctx.router.url('users-entrenadores'),
+  });
+});
+
+router.get('users-nutricionistas', '/nutricionistas', async (ctx) => {
+  const trainers = ctx.orm.user.findAll();
+  return await ctx.render('users/nutricionistas', {
+    trainers,
+    usersNutriPath: ctx.router.url('users-nutricionistas'),
+  });
+});
+
+router.get('users-charts', '/charts', async (ctx) => {
+
+  const entrenadores = await ctx.orm.user.findAll({
+    where: {
+      user_type: 2
+    }
+  });
+
+  const nutricionistas = await ctx.orm.user.findAll({
+    where: {
+      user_type: 3
+    }
+  });
+
+  const clientes = await ctx.orm.user.findAll({
+    where: {
+      user_type: 1
+    }
+  });
+
+  return ctx.render('users/charts', {
+    entrenadores,
+    nutricionistas,
+    clientes,
+    chartsPath: ctx.router.url('users-charts'),
+  });
+});
+
+
+router.get('users-personal', '/personal', async (ctx) => {
+  const users = await ctx.orm.user.findAll();
+  await ctx.render('users/personal', {
+    users,
+    personalusersPath: ctx.router.url('users-personal'),
+    editUserPath: id => ctx.router.url('users-edit', id),
+    deleteUserPath: id => ctx.router.url('users-delete', id),
+  });
+});
+
+router.get('users-admin', '/:id/admin', async (ctx) => {
+  const { user } = ctx.state;
+  // eslint-disable-next-line global-require
+  const { Op } = require('sequelize');
+  const conversations = await ctx.orm.conversation.findAll({
+    where: {
+      [Op.or]: [
+        { userId1: user.id },
+        { userId2: user.id },
+      ],
+    },
+    include: ['user1', 'user2'],
+  });
+  return ctx.render('users/admin', {
+    user,
+    conversations,
+    conversationPath: (id) => ctx.router.url('conversation', id),
+    newConversationPath: ctx.router.url('conversations-new'),
+    deleteConversationPath: (id) => ctx.router.url('conversations-delete', id),
+    events: await user.getEvents(),
+  });
 });
 
 router.get('user', '/:id', async (ctx) => {
