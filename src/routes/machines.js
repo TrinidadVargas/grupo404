@@ -47,11 +47,11 @@ router.get('machines-all', '/all', async (ctx) => {
   switch (ctx.accepts(['json'])) {
     case 'json':
       ctx.body = machines.map(({ id, name, description, image, tipo }) => (
-        { id,
-          name,
-          description,
-          image,
-          tipo,
+        { id, 
+          name, 
+          description, 
+          image: ctx.state.cloudinary.url(image),
+          tipo, 
           url: ctx.router.url('machine', id),
       }));
       break;

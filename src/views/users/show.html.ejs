@@ -1,4 +1,5 @@
 <body>
+  <% if (locals.currentUser && locals.currentUser.user_type==1 || locals.currentUser && locals.currentUser.user_type==2 || locals.currentUser && locals.currentUser.user_type==3 ||locals.currentUser && locals.currentUser.user_type==0  ) { %>
   <section class="cuerpo">
   <div class="title">
     <h3> Hola <%= user.name%></h3>
@@ -23,8 +24,10 @@
       <img class="medium" src="https://res.cloudinary.com/divxz0cz4/image/upload/c_scale,h_279,w_350/v1606743703/ficha_pspynf.jpg" />
     </li>
     <li class="photo">
-      <h3>Membresía</h3>
-      <img class="medium" src="https://res.cloudinary.com/divxz0cz4/image/upload/c_scale,h_276,w_350/v1605479393/dashboard/dashboard_Mesa-de-trabajo-3-1_kcgbkn-c_limit_h_350_w_350_bv2ivn.jpg"/>
+      <h3> Citas </h3>
+      <a href ="<%= appointmentsPath %>">
+        <img class="medium" src="https://res.cloudinary.com/divxz0cz4/image/upload/c_scale,h_276,w_350/v1605479393/dashboard/dashboard_Mesa-de-trabajo-3-1_kcgbkn-c_limit_h_350_w_350_bv2ivn.jpg"/>
+      </a>
     </li>
     <li class="photo">
       <h3>Mis clases</h3>
@@ -63,5 +66,6 @@
       </a>
     </li>           
   </ul> 
-  </section>
+  <% } %>
+</section>
 </body>

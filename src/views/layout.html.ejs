@@ -14,10 +14,11 @@
         <div class="logo-container">
           <a class="logo" href="/">GO<span>GYM</span></a>
         </div>
-          
+        
         <div class="nav-btn">
           <div class="nav-links">
             <ul>
+              <% if (!locals.currentUser) { %>  
               <li class="nav-link">
                 <a class="current" href="<%= eventsPath %>">Clases</a>
               </li>
@@ -27,7 +28,17 @@
               <li class="nav-link">
                 <a class="current" href="<%= roomsPath %>">Salas</a>
               </li>
-              <% if (locals.currentUser && locals.currentUser.user_type==1) { %>
+              <% } %>
+              <% if (locals.currentUser && locals.currentUser.user_type==1 || locals.currentUser && locals.currentUser.user_type==2||locals.currentUser && locals.currentUser.user_type==3) { %>
+                <li class="nav-link">
+                  <a class="current" href="<%= eventsPath %>">Clases</a>
+                </li>
+                <li class="nav-link">
+                  <a class="current" href="<%= machinesPath %>">Máquinas</a>
+                </li>
+                <li class="nav-link">
+                  <a class="current" href="<%= appointmentsPath %>">Citas</a>
+                </li>
                 <li class="nav-link">
                   <a class="current" href="<%= chatsPath %>">Chat</a>
                 </li>
@@ -38,11 +49,24 @@
           
               <% if (locals.currentUser && locals.currentUser.user_type==0) { %>
                 <li class="nav-link">
-                  <a class="current" href="<%= chatsPath %>">Chat</a>
+                  <a class="current" href="<%= eventsPath %>">Clases</a>
+                </li>
+                <li class="nav-link">
+                  <a class="current" href="<%= machinesPath %>">Máquinas</a>
+                </li>
+                <li class="nav-link">
+                  <a class="current" href="<%= roomsPath %>">Salas</a>
+                </li>
+                <li class="nav-link">
+                  <a class="current" href="<%= chatsPath %>">Chats</a>
                 </li>
                 <li class="nav-link">
                   <a class="current" href="<%= usersPath %>">Usuarios</a>
                 </li>
+                <li class="nav-link">
+                  <a class="current" href="<%= adminuserPath(locals.currentUser.id) %>">Perfil</a>
+                </li>
+          
           
               <% } %>
             </ul>
