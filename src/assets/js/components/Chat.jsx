@@ -1,20 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { hot } from 'react-hot-loader';
 
-// document.addEventListener('DOMContentLoaded', function() {
-//   console.log('Ahora si');
-//   // const btn = document.querySelector
-// });
 
 function buildMessagesPath(convId) {
   return `/conversations/${convId}/msgs`;
 }
-
-// function fetchMessages(convId) {
-//   fetch(
-//     buildMessagesPath(convId)
-//   ).then(response => response.json());
-// }
 
 const fetchMessages = (convId) => (
   fetch(buildMessagesPath(convId))
@@ -31,11 +21,6 @@ const sendMessage = (convId, userId, text) => (
     body: JSON.stringify({ senderId: userId, message: text, conversationId: convId }),
   })
 );
-
-// export async function fetchData(url) {
-//   const response = await fetch(url, {Accept: 'application/json'});
-//   return response.json();
-// };
 
 function SingleMessage(props) {
   const {message, userId} = props;
@@ -83,10 +68,27 @@ function Chat(props) {
   const handleChange = (event) => {
     setText(event.target.value)
   };
+
+  if (!messages.length) {
+    return (
+      <div>
+      <button onClick={handleMsgsClick} >Recargar</button>
+      <div className="messages">
+        Aun no hay ningun mensaje
+      </div>
+      <div className="this-form">
+      <label>
+        <input type="text" onChange={handleChange} value={text}/>
+      </label>
+      <button onClick={handleSendMsgsClick}>Send</button>
+      </div>
+    </div>
+    );
+  }
   
   return (
     <div>
-      <button onClick={handleMsgsClick} >Recargar</button>
+      <button class="editlinkchat" onClick={handleMsgsClick} >Recargar</button>
       <div className="messages">
         {messages.map((msg) => (
           < SingleMessage key={msg.id} message={msg} userId={userId}/>

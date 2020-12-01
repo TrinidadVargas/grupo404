@@ -7,7 +7,7 @@ const PERMITTED_FIELDS = [
   'name',
   'description',
   'available',
-  'image'
+  'image',
 ];
 
 const PROTECTED_PATHS = [
@@ -38,6 +38,7 @@ router.get('machines', '/', async (ctx) => {
     machinePath: (id) => ctx.router.url('machine', id),
     newMachinePath: ctx.router.url('machines-new'),
     editMachinePath: (id) => ctx.router.url('machines-edit', id),
+    deleteMachinePath: (id) => ctx.router.url('machines-delete', id),
   });
 });
 
@@ -59,6 +60,7 @@ router.get('machines-all', '/all', async (ctx) => {
   }
 });
 
+
 router.get('machines-new', '/new', (ctx) => {
   const machine = ctx.orm.machines.build();
   return ctx.render('machines/new', {
@@ -76,14 +78,24 @@ router.post('machines-create', '/', async (ctx) => {
     await ctx.render('machines/new', {
       machine,
       errors: error.errors,
-      submitPath: ctx.router.url('machines-create')
+      submitPath: ctx.router.url('machines-create'),
     });
   }
 });
 
-router.get('machine', '/:id', (ctx) => {
+router.get('machine', '/:id', async (ctx) => {
   const { machine } = ctx.state;
-  return ctx.render('machines/show', { machine });
+  const reservations = await machine.getMachineReservation();
+  console.log(reservations);
+  return ctx.render('machines/show', { 
+    machine,
+    createMachineReservationPath: ctx.router.url('reserve_machines-create'),
+    reservations,
+    updateMachineReservationPath: (id) => ctx.router.url('reserve_machines-update', id),
+    deleteMachineReservationPath: (id) => ctx.router.url('reserve_machines-delete', id),
+    editMachinePath: (id) => ctx.router.url('machines-edit', id),
+    deleteMachinePath: (id) => ctx.router.url('machines-delete', id),
+  });
 });
 
 router.get('machines-edit', '/:id/edit', (ctx) => {
@@ -114,5 +126,10 @@ router.patch('machines-update', '/:id', checkAuth, async (ctx) => {
   }
 });
 
+router.del('machines-delete', '/:id', async (ctx) => {
+  const { machine } = ctx.state;
+  await machine.destroy();
+  ctx.redirect(ctx.router.url('machines'));
+});
 
 module.exports = router;

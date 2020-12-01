@@ -4,27 +4,37 @@
     <h3>Nueva conversacion</h3>
   </div>
 
+<% if (locals.currentUser) { %>
 
-<form method="post" action="<%= createConversationPath%>">
-  <div class="wrapper">
-    <div class="this-form">
+  <form method="post" action="<%= createConversationPath%>">
+    <div class="wrapper">
+      <div class="this-form">
+        
+        <input type="hidden" id="userId1" name="userId1" value="<%=locals.currentUser.id%>"/>
       
-      <div class="field">
-        <label for="userId1">MyId</label>
-        <input type="number" id="userId1" name="userId1" />
+        <div class="field">
+          <label for="userId2">Iniciar conversacion con </label>
+          <select name="userId2" id="userId2">
+            <% users.forEach( user => { %>
+              <option value="<%=user.id%>"><%=user.name%> <%=user.lastname%></option>
+            <% }); %>
+          </select>
       </div>
-    
-      <div class="field">
-        <label for="userId2">OtherId</label>
-        <input type="number" id="userId2" name="userId2"/>
-      </div>
-    
-      <div class="actions">
-        <input type="submit" value="Crear" />
+
+        <!-- <div class="field">
+          <label for="userId2">OtherId</label>
+          <input type="number" id="userId2" name="userId2"/>
+        </div> -->
+      
+        <div class="actions">
+          <input type="submit" value="Crear" />
+        </div>
       </div>
     </div>
-  </div>
-  
-</form>
+    
+  </form>
+
+<% } %>
+
 </section>
 </body>

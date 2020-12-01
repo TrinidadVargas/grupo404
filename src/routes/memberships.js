@@ -50,9 +50,17 @@ router.post('membership-create', '/', async (ctx) => {
 
 });
 
+router.get('memberships-sale', '/sale', async (ctx) => {
+  return ctx.render('memberships/sale', {
+    membershipsSalePath: ctx.router.url('memberships-sale'),
+  });
+});
+
 router.get('membership', '/:id', (ctx) =>{
   const {membership} = ctx.state;
   return ctx.render('memberships/show', {membership});
 });
+
+
 
 module.exports = router;

@@ -1,0 +1,28 @@
+img profilepic{
+
+    margin-right:225px;
+    width: 225px;
+
+}
+  .first-row {
+    display: flex;
+    flex-direction: row;
+    height: 225px;
+    padding: 30px 30px;
+ 
+  }
+
+
+  .first-text-container {
+
+    padding: 50px;
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 1em 0;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 3px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }

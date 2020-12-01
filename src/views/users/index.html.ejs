@@ -1,24 +1,29 @@
 <body>
 	<section class="cuerpo">
-    <div class="title">
-			<h1> Usuarios </h1>
-		</div>
-    
-    <div class="ref-to-new">
-        <a href="<%= newUserPath %>">Agregar nuevo usuario</a>
-        <p> Cantidad de Usuarios: <%= users.length %> </p>
+    <div class="inicio">
+			<p> Usuarios </>
+	</div>
+    <% if (locals.currentUser && locals.currentUser.user_type==0) { %>
+    <div class="inicio">
+        <a class="addthing" href="<%= newUserPath %>">Agregar nuevo usuario</a>
+        <h1> Cantidad de Usuarios: <%= users.length %> </h1>
     </div>
+    <% } %>
     <div class="items">
         <% users.forEach(user => { %>
-            <div class="elemento">
-                <h2> <%= user.name %> <%= user.lastname %></h2>
-                <img class="little" src="<%= cloudinary.url(user.image) %>" />
-                <a href="<%= userPath(user.id) %>">Ver más</a>
-                <a href="<%= editUserPath(user.id) %>">Editar</a>
+            <div class="profilepic">
+                <h2 class="title"> <%= user.name %> <%= user.lastname %></h2>
+                <div class="first-row">
+                    <img class="little" src="<%= cloudinary.url(user.image) %>" />
+                <div class="first-text-container">
+                <a class="addthing" href="<%= userPath(user.id) %>">Ver más</a>
+                <a class="addthing" href="<%= editUserPath(user.id) %>">Editar</a>
                 <form action="<%= deleteUserPath(user.id) %>" method="POST">
                     <input type="hidden" name="_method" value="delete" />
-                    <input type="submit" value="Delete" />
+                    <input class="editlink" type="submit" value="Delete" />
                 </form>
+                </div>
+            </div>
             </div>
 
         <% }); %>

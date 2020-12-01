@@ -73,6 +73,16 @@ module.exports = (sequelize, DataTypes) => {
     user.hasMany(models.appointment, {
       foreignKey: 'specialistId',
     });
+
+    user.hasMany(models.user_machine, {
+      foreignKey: 'userId',
+      as: 'reservation',
+    });
+    
+    user.hasMany(models.health_profile, {
+      foreignKey: 'user_id',
+    });
+
     // user.hasMany(models.event_inscription, {
     //   foreignKey: 'userId',
     // });
@@ -85,6 +95,12 @@ module.exports = (sequelize, DataTypes) => {
     user.belongsToMany(models.event, {
       through: 'event_inscriptions',
       foreignKey: 'userId',
+    });
+
+    user.belongsToMany(models.health_profile,{
+      through: 'user_profiles',
+      foreignKey: 'userId'
+
     });
   };
 

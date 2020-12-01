@@ -1,0 +1,35 @@
+Hola :)
+<!-- the form for create and update are totally diferent
+     the update only changes de userId when a user wants 
+     to reserve the machine -->
+<body>
+<section class="cuerpo">
+  <div class="title">
+    <h3>Reserva de máquina</h3>
+  </div>
+
+  <form method="post" action="<%= createMachineReservationPath%>">
+    <div class="wrapper">
+      <div class="this-form">
+          <input type="hidden" id="machineId" name="machineId" value="<%=machineReservation.id%>" />
+          <input type="hidden" id="status" name="status" value="0" />
+          
+          <div class="field">
+            <label for="time">Fecha</label>
+            <input type="datetime-local" id="time" name="time">
+          </div>
+          <div class="field">
+            <label for="duration">Duración en minutos</label>
+            <input type="integer" id="duration" name="duration">
+          </div>
+          <div class="actions">
+              <input class="formlink" type="submit" name="create" value="Create" />      
+          </div>
+      </div>
+    </div>
+
+  </form>
+
+  
+</section>
+</body>

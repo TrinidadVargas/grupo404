@@ -1,11 +1,15 @@
 <body>
 <section class="cuerpo">
 <% console.log(conversation) %> 
-<h2>Chat entre <%= users[0].name %> <%= users[0].lastname %> y <%= users[1].name %> <%= users[1].lastname %> </h2>
+<div class="inicio">
+  <h1>Chat entre <%= users[0].name %> <%= users[0].lastname %> y <%= users[1].name %> <%= users[1].lastname %> </h1>
+</div>
 
-<% if (locals.currentUser && (locals.currentUser.id == users[0].id || locals.currentUser.id == users[1].id)) {%>
-<div id="chat-app" data-conv-id="<%=conversation.id%>" data-user-id="<%=locals.currentUser.id%>"></div>
-<% } %> 
+<div class="chatbox">
+  <% if (locals.currentUser && (locals.currentUser.id == users[0].id || locals.currentUser.id == users[1].id)) {%>
+  <div id="chat-app" data-conv-id="<%=conversation.id%>" data-user-id="<%=locals.currentUser.id%>"></div>
+  <% } %> 
+</div>
 
 <!-- <% if (locals.currentUser && (locals.currentUser.id == users[0].id || locals.currentUser.id == users[1].id)) {%>
   <div id="new-msg-app" data-conv-id="<%=conversation.id%>" data-user-id="<%=locals.currentUser.id%>"></div>

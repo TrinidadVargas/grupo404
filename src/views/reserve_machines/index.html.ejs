@@ -1,0 +1,50 @@
+<body>
+<section class="cuerpo">
+<% if (locals.currentUser.user_type == 0) {%>
+  <div class="title">
+    <h3>Reservas de máquinas</h3>
+  </div>
+  <% if (machineReservations.length == 0) { %>
+   Aún no hay reservas hechas
+  <% } %>
+  <% machineReservations.forEach(reservation => { %>
+    Máquina reservada: <%= reservation.machine.name %> 
+    Fecha y hora: <%= reservation.date %> 
+    Duración: <%= reservation.duration %>
+    
+    <% if (reservation.status != 0)  { %>
+      Estado: Reservado
+      Reservado por: <%= reservation.user.name %> <%= reservation.user.lastname %> 
+    <% } else { %>
+      Estado: Disponible
+    <% } %>   
+
+    <form action="<%= deleteMachineReservationPath(reservation.id) %>" method="POST">
+      <input type="hidden" name="_method" value="delete" />
+      <input type="submit" value="Eliminar" />
+    </form>
+  <% }); %> 
+
+<% } else if (locals.currentUser) { %>
+  <div class="title">
+    <h3>Mis reservas de máquinas</h3>
+  </div>
+  <% if (machineReservations.length == 0) { %>
+    Aún no hay reservas hechas
+   <% } %>
+  <% machineReservations.forEach(reservation => { %>
+    Máquina reservada: <%= reservation.machine.name %> 
+    Fecha y hora: <%= reservation.date %> 
+    Duración: <%= reservation.duration %>  
+
+    <form action="<%= updateMachineReservationPath(reservation.id) %>" method="post">
+      <input type="hidden" id="userId" name="userId" value="<%=0%>" />
+      <input type="hidden" id="status" name="status" value="<%=0%>" />
+      <input type="submit" name="update" value="Eliminar reserva" />
+    </form>
+    
+  <% }); %> 
+<% } %>   
+
+</section>
+</body>
