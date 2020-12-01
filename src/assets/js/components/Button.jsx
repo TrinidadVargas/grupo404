@@ -3,7 +3,7 @@ import { hot } from 'react-hot-loader';
 
 function Button(props) {
   return (
-    <button onClick={props.onClick}> Load from endpoint</button>
+    <button className="editlink" onClick={props.onClick}> Load from endpoint</button>
   );
 };
 

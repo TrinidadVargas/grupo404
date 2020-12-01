@@ -3,8 +3,6 @@ import { hot } from 'react-hot-loader';
 import Button from './Button';
 import SingleMachine from './SingleMachine';
 
-const URL = '/machines/all';
-
 function buildMachinesPath() {
   return `/machines/all`;
 }
@@ -14,12 +12,10 @@ const fetchMachines = () => (
     .then(response => response.json())
 );
 
-
 function Machines(props) {
-
   const [machines, setMachines] = React.useState([]);
   const [allMachines, setAllMachines] = React.useState([]);
-  
+
   useEffect(() => {
     fetchMachines()
       .then((machines) => {
@@ -66,12 +62,10 @@ function Machines(props) {
       <button className="editlink" onClick={handleLowerClick}>Tren Inferior</button>
       <button className="editlink" onClick={handleNoneClick}>Borrar todas</button>
 
-
       <div className="items">
         {machines.map((machine) => (
           < SingleMachine key={machine.id} machine={machine}/>
         ))}
-
 
       </div>
     </div>

@@ -24,7 +24,7 @@ function checkAuth(ctx, next) {
 
 router.use(PROTECTED_PATHS, checkAuth);
 
-router.param('id', async (id, ctx, next) =>{
+router.param('id', async (id, ctx, next) => {
   const machine = await ctx.orm.machines.findByPk(id);
   if (!machine) ctx.throw (404);
   ctx.state.machine = machine;
@@ -60,7 +60,6 @@ router.get('machines-all', '/all', async (ctx) => {
   }
 });
 
-
 router.get('machines-new', '/new', (ctx) => {
   const machine = ctx.orm.machines.build();
   return ctx.render('machines/new', {
@@ -87,7 +86,7 @@ router.get('machine', '/:id', async (ctx) => {
   const { machine } = ctx.state;
   const reservations = await machine.getMachineReservation();
   console.log(reservations);
-  return ctx.render('machines/show', { 
+  return ctx.render('machines/show', {
     machine,
     createMachineReservationPath: ctx.router.url('reserve_machines-create'),
     reservations,
