@@ -1,3 +1,9 @@
+<% function convert(str) {
+  var date = new Date(str),
+    mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+    day = ("0" + date.getDate()).slice(-2);
+  return [day, mnth,date.getFullYear()].join("-");
+} %>
 <body>
 <section class="cuerpo"> 
   <div class="title">
@@ -17,7 +23,7 @@
 <% appointments.forEach(appt => { %>
     <div>
       <a href="<%=specialistPath(appt.specialistId)%>"><%= appt.specialist.name %> <%= appt.specialist.lastname %></a>
-      <h4><%=appt.date%></h4>
+      <h4><%=convert(appt.date)%></h4>
       <p><%= appt.description%></p>
       <a class="addthing" href="<%=apptPath(appt.id)%>">Ver</a>
       <% if (locals.currentUser && locals.currentUser.user_type!=1) {%>

@@ -1,56 +1,67 @@
+<% function convert(str) {
+  var date = new Date(str),
+    mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+    day = ("0" + date.getDate()).slice(-2);
+  return [day, mnth,date.getFullYear()].join("-");
+} %>
 <body>
 <section class="cuerpo">
+  <div class="title">
+		<h1>Hora con especialista </h1>
+  </div>
 
-<h1>Hora con especialista </h1>
-<h3>
-<%if (specialist.user_type == 2) {%>
-  Entrenador 
-<%} else if (specialist.user_type == 3) {%>
-  Nutricionista
-<%}%>
+  <div class="inicio">
+  <%if (specialist.user_type == 2) {%>
+   <h1> Entrenador </h1>
+   <a class="addthing" href="<%=specialistPath(appointment.specialistId)%>"><%= specialist.name %> <%= specialist.lastname %></a>
+  <%} else if (specialist.user_type == 3) {%>
+    <h1> Nutricionista </h1>
+    <a class="addthing" href="<%=specialistPath(appointment.specialistId)%>"><%= specialist.name %> <%= specialist.lastname %></a>
+  <%}%>
+</div>
+<article class="articles-grid">
+  <h3>Fecha: <%= convert(appointment.date)%></h3>
+  <h3>Lugar: <%= appointment.place%></h3>
+  <% if (appointment.appttype == 0) { %>
+    <h3>Status: Libre</h3>
+  <% } else if (appointment.appttype == 1) {%>
+    <h3>Status: Agendada</h3>
+  <% } else if (appointment.appttype == 2) {%>
+    <h3>Status: Realizada</h3>
+  <% } else if (appointment.appttype == 3) {%>
+    <h3>Status: Cancelada</h3>
+  <% } else if (appointment.appttype == 4) {%>
+    <h3>Status: No llega</h3>
+  <% } %> 
 
-<a href="<%=specialistPath(appointment.specialistId)%>"><%= specialist.name %> <%= specialist.lastname %></a>
-</h3>
+  <% if ((!appointment.userId || appointment.userId == 0) && locals.currentUser && locals.currentUser.user_type==1) {%>
 
-<h3>Fecha:<%= appointment.date%></h3>
-<h3>Lugar:<%= appointment.place%></h3>
-<% if (appointment.appttype == 0) { %>
-  <h3>Status: Libre</h3>
-<% } else if (appointment.appttype == 1) {%>
-  <h3>Status: Agendada</h3>
-<% } else if (appointment.appttype == 2) {%>
-  <h3>Status: Realizada</h3>
-<% } else if (appointment.appttype == 3) {%>
-  <h3>Status: Cancelada</h3>
-<% } else if (appointment.appttype == 4) {%>
-  <h3>Status: No llega</h3>
-<% } %> 
+    <form action="<%= submitApptPath %>" method="post">
+      <input type="hidden" id="userId" name="userId" value="<%=locals.currentUser.id%>" />
+      <div class="field">
+        <label for="description">Dejar un comentario:</label>
+        <input type="text" id="description" name="description" />
+      </div>
+      <input class="editlink" type="submit" name="update" value="Agendar Hora" />
+    </form>
 
-<% if ((!appointment.userId || appointment.userId == 0) && locals.currentUser && locals.currentUser.user_type==1) {%>
+  <%} else if (locals.currentUser && appointment.userId == locals.currentUser.id) {%>
 
-  <form action="<%= submitApptPath %>" method="post">
-    <input type="hidden" id="userId" name="userId" value="<%=locals.currentUser.id%>" />
-    <div class="field">
-      <label for="description">Dejar un comentario:</label>
-      <input type="text" id="description" name="description" />
-    </div>
-    <input type="submit" name="update" value="Agendar Hora" />
-  </form>
+    <form action="<%= submitApptPath %>" method="post">
+      <input type="hidden" id="userId" name="userId" value="0" />
+      <input type="hidden" id="description" name="description" value=" " />
+      <input class="editlink" type="submit" name="update" value="Cancelar Hora" />
+    </form>
 
-<%} else if (locals.currentUser && appointment.userId == locals.currentUser.id) {%>
+  <%}%>
+</article>
 
-  <form action="<%= submitApptPath %>" method="post">
-    <input type="hidden" id="userId" name="userId" value="0" />
-    <input type="hidden" id="description" name="description" value=" " />
-    <input type="submit" name="update" value="Cancelar Hora" />
-  </form>
-
-<%}%>
+<div class="inicio">
 
 <% if (locals.currentUser && locals.currentUser.user_type != 1) {%>
   <form action="<%= submitApptPath %>" method="post">
     <div>
-      <label for="appttype">Cambiar Estado</label>
+      <label id="estado" for="appttype">Cambiar Estado</label>
       <select name="appttype" id="appttype" value="<%= appointment.appttype %>">
         <option value=0 select="<%= appointment.appttype == 0 ? 'selected' : '' %>"> Libre</option>
         <option value=1 > Agendada</option>
@@ -59,13 +70,13 @@
         <option value=4 > No llega</option>
       </select>
     </div>
-    <input type="submit" name="update" value="Cambiar" />
+    <input class="editlink" type="submit" name="update" value="Cambiar" />
   </form>
 
   <% if (appointment.userId) { %>
     <a href="<%=specialistPath(appointment.userId)%>">Perfil Paciente</a>
   <% } %>
 <% } %>  
-
+  </div>
 </section>
 </body>
