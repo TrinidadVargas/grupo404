@@ -1,16 +1,15 @@
 <body>
 	<section class="cuerpo">
     <div class="inicio">
-			<p> Usuarios </p>
+			<p> Personal </>
 	</div>
     <% if (locals.currentUser && locals.currentUser.user_type==0) { %>
     <div class="inicio">
-        <a class="addthing" href="<%= newUserPath %>">Agregar nuevo usuario</a>
-        <h1> Cantidad de Usuarios: <%= users.length %> </h1>
+        <a class="addthing" href="<%= newUserPath %>">Agregar nuevo miembro</a>
     </div>
-    <% } %>
     <div class="items">
         <% users.forEach(user => { %>
+            <% if (user.ser_type==2 ||user.user_type==3){ %>
             <div class="profilepic">
                 <h2 class="title"> <%= user.name %> <%= user.lastname %></h2>
                 <div class="first-row">
@@ -24,9 +23,12 @@
                 </form>
                 </div>
             </div>
+            <% } %>
             </div>
 
         <% }); %>
+
+    <% } %>
 		</div>
 	</section>
 </body>

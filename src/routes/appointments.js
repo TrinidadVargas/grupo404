@@ -35,8 +35,14 @@ router.get('appointments', '/', async (ctx) => {
 });
 
 router.get('appointments-new', '/new', async (ctx) => {
+  const { Op } = require("sequelize");
+  const specialists = await ctx.orm.user.findAll({
+    where: { user_type: {[Op.or]: [2, 3], }, },
+    attributes: ['id', 'name', 'lastname'],
+  });
   const appointment = ctx.orm.appointment.build();
   return await ctx.render('appointments/new', {
+    specialists,
     appointment,
     submitAppointmentPath: ctx.router.url('appointments-create'),
   });

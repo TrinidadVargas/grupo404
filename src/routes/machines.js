@@ -7,7 +7,7 @@ const PERMITTED_FIELDS = [
   'name',
   'description',
   'available',
-  'image'
+  'image',
 ];
 
 const PROTECTED_PATHS = [
@@ -24,7 +24,7 @@ function checkAuth(ctx, next) {
 
 router.use(PROTECTED_PATHS, checkAuth);
 
-router.param('id', async (id, ctx, next) =>{
+router.param('id', async (id, ctx, next) => {
   const machine = await ctx.orm.machines.findByPk(id);
   if (!machine) ctx.throw (404);
   ctx.state.machine = machine;
@@ -38,8 +38,27 @@ router.get('machines', '/', async (ctx) => {
     machinePath: (id) => ctx.router.url('machine', id),
     newMachinePath: ctx.router.url('machines-new'),
     editMachinePath: (id) => ctx.router.url('machines-edit', id),
+    deleteMachinePath: (id) => ctx.router.url('machines-delete', id),
   });
-}); 
+});
+
+router.get('machines-all', '/all', async (ctx) => {
+  const machines = await ctx.orm.machines.findAll();
+  switch (ctx.accepts(['json'])) {
+    case 'json':
+      ctx.body = machines.map(({ id, name, description, image, tipo }) => (
+        { id, 
+          name, 
+          description, 
+          image: ctx.state.cloudinary.url(image),
+          tipo, 
+          url: ctx.router.url('machine', id),
+      }));
+      break;
+    default:
+      break;
+  }
+});
 
 router.get('machines-new', '/new', (ctx) => {
   const machine = ctx.orm.machines.build();
@@ -58,22 +77,23 @@ router.post('machines-create', '/', async (ctx) => {
     await ctx.render('machines/new', {
       machine,
       errors: error.errors,
-      submitPath: ctx.router.url('machines-create')
+      submitPath: ctx.router.url('machines-create'),
     });
   }
-
 });
 
 router.get('machine', '/:id', async (ctx) => {
   const { machine } = ctx.state;
   const reservations = await machine.getMachineReservation();
   console.log(reservations);
-  return ctx.render('machines/show', { 
+  return ctx.render('machines/show', {
     machine,
     createMachineReservationPath: ctx.router.url('reserve_machines-create'),
     reservations,
     updateMachineReservationPath: (id) => ctx.router.url('reserve_machines-update', id),
     deleteMachineReservationPath: (id) => ctx.router.url('reserve_machines-delete', id),
+    editMachinePath: (id) => ctx.router.url('machines-edit', id),
+    deleteMachinePath: (id) => ctx.router.url('machines-delete', id),
   });
 });
 
@@ -105,5 +125,10 @@ router.patch('machines-update', '/:id', checkAuth, async (ctx) => {
   }
 });
 
+router.del('machines-delete', '/:id', async (ctx) => {
+  const { machine } = ctx.state;
+  await machine.destroy();
+  ctx.redirect(ctx.router.url('machines'));
+});
 
 module.exports = router;

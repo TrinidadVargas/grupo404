@@ -16,23 +16,23 @@
       <form action="<%= submitInscriptionPath %>" method="post">
           <input type="hidden" id="userId" name="userId" value="<%=locals.currentUser.id%>" />
           <input type="hidden" id="eventId" name="eventId" value="<%=event.id%>" />
-          <input type="submit" name="update" value="Inscribirme" />
+          <input class="editlink" type="submit" name="update" value="Inscribirme" />
       </form>
     <% } else if (locals.currentUser && locals.currentUser.user_type==1) { %>
       <form action="<%= deleteInscription %>" method="POST">
         <input type="hidden" id="userId" name="userId" value="<%=locals.currentUser.id%>" />
         <input type="hidden" id="eventId" name="eventId" value="<%=event.id%>" />
         <input type="hidden" name="_method" value="delete" />
-        <input type="submit" value="Desinscribirme" />
+        <input class="editlink" type="submit" value="Desinscribirme" />
     </form>
     <% } %>
 
     <div>
       <h5>Cantidad de inscritos: <%= users.length%></h5>
       <% users.forEach(user => { %>
-        <%=user.id %> <%= user.name %> <%= user.lastname %>
+        <%= user.name %> <%= user.lastname %>
       <% });%>
     </div>
-    <div id="photos-app"></div>
+    
   </section>
 </body>

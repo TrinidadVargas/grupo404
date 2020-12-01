@@ -31,8 +31,19 @@ router.use(async (ctx, next) => {
     machinesPath: ctx.router.url('machines'),
     newUserPath: ctx.router.url('users-new'),
     usersPath: ctx.router.url('users'),
+    userPath: id => ctx.router.url('user', id),
     chatsPath: ctx.router.url('conversations'),
     machineReservationsPath: ctx.router.url('reserve_machines'),
+    usersTrainersPath: ctx.router.url('users-entrenadores'),
+    usersNutriPath: ctx.router.url('users-nutricionistas'),
+    chartsPath: ctx.router.url('users-charts'),
+    personalusersPath: ctx.router.url('users-personal'),
+    adminuserPath: id => ctx.router.url('users-admin', id),
+    appointmentsPath: ctx.router.url('appointments'),
+    healthprofilePath: ctx.router.url('healthprofiles'),
+    membershipsPath: ctx.router.url('memberships'),
+    
+    
   });
   return next();
 });

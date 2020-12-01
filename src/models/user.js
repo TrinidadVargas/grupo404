@@ -79,6 +79,11 @@ module.exports = (sequelize, DataTypes) => {
       as: 'reservation',
     });
     
+    user.hasMany(models.health_profile, {
+      foreignKey: 'user_id',
+      // as: 'healthprofile',
+    });
+
     // user.hasMany(models.event_inscription, {
     //   foreignKey: 'userId',
     // });
@@ -91,12 +96,6 @@ module.exports = (sequelize, DataTypes) => {
     user.belongsToMany(models.event, {
       through: 'event_inscriptions',
       foreignKey: 'userId',
-    });
-
-    user.belongsToMany(models.health_profile,{
-      through: 'user_profiles',
-      foreignKey: 'userId'
-
     });
   };
 

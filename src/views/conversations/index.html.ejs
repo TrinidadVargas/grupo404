@@ -1,24 +1,38 @@
-
+<body>
+	<section class="cuerpo">
+    <div class="title">
+			<h1> Chat</h1>
+    </div>
+    <div class="first-row">
+      <img id="profilepic" src="https://res.cloudinary.com/divxz0cz4/image/upload/v1605479610/dashboard/dashboard_cel_pij1tk-c_limit_h_350_w_350_yyldzd.jpg"/>
+      <div class="first-text-container">
+          <div> Cualquier duda escríbenos </div>
+          <div> Manda mensajes a tus entrenadores!</div>
+          <div>Manda mensajes a tu nutricionista!</div>
+          <% if (locals.currentUser && locals.currentUser.id == currentId) { %>
+            <a class="editlink" href="<%= newConversationPath%>">Crear nueva conversación</a>
+          <% } %> 
+      </div>
+    </div>
 <% if (locals.currentUser && locals.currentUser.id == currentId) { %>
-  <a href="<%= newConversationPath%>">Crear nueva conversación</a>
   <% if (conversations.length) { %>
-    <h2>Mis conversaciones</h2>
     <% conversations.forEach((conversation) => { %>
-      <ul>
-       
+      <div class="elements">
       <% if (conversation.userId1 != currentId){ %>
-        <h4>Chat con <%= conversation.user1.name %> <%= conversation.user1.lastname %>
+        <p>Chat con <%= conversation.user1.name %> <%= conversation.user1.lastname %></p>
+        <a id="chatear" href="<%= conversationPath(conversation.id) %>">Go</a> 
       <% } else { %> 
-        <h4>Chat con <%= conversation.user2.name %> <%= conversation.user2.lastname %> 
+        <p>Chat con <%= conversation.user2.name %> <%= conversation.user2.lastname %></p>
+        <a  id="chatear" href="<%= conversationPath(conversation.id) %>">Go</a> 
       <% } %> 
-        <a href="<%= conversationPath(conversation.id) %>">Ir</a> 
+      <div class="first-text-container">
         <form action="<%= deleteConversationPath(conversation.id) %>" method="POST">
           <input type="hidden" name="_method" value="delete" />
-          <input type="submit" value="Delete" />
-      </form>
-        
-      </h4>
-      </ul>
+          <input class="formlink" type="submit" value="Delete" />
+        </form>
+      </div>
+      </div>
+  </div>
     <% }); %>
     
   <% } else { %>
@@ -26,3 +40,5 @@
   <% } %>
   
 <% } %>
+</section>
+</body>

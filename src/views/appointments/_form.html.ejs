@@ -24,8 +24,12 @@
         <input type="hidden" id="specialistId" name="specialistId" value="<%=locals.currentUser.id%>"/>
       <% } else if (locals.currentUser && locals.currentUser.user_type == 0) {%>
         <div class="field">
-          <label for="specialistId">SpecialistId</label>
-          <input type="number" id="specialistId" name="specialistId" value="<%=appointment.specialistId%>"/>
+          <label for="specialistId">Especialista</label>
+          <select name="specialistId" id="specialistId">
+            <% specialists.forEach( spe => { %>
+              <option value="<%=spe.id%>"><%=spe.name%> <%=spe.lastname%></option>
+            <% }); %>
+          </select>
         </div>
       <% } %> 
       <div class="field">

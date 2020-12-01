@@ -43,7 +43,7 @@ module.exports = {
       password: hash,
       rut: '11111111-3',
       user_type: 2,
-      image: 'dpersonal4_sz1w0t',
+      image: 'default-user_nmftx2',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -55,7 +55,7 @@ module.exports = {
       password: hash,
       rut: '11111111-4',
       user_type: 2,
-      image: 'personal3_fclvc1',
+      image: 'default-user_nmftx2',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -67,7 +67,7 @@ module.exports = {
       password: hash,
       rut: '11111111-5',
       user_type: 2,
-      image: 'https://res.cloudinary.com/divxz0cz4/image/upload/v1606313188/entrenadores/persinal4_erjyc3.jpg',
+      image: 'default-user_nmftx2',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -79,7 +79,7 @@ module.exports = {
       password: hash,
       rut: '11111111-6',
       user_type: 2,
-      image: 'personal2_rgwkwt',
+      image: 'default-user_nmftx2',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -103,7 +103,7 @@ module.exports = {
       password: hash,
       rut: '11111112-1',
       user_type: 3,
-      image: 'nutri1_asuuei',
+      image: 'default-user_nmftx2',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -115,7 +115,7 @@ module.exports = {
       password: hash,
       rut: '11111112-2',
       user_type: 3,
-      image: 'nutri2_tfgb0l',
+      image: 'default-user_nmftx2',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -127,7 +127,7 @@ module.exports = {
       password: hash,
       rut: '11111112-3',
       user_type: 3,
-      image: 'nutri4_i909ev',
+      image: 'default-user_nmftx2',
       createdAt: new Date(),
       updatedAt: new Date(),
     });

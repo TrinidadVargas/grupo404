@@ -1,35 +1,40 @@
 <body>
+  <% if (locals.currentUser && locals.currentUser.user_type==1 || locals.currentUser && locals.currentUser.user_type==2 || locals.currentUser && locals.currentUser.user_type==3 ||locals.currentUser && locals.currentUser.user_type==0  ) { %>
   <section class="cuerpo">
-    <h1>Hola <%= user.name%></h1>
-    <h3>Nombre: <%= user.name%> <%= user.lastname%></h3>
-    <p>email: <%= user.email %></p>
-
-    <div class="conversations">
-      <% if (conversations.length){ %>
-        <h2>Mis conversaciones</h2>
-        <% conversations.forEach((conversation) => { %>
-          <ul>
-          <% if (conversation.userId1 != user.id){ %>
-            <h4>Chat con <%= conversation.user1.name %> <%= conversation.user1.lastname %>
-          <% } else { %> 
-            <h4>Chat con <%= conversation.user2.name %> <%= conversation.user2.lastname %> 
-          <% } %> 
-            <a href="<%= conversationPath(conversation.id) %>">Ir</a> 
-            
-          </h4>
-          </ul>
-        <% }); %>
-        
-      <% } %> 
-      <a href="<%= newConversationPath%>">Crear nueva conversación</a>
+  <div class="title">
+    <h3> Hola <%= user.name%></h3>
+  </div>
+  <div class="first-row">
+    <img id="profilepic" src="<%= cloudinary.url(user.image) %>" />
+    <div class="first-text-container">
+        <div>Nombre: <%= user.name%> <%= user.lastname%></div>
+        <div>Email: <%= user.email %></div>
+        <div>Rut:  <%= user.rut %> </div>
     </div>
-
-
-  <div class="article">
-    <div class="articles-grid">
-      <h2>Mis Clases</h2>
-      <h2><%= events.length %> clases reservadas</h2>
-      <% if (events.length) { %>
+  </div>
+  <ul class="photos">
+    <li class="photo">
+      <h3>Mis Máquinas</h3>
+      <a href ="<%= machineReservationsPath %>">
+        <img class="medium" src="https://res.cloudinary.com/divxz0cz4/image/upload/c_scale,h_279,w_350/v1606742087/dashboard/calugacovid_k25djg.jpg" />	
+      </a>
+    </li>
+    <li class="photo">
+      <h3>Ficha</h3>
+      <a href ="<%= profilesPath %>">
+        <img class="medium" src="https://res.cloudinary.com/divxz0cz4/image/upload/c_scale,h_279,w_350/v1606743703/ficha_pspynf.jpg" />
+      </a>
+    </li>
+    <li class="photo">
+      <h3> Citas </h3>
+      <a href ="<%= appointmentsPath %>">
+        <img class="medium" src="https://res.cloudinary.com/divxz0cz4/image/upload/c_scale,h_276,w_350/v1605479393/dashboard/dashboard_Mesa-de-trabajo-3-1_kcgbkn-c_limit_h_350_w_350_bv2ivn.jpg"/>
+      </a>
+    </li>
+    <li class="photo">
+      <h3>Mis clases</h3>
+      <h3><%= events.length %> clases reservadas</h3>
+        <% if (events.length) { %>
           <ul>
               <% events.forEach((event) => { %>
                   <h4> <%= event.name %></h4>
@@ -39,16 +44,30 @@
               <% }); %>
           </ul>
       <% } %>
-    </div>
-    <div class="articles-grid">
-      <h2>Membresía</h2>
-    </div>
-    <div class="articles-grid">
-      <h2>Máquinas</h2>
-    </div>
-    <div class="articles-grid">
-      <h2>Ficha</h2>
-    </div>
-  </div>
-  </section>
+    </li>    
+    <li class="photo">
+      <h3>Mis Conversaciones</h3>
+        <% if (conversations.length){ %>
+          <% conversations.forEach((conversation) => { %>
+            <ul>
+            <% if (conversation.userId1 != user.id){ %>
+              <h4>Chat con <%= conversation.user1.name %> <%= conversation.user1.lastname %>
+            <% } else { %> 
+              <h4>Chat con <%= conversation.user2.name %> <%= conversation.user2.lastname %> 
+            <% } %> 
+              <a class="editlink" href="<%= conversationPath(conversation.id) %>">Ir</a>  
+            </h4>
+            </ul>
+          <% }); %>
+        <% } %>    
+    </li>  
+    <li class="photo">
+      <h3>Chatear</h3>
+      <a href ="<%= newConversationPath%>">
+        <img class="medium" src="https://res.cloudinary.com/divxz0cz4/image/upload/v1605479610/dashboard/dashboard_cel_pij1tk-c_limit_h_350_w_350_yyldzd.jpg" />	
+      </a>
+    </li>           
+  </ul> 
+  <% } %>
+</section>
 </body>

@@ -72,7 +72,7 @@ function Chat(props) {
   if (!messages.length) {
     return (
       <div>
-      <button onClick={handleMsgsClick} >Recargar</button>
+      <button className="editlinkchat" onClick={handleMsgsClick} >Recargar</button>
       <div className="messages">
         Aun no hay ningun mensaje
       </div>
@@ -88,7 +88,7 @@ function Chat(props) {
   
   return (
     <div>
-      <button onClick={handleMsgsClick} >Recargar</button>
+      <button className="editlinkchat" onClick={handleMsgsClick} >Recargar</button>
       <div className="messages">
         {messages.map((msg) => (
           < SingleMessage key={msg.id} message={msg} userId={userId}/>
