@@ -34,8 +34,7 @@ module.exports = (sequelize, DataTypes) => {
   health_profile.associate = function associate(models) {
     // associations can be defined here. This method receives a models parameter.
     health_profile.belongsTo(models.user, { 
-      through: 'user_profiles',
-      foreignKey: 'user_id'
+      foreignKey: 'user_id',
     });
   };
 

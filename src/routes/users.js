@@ -112,26 +112,39 @@ router.get('users-nutricionistas', '/nutricionistas', async (ctx) => {
   });
 });
 
-router.get('users-charts', '/charts', async (ctx) => {
+router.get('user-healthprofile', '/:id/healthprofile', async (ctx) => {
+  const { user } = ctx.state;
+  const healthprofiles = await user.getHealth_profiles();
+  let lastProfile = null;
+  if (healthprofiles.length != 0) {
+    lastProfile = healthprofiles[healthprofiles.length - 1];
+  }
+  return await ctx.render('users/healthprofile', {
+    user,
+    healthprofiles,
+    lastProfile,
+    profilePath: id => ctx.router.url('healthprofile', id),
+    createProfilePath: ctx.router.url('healthprofiles-create'),
+  });
+});
 
+
+router.get('users-charts', '/charts', async (ctx) => {
   const entrenadores = await ctx.orm.user.findAll({
     where: {
       user_type: 2
     }
   });
-
   const nutricionistas = await ctx.orm.user.findAll({
     where: {
       user_type: 3
     }
   });
-
   const clientes = await ctx.orm.user.findAll({
     where: {
       user_type: 1
     }
   });
-
   return ctx.render('users/charts', {
     entrenadores,
     nutricionistas,
@@ -191,9 +204,12 @@ router.get('user', '/:id', async (ctx) => {
     user,
     conversations,
     conversationPath: (id) => ctx.router.url('conversation', id),
+    healthprofilePath: ctx.router.url('user-healthprofile', user.id),
     newConversationPath: ctx.router.url('conversations-new'),
     deleteConversationPath: (id) => ctx.router.url('conversations-delete', id),
     events: await user.getEvents(),
+    profilesPath: ctx.router.url('user-healthprofile', user.id),
+
   });
 });
 
