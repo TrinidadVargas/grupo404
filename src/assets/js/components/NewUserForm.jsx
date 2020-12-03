@@ -3,23 +3,8 @@ import { hot } from 'react-hot-loader';
 
 
 function UserType(props) {
-  const {isAdmin} = props;
-  if (isAdmin) {
-    return (
-      <div className="field">
-        Tipo de usuario
-        <select name="user_type" id="user_type">
-          <option value={0}> Administrador</option>
-          <option value={1}> Cliente</option>
-          <option value={2}> Entrenador</option>
-          <option value={3}> Nutricionista</option>
-        </select>
-      </div>
-    );
-  }
   return (
     <div>
-      Chao
       <input type="hidden" id="user_type" name="user_type" value={1} />
     </div>
   );
@@ -78,6 +63,7 @@ function EmailUserForm(props) {
 }
 
 function NewUserForm(props) {
+  console.log(props);
   const { data: {isAdmin}} = props;
   console.log(isAdmin); 
   return (
