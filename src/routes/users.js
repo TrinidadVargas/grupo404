@@ -40,9 +40,9 @@ router.get('users', '/', async (ctx) => {
 
 router.get('users-new', '/new', async (ctx) => {
   const user = ctx.orm.user.build();
-  let isAdmin = false;
+  let isAdmin = 0;
   if (ctx.state.currentUser && ctx.state.currentUser.user_type == 0) {
-    isAdmin = true;
+    isAdmin = 1;
   }
   return await ctx.render('users/new', {
     isAdmin,
